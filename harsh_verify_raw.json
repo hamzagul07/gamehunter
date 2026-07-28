@@ -754,5 +754,522 @@
    "holds": true,
    "seconds": 2.4
   }
- ]
+ ],
+ "gap_f_squares": {
+  "note": "all F / squares laws, not a sample; method imported from harsh_verify.py",
+  "branch_order": "F / squares",
+  "games": 14,
+  "held": 14,
+  "broke": 0,
+  "n_harsh": 1000000,
+  "seconds": 136.8,
+  "results": [
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       1
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [1]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {1} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{1}",
+    "game_hash": "d124d5dd2614",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      0
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       3
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [3]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {3} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{3}",
+    "game_hash": "d124d5dd2614",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      0
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       5
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [5]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {5} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{5}",
+    "game_hash": "d124d5dd2614",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      0
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       7
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [7]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {7} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{7}",
+    "game_hash": "d124d5dd2614",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      0
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 12.3
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       9
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [9]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {9} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{9}",
+    "game_hash": "d124d5dd2614",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      0
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.3
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       1
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [1]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {1} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{1}",
+    "game_hash": "2e161ebc29c9",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      1
+     ],
+     "from": 4
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 4, the P-positions are exactly n \u2261 1 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       3
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [3]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {3} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{3}",
+    "game_hash": "4cead9445859",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      1
+     ],
+     "from": 4
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 4, the P-positions are exactly n \u2261 1 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       5
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [5]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {5} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{5}",
+    "game_hash": "d021e9a3b98a",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      1
+     ],
+     "from": 12
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 12, the P-positions are exactly n \u2261 1 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       7
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [7]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {7} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{7}",
+    "game_hash": "70874301fd99",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      1
+     ],
+     "from": 16
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 16, the P-positions are exactly n \u2261 1 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.2
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       9
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [9]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {9} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{9}",
+    "game_hash": "aa12e54fa819",
+    "law": {
+     "modulus": 2,
+     "residues": [
+      1
+     ],
+     "from": 10
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 10, the P-positions are exactly n \u2261 1 (mod 2).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 10.6
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       3,
+       8,
+       9
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [3, 8, 9]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {3,8,9} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{3,8,9}",
+    "game_hash": "337a44d9c5f2",
+    "law": {
+     "modulus": 16,
+     "residues": [
+      0,
+      2,
+      4,
+      6
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0, 2, 4, 6 (mod 16).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 10.7
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     0,
+     [
+      "const",
+      [
+       8
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 0, [\"const\", [8]], [\"squares\"]]",
+    "pretty": "[if n\u22610 (mod 2): {8} else: squares \u2264 n]",
+    "m": 2,
+    "r": 0,
+    "branch_order": "F / squares",
+    "F_pretty": "{8}",
+    "game_hash": "85726ded2ae7",
+    "law": {
+     "modulus": 16,
+     "residues": [
+      0,
+      2,
+      4,
+      6
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0, 2, 4, 6 (mod 16).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 9.6
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       3,
+       8,
+       9
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [3, 8, 9]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {3,8,9} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{3,8,9}",
+    "game_hash": "461813d856f8",
+    "law": {
+     "modulus": 16,
+     "residues": [
+      1,
+      5,
+      7,
+      11
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 1, 5, 7, 11 (mod 16).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 10.1
+   },
+   {
+    "rule": [
+     "ifmod",
+     2,
+     1,
+     [
+      "const",
+      [
+       8
+      ]
+     ],
+     [
+      "squares"
+     ]
+    ],
+    "dsl": "[\"ifmod\", 2, 1, [\"const\", [8]], [\"squares\"]]",
+    "pretty": "[if n\u22611 (mod 2): {8} else: squares \u2264 n]",
+    "m": 2,
+    "r": 1,
+    "branch_order": "F / squares",
+    "F_pretty": "{8}",
+    "game_hash": "59db46dacd80",
+    "law": {
+     "modulus": 16,
+     "residues": [
+      1,
+      3,
+      5,
+      7
+     ],
+     "from": 1
+    },
+    "conjecture_census": "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 1, 3, 5, 7 (mod 16).",
+    "N_harsh": 1000000,
+    "first_counterexample": null,
+    "holds": true,
+    "seconds": 10.4
+   }
+  ]
+ }
 }
