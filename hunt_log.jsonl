@@ -1,0 +1,5 @@
+{"stamp": "20260728-112329", "seed": 1, "best": "({3..3} \u222a proper divisors of n)", "best_score": 8.14}
+{"stamp": "20260728-112432", "seed": 2, "best": "(proper divisors of n \u222a {7})", "best_score": 11.14}
+{"stamp": "20260728-112533", "seed": 3, "best": "(proper divisors of n + 2)", "best_score": 11.26}
+{"stamp": "20260728-112643", "seed": 4, "best": "(proper divisors of n + 2)", "best_score": 11.26}
+{"stamp": "20260728-112820", "seed": 5, "best": "[if n\u22611 (mod 2): nonzero base-12 digits of n else: {1,6,9}]", "best_score": 11.14}

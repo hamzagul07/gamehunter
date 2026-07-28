@@ -1,0 +1,22 @@
+# GameHunter rules for Cursor's agent
+# This project is a conjecture-hunting engine for combinatorial games.
+# The machine outputs CONJECTURES; only the human's proof makes a discovery.
+
+- You may edit engineering code (DSL, detectors, performance, CLI, v2 features),
+  but pattern detection must stay fully deterministic: never add AI/LLM calls
+  inside the verifier (Grundy engine) or detector functions.
+- REGRESSION RULE: after ANY edit to game_hunter.py, run
+  `python game_hunter.py demo --offline` and confirm the five classics still
+  detect correctly ({1,2,3} → period 4; powers of 2 → P ≡ 0 mod 3; divisors →
+  P = odd; base-10 digits → P ≡ 0 mod 10; squares → chaotic). If any detection
+  changed, the edit broke a detector — fix or revert first.
+- Never label a conjecture proved/confirmed/verified. Never edit or embellish
+  reports, hunt_log.jsonl, scores, or conjecture wording to look better.
+- Never tune thresholds to manufacture "structure." Changes to detector
+  tolerances need a correctness reason, and the regression rule still applies.
+- LLM-proposed rules go only through llm_propose() and must pass valid() and
+  the Grundy engine like any random mutation.
+- Standard library only; Python 3.9+; keep the single-file structure; never
+  delete hunt_log.jsonl or report_*.json (they are the research log).
+- Proof-writing is the human's job. Explaining theory in chat is fine; claiming
+  verification is not.

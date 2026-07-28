@@ -1,0 +1,944 @@
+{
+ "seed": 5,
+ "args": {
+  "cmd": "hunt",
+  "N": 1200,
+  "offline": false,
+  "cache": "oeis_cache.json",
+  "outdir": ".",
+  "gens": 25,
+  "pop": 40,
+  "top": 8,
+  "deepN": 5000,
+  "seed": 5
+ },
+ "finalists": [
+  {
+   "rule": [
+    "ifmod",
+    2,
+    1,
+    [
+     "digits",
+     12
+    ],
+    [
+     "const",
+     [
+      1,
+      6,
+      9
+     ]
+    ]
+   ],
+   "pretty": "[if n\u22611 (mod 2): nonzero base-12 digits of n else: {1,6,9}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 11.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: ABSENT from OEIS -- novelty candidate",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 12,
+     "residues": [
+      0,
+      2,
+      4
+     ],
+     "from": 1
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 5,
+    "branching": 3.0,
+    "static_set": false,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    0,
+    1,
+    0,
+    1,
+    2,
+    1,
+    2,
+    1,
+    2,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    2,
+    1,
+    2,
+    1,
+    2,
+    1,
+    0,
+    2,
+    0,
+    1,
+    0,
+    2,
+    3
+   ],
+   "p_positions_head": [
+    2,
+    4,
+    12,
+    14,
+    16,
+    24,
+    26,
+    28,
+    36,
+    38,
+    40,
+    48,
+    50,
+    52,
+    60,
+    62,
+    64,
+    72,
+    74,
+    76,
+    84,
+    86,
+    88,
+    96,
+    98
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0, 2, 4 (mod 12).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "1c15640ab121",
+   "oeis_p_positions": {
+    "status": "not_found"
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    5,
+    1,
+    [
+     "squares"
+    ],
+    [
+     "range",
+     2,
+     2
+    ]
+   ],
+   "pretty": "[if n\u22611 (mod 5): squares \u2264 n else: {2..2}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 11.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: ABSENT from OEIS -- novelty candidate",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 5,
+     "residues": [
+      2,
+      3
+     ],
+     "from": 15
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 10,
+    "branching": 14.0,
+    "static_set": false,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    2,
+    1,
+    0,
+    0,
+    1,
+    2,
+    0,
+    0,
+    1,
+    1,
+    2,
+    0,
+    0,
+    1,
+    1,
+    2,
+    0,
+    0,
+    1,
+    1
+   ],
+   "p_positions_head": [
+    3,
+    4,
+    6,
+    7,
+    10,
+    13,
+    14,
+    17,
+    18,
+    22,
+    23,
+    27,
+    28,
+    32,
+    33,
+    37,
+    38,
+    42,
+    43,
+    47,
+    48,
+    52,
+    53,
+    57,
+    58
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 15, the P-positions are exactly n \u2261 2, 3 (mod 5).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "ca7c05450a3c",
+   "oeis_p_positions": {
+    "status": "not_found"
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    5,
+    2,
+    [
+     "squares"
+    ],
+    [
+     "range",
+     2,
+     2
+    ]
+   ],
+   "pretty": "[if n\u22612 (mod 5): squares \u2264 n else: {2..2}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 11.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: ABSENT from OEIS -- novelty candidate",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 5,
+     "residues": [
+      3,
+      4
+     ],
+     "from": 16
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 10,
+    "branching": 1.0,
+    "static_set": true,
+    "dull": false
+   },
+   "G_head": [
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    2,
+    1,
+    0,
+    0,
+    1,
+    2,
+    0,
+    0,
+    1,
+    1,
+    2,
+    0,
+    0,
+    1,
+    1,
+    2,
+    0,
+    0,
+    1
+   ],
+   "p_positions_head": [
+    1,
+    4,
+    5,
+    7,
+    8,
+    11,
+    14,
+    15,
+    18,
+    19,
+    23,
+    24,
+    28,
+    29,
+    33,
+    34,
+    38,
+    39,
+    43,
+    44,
+    48,
+    49,
+    53,
+    54,
+    58
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 16, the P-positions are exactly n \u2261 3, 4 (mod 5).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "85e7e856a4f5",
+   "oeis_p_positions": {
+    "status": "not_found"
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    5,
+    2,
+    [
+     "squares"
+    ],
+    [
+     "range",
+     1,
+     3
+    ]
+   ],
+   "pretty": "[if n\u22612 (mod 5): squares \u2264 n else: {1..3}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 11.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: ABSENT from OEIS -- novelty candidate",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 5,
+     "residues": [
+      3
+     ],
+     "from": 25
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 13,
+    "branching": 3.0,
+    "static_set": true,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    0,
+    2,
+    3,
+    1,
+    0,
+    1,
+    2,
+    3,
+    0,
+    1,
+    0,
+    2,
+    3,
+    1,
+    0,
+    3,
+    2,
+    1,
+    0,
+    3,
+    1,
+    2,
+    0,
+    3,
+    1,
+    3,
+    0,
+    2,
+    1
+   ],
+   "p_positions_head": [
+    2,
+    6,
+    10,
+    12,
+    16,
+    20,
+    24,
+    28,
+    33,
+    38,
+    43,
+    48,
+    53,
+    58,
+    63,
+    68,
+    73,
+    78,
+    83,
+    88,
+    93,
+    98,
+    103,
+    108,
+    113
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 25, the P-positions are exactly n \u2261 3 (mod 5).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "ef3508a472d8",
+   "oeis_p_positions": {
+    "status": "not_found"
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    3,
+    1,
+    [
+     "squares"
+    ],
+    [
+     "range",
+     3,
+     6
+    ]
+   ],
+   "pretty": "[if n\u22611 (mod 3): squares \u2264 n else: {3..6}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 11.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: ABSENT from OEIS -- novelty candidate",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 9,
+     "residues": [
+      0,
+      8
+     ],
+     "from": 9
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 16,
+    "branching": 16.0,
+    "static_set": false,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    0,
+    1,
+    2,
+    2,
+    2,
+    0,
+    3,
+    0,
+    3,
+    1,
+    1,
+    3,
+    2,
+    2,
+    3,
+    0,
+    0,
+    4,
+    1,
+    1,
+    4,
+    2,
+    2,
+    4,
+    0,
+    0,
+    3,
+    1,
+    1
+   ],
+   "p_positions_head": [
+    2,
+    7,
+    9,
+    17,
+    18,
+    26,
+    27,
+    35,
+    36,
+    44,
+    45,
+    53,
+    54,
+    62,
+    63,
+    71,
+    72,
+    80,
+    81,
+    89,
+    90,
+    98,
+    99,
+    107,
+    108
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 9, the P-positions are exactly n \u2261 0, 8 (mod 9).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "be46689174c6",
+   "oeis_p_positions": {
+    "status": "not_found"
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    5,
+    1,
+    [
+     "squares"
+    ],
+    [
+     "range",
+     1,
+     2
+    ]
+   ],
+   "pretty": "[if n\u22611 (mod 5): squares \u2264 n else: {1..2}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 11.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: ABSENT from OEIS -- novelty candidate",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 10,
+     "residues": [
+      0,
+      3,
+      7
+     ],
+     "from": 15
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 12,
+    "branching": 14.7,
+    "static_set": false,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    2,
+    3,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    3,
+    0,
+    1,
+    2,
+    0
+   ],
+   "p_positions_head": [
+    3,
+    6,
+    9,
+    11,
+    14,
+    17,
+    20,
+    23,
+    27,
+    30,
+    33,
+    37,
+    40,
+    43,
+    47,
+    50,
+    53,
+    57,
+    60,
+    63,
+    67,
+    70,
+    73,
+    77,
+    80
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 15, the P-positions are exactly n \u2261 0, 3, 7 (mod 10).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "bcb693c540b9",
+   "oeis_p_positions": {
+    "status": "not_found"
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    3,
+    1,
+    [
+     "powers",
+     2
+    ],
+    [
+     "divisors"
+    ]
+   ],
+   "pretty": "[if n\u22611 (mod 3): powers of 2 \u2264 n else: proper divisors of n]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 8.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: matches A016789 (a(n) = 3*n + 2.)",
+    "oeis_grundy: ABSENT from OEIS -- novelty candidate"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 3,
+     "residues": [
+      2
+     ],
+     "from": 1
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 13,
+    "branching": 12.3,
+    "static_set": false,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    0,
+    1,
+    2,
+    0,
+    4,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    0,
+    1,
+    2,
+    0,
+    5,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3
+   ],
+   "p_positions_head": [
+    2,
+    5,
+    8,
+    11,
+    14,
+    17,
+    20,
+    23,
+    26,
+    29,
+    32,
+    35,
+    38,
+    41,
+    44,
+    47,
+    50,
+    53,
+    56,
+    59,
+    62,
+    65,
+    68,
+    71,
+    74
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 2 (mod 3).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "875f108fe5f8",
+   "oeis_p_positions": {
+    "status": "found",
+    "A": "A016789",
+    "name": "a(n) = 3*n + 2.",
+    "count": 2
+   },
+   "oeis_grundy": {
+    "status": "not_found"
+   }
+  },
+  {
+   "rule": [
+    "ifmod",
+    2,
+    1,
+    [
+     "digits",
+     12
+    ],
+    [
+     "const",
+     [
+      1,
+      2,
+      7
+     ]
+    ]
+   ],
+   "pretty": "[if n\u22611 (mod 2): nonzero base-12 digits of n else: {1,2,7}]",
+   "size": 3,
+   "N": 5000,
+   "tier": "HIDDEN_MOD_STRUCTURE",
+   "score": 5.14,
+   "notes": [
+    "Grundy values look chaotic but win/loss is cleanly modular -- ideal theorem material",
+    "oeis_p_positions: matches A008586 (Multiples of 4.)",
+    "oeis_grundy: matches A007877 (Period 4 zigzag sequence: repeat [0,1,2,1].)"
+   ],
+   "detections": {
+    "arith": null,
+    "period": null,
+    "residue": {
+     "modulus": 4,
+     "residues": [
+      0
+     ],
+     "from": 1
+    },
+    "digitsum": null
+   },
+   "stats": {
+    "distinct_tail_values": 5,
+    "branching": 3.0,
+    "static_set": false,
+    "dull": false
+   },
+   "G_head": [
+    1,
+    2,
+    1,
+    0,
+    1,
+    2,
+    1,
+    0,
+    1,
+    2,
+    1,
+    0,
+    1,
+    2,
+    1,
+    0,
+    1,
+    2,
+    1,
+    0,
+    1,
+    2,
+    1,
+    0,
+    2,
+    3,
+    1,
+    0,
+    2,
+    3
+   ],
+   "p_positions_head": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    60,
+    64,
+    68,
+    72,
+    76,
+    80,
+    84,
+    88,
+    92,
+    96,
+    100
+   ],
+   "conjectures": [
+    "CONJECTURE: for n \u2265 1, the P-positions are exactly n \u2261 0 (mod 4).",
+    "Proof strategy: induction on n. Show (i) every move from a claimed P-position lands on a claimed N-position, and (ii) from every claimed N-position some move lands on a claimed P-position."
+   ],
+   "game_hash": "5c3ff85a7701",
+   "oeis_p_positions": {
+    "status": "found",
+    "A": "A008586",
+    "name": "Multiples of 4.",
+    "count": 5
+   },
+   "oeis_grundy": {
+    "status": "found",
+    "A": "A007877",
+    "name": "Period 4 zigzag sequence: repeat [0,1,2,1].",
+    "count": 9
+   }
+  }
+ ]
+}
