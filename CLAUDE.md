@@ -29,6 +29,9 @@ proves them. Read README.md before making changes.
    proposal passes `valid()` + the Grundy engine like any random mutation.
 6. Proofs are the human's work. When asked, you may explain theory or critique
    a proof attempt in chat — but nothing you say is a verification.
+7. The proofs/ directory contains human-authored mathematics only. Agents
+   may create empty placeholder files there when asked, but must never
+   write, edit, summarize, or "fix" mathematical content in that directory.
 
 ## Engineering constraints
 - Standard library only. Do not add dependencies without asking.
