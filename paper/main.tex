@@ -225,10 +225,10 @@ $m - 1$ such classes simultaneously.
 
 % PORT: chain_lemma.md, Scope paragraph — per the skeleton's instruction
 % that it becomes the first sentence of this section.
-The Lemma classifies no position of class $r$ itself --- it is silent
+Lemma~\ref{lem:chain} classifies no position of class $r$ itself --- it is silent
 about every $n \equiv r \pmod m$, and in particular does not assert those
-are \NN-positions; that claim is the subject of
-Section~\ref{sec:clearing}, and only the two together give the full
+are \NN-positions; that claim is the subject of the
+present section, and only the two together give the full
 mod-$2m$ law.
 
 \begin{definition}[Window; free and hard residues; hard set]\label{def:window}
@@ -263,10 +263,12 @@ from the hard residue lands one below it in the top half, an
 \end{lemma}
 \begin{proof}
 % PORT: the corresponding sentence of IV.1.
-Constitutional uselessness, for every $m$ and $r$: $0, 1, m \notin
-H(m, r)$ --- a square $\equiv 0$ or $m \pmod{2m}$ is $\equiv 0 \pmod m$
-and stays inside class $r$, and subtracting $\equiv 1$ from the hard
-residue lands one below it in the top half, an odd rung, \NN.
+The exclusions $0, 1, m \notin H(m,r)$ are read directly off the
+displayed form of $H$. A square $\equiv 0$ or $m \pmod{2m}$ is
+$\equiv 0 \pmod m$, so subtracting it keeps a class-$r$ position inside
+class $r$; and subtracting a square $\equiv 1 \pmod{2m}$ from the hard
+residue lands one below it in the top half --- the odd rung directly
+above a bottom --- an N-position.
 \end{proof}
 
 \begin{lemma}[Clearing Lemma]\label{lem:clearing}
@@ -358,7 +360,7 @@ $6, 7, 8$; the members $45 + r$ ($49, 50, 51$) by $49 \equiv 13$, landing
 on bottoms $0, 1, 2$; and from $63 + r \ge 64 = (m - 1)^2$ onward, the
 witness $64 \equiv 10 = m + 1$ lands on bottom $r - 1$ forever. So each
 exceptional game carries exactly one extra \PP-position, and the
-exception set is precisely the $E$ displayed in the box.
+exception set is precisely the set $E$ of Theorem~\ref{thm:main}.
 \end{proof}
 
 \begin{lemma}[Boundary positions corrupt nothing]\label{lem:audit}
@@ -406,12 +408,6 @@ The law holds for both parities of $m$, with no thresholds and no
 unverified zones.
 \end{theorem}
 \begin{proof}
-% WRITE (short assembly, ~6 sentences, your voice): chains by
-% Lemma~\ref{lem:chain}; free residue by 1^2; hard residue by
-% Lemmas~\ref{lem:clearing}+\ref{lem:square-exists} outside the failure
-% window; the window cases by Proposition~\ref{prop:rebels}; boundary
-% clauses by Lemma~\ref{lem:audit}. Model it on your II.7/IV assembly
-% paragraphs.
 Fix a position $n$ of $D(m,r)$ with $m \ge 3$, $m \ne 4$: either $n$ lies in a
 class $c \not\equiv r \pmod{m}$, or $n$ lies in class $r$, and in the latter
 case $n$ is either a boundary position named in the statement --- $n = 0$ when
@@ -446,8 +442,8 @@ harmlessness: $n = 0$ at $r = 0$ is terminal hence P, and neither its P-ness
 nor a rebel's disturbs any verdict already issued --- every position with a
 move onto them is a class-$r$ position ruled N above, and no fallback chain
 ever enters class $r$ --- so the classifications of the four preceding
-sentences stand unsturbed, and the P-positions of $D(m,r)$ are exactly
-those of the boxed statement: the foreign bottoms modulo $2m$, together with
+sentences stand undisturbed, and the P-positions of $D(m,r)$ are exactly
+those of the statement: the foreign bottoms modulo $2m$, together with
 $n = 0$, together with $n = m + r$ when $(m,r) \in E$.
 \end{proof}
 
@@ -456,13 +452,13 @@ $n = 0$, together with $n = m + r$ when $(m,r) \in E$.
 % Clearing Lemma; kept as the original route.
 \emph{The odd-$m$ witness identity, the original route.} For odd $m$,
 $(m - 1)^2 = m^2 - 2m + 1 \equiv m^2 + 1 \equiv \mathbf{m + 1}
-\pmod{2m}$, using $m^2 \equiv m$ from Part~III; and $m + 1$ belongs to
+\pmod{2m}$, using $m^2 \equiv m$ from Definition~\ref{def:Q}; and $m + 1$ belongs to
 every hard set, landing the hard residue exactly on bottom $r - 1$
 ($m - 1$ when $r = 0$). So the pair $(1^2, (m - 1)^2)$ is a universal
 witness pair for all odd $m$ at once --- at the price of the threshold
 $n \ge (m - 1)^2$. The Clearing Lemma supersedes it: a square below
 $m + r$ does the same job with legality free, for both parities, with no
-threshold. The identity remains the cleanest line in this file and the
+threshold. The identity remains the cleanest line in this development and the
 historical door to everything above.
 \end{remark}
 
@@ -485,14 +481,15 @@ while every hard set $H(m, r)$ excludes $0$, $1$, and $m$
 every legal square move either stays inside class $r$ (a square $\equiv
 0$ or $m$ mod $2m$ is $\equiv 0$ mod $m$) or lands one below on the odd
 rung above a bottom (a square $\equiv 1$), an \NN-position --- never on a
-\PP-position of a foreign chain. \emph{Proof:} only-options enumeration
-over $\Q(2m)$, the mirror image of the Independence section --- there,
+\PP-position of a foreign chain. The argument is an only-options enumeration
+over $\Q(2m)$, the mirror image of the Independence step in the proof of
+Lemma~\ref{lem:chain} --- there,
 fallback moves cannot leave a chain; here, square moves cannot leave the
 class except onto \NN. \emph{Consequence:} the hard class's \PP/\NN\
 structure is decided by a self-contained internal recursion, and its very
 first member already defies the chain law: $3$ is \PP\ in $D(2,1)$ and
 $5$ is \PP\ in $D(4,1)$, where escape, if it existed, would force \NN.
-Calibration, as accepted at the viva: for $m = 2$ and $m = 4$ we prove
+Calibration: for $m = 2$ and $m = 4$ we prove
 confinement --- no square door into the window, so the class turns
 inward. We do \textbf{not} prove that these confined classes obey no
 eventual law of their own: ``no period and no modulus up to 200 fits'' is
@@ -520,13 +517,13 @@ $n \equiv 0, 1, 3,$ or $4 \pmod{10}$.
 \end{example}
 
 % PORT: escape_and_diagonal.md Part II, II.1–II.8, in full.
-\noindent\textbf{II.1 Statement.} There is an explicit threshold $N_0$,
+\noindent\textbf{Step 1. Statement.} There is an explicit threshold $N_0$,
 computed in II.6 below, such that every position $n \equiv 2 \pmod 5$
 with $n \ge N_0$ has at least one legal square move --- some $k$ with
 $k^2 \le n$ --- whose landing $n - k^2$ is a \PP-position of a fallback
 chain. Consequently every such $n$ is an \NN-position.
 
-\noindent\textbf{II.2 The target window.} By the Chain Lemma, the
+\noindent\textbf{Step 2. The target window.} By the Chain Lemma, the
 fallback classes $0, 1, 3, 4 \pmod 5$ have their \PP-positions exactly at
 $n \equiv 0, 1, 3, 4 \pmod{10}$; call that set $T = \{0, 1, 3, 4\}
 \pmod{10}$. A landing in $T$ is genuinely \PP: a number $\equiv 0, 1, 3,$
@@ -535,26 +532,26 @@ fallback chain where the lemma has jurisdiction, and its residue mod $10$
 matching the chain bottom's means it sits an even number of rungs up ---
 precisely the lemma's \PP-rungs.
 
-\noindent\textbf{II.3 The split.} Write $n = 5q + 2$: if $q = 2t$ then
+\noindent\textbf{Step 3. The split.} Write $n = 5q + 2$: if $q = 2t$ then
 $n = 10t + 2$, and if $q = 2t + 1$ then $n = 10t + 7$, so a class-$2$
 position is $\equiv 2$ or $7 \pmod{10}$ --- that is, $r$ or $r + m$ ---
 and the proof forks on the parity of $q$ exactly the way the chain proof
 forked on the parity of $j$.
 
-\noindent\textbf{II.4 Coverage line one.} For $n \equiv 2 \pmod{10}$: the
+\noindent\textbf{Step 4. Coverage line one.} For $n \equiv 2 \pmod{10}$: the
 differences $2 - T$ are $\{2-0, 2-1, 2-3, 2-4\} \equiv \{2, 1, 9, 8\}
 \pmod{10}$, and intersecting with $\Q = \{0, 1, 4, 5, 6, 9\}$ leaves
 $\{1, 9\}$; take the smallest, $s = 1$, so subtracting $1^2$ gives
 $n - 1 \equiv 1 \pmod{10} \in T$.
 
-\noindent\textbf{II.5 Coverage line two.} For $n \equiv 7 \pmod{10}$: the
+\noindent\textbf{Step 5. Coverage line two.} For $n \equiv 7 \pmod{10}$: the
 differences $7 - T$ are $\{7, 6, 4, 3\} \pmod{10}$, intersecting with
 $\Q$ leaves $\{4, 6\}$; take $s = 4$, so subtracting $2^2$ gives
 $n - 4 \equiv 3 \pmod{10} \in T$. Both keystones came with a spare ---
 $9 = 3^2$ also rescues residue $2$, and $16 = 4^2$ also rescues residue
 $7$. The corridor is wider than it needs to be.
 
-\noindent\textbf{II.6 Legality and the threshold.} The rescue squares are
+\noindent\textbf{Step 6. Legality and the threshold.} The rescue squares are
 the concrete numbers $1$ and $4$. For the residue-$2$ class, whose
 members are $2, 12, 22, \dots$, legality demands $1 \le n$, which already
 holds at the smallest member. For the residue-$7$ class, members
@@ -562,8 +559,7 @@ $7, 17, 27, \dots$, legality demands $4 \le n$, which holds at $7$. So
 both rescues are legal for every member of their class, and the threshold
 collapses: $\mathbf{N_0 = 2}$, the smallest class-$2$ position in
 existence. Below $N_0$ there are no class-$2$ positions at all, so the
-hand-check zone is empty --- verdict: vacuous. Checking the workbook rows
-anyway, as ordered: $2 - 1 = 1$ (\PP) $\checkmark$, $7 - 4 = 3$ (\PP)
+hand-check zone is empty --- verdict: vacuous. Checking the small rows directly anyway: $2 - 1 = 1$ (\PP) $\checkmark$, $7 - 4 = 3$ (\PP)
 $\checkmark$, $12 - 1 = 11$ (\PP) $\checkmark$, $17 - 4 = 13$ (\PP)
 $\checkmark$, $22 - 1 = 21$ (\PP) $\checkmark$, $27 - 4 = 23$ (\PP)
 $\checkmark$. Every row is rescued-anyway, rebels: none. Worth recording
@@ -572,7 +568,7 @@ than the smallest members of their classes. Nothing guarantees that luck
 at other moduli, which is exactly why the theorem was written with $N_0$
 as a named unknown.
 
-\noindent\textbf{II.7 Assembly.} The Chain Lemma classifies the four
+\noindent\textbf{Step 7. Assembly.} The Chain Lemma classifies the four
 fallback classes everywhere: \PP\ exactly at $n \equiv 0, 1, 3, 4
 \pmod{10}$, \NN\ at $5, 6, 8, 9$. The Escape Theorem classifies class $2$
 everywhere, since $N_0 = 2$ means ``past the threshold'' is all of it:
@@ -585,7 +581,7 @@ whole game \emph{is} the target window $T$ --- the landing pads and the
 answer turned out to be the same four residues (resolved in
 Remark~\ref{rem:coincidence}).
 
-\noindent\textbf{II.8 Scope and the forward hook.} The proof secretly
+\noindent\textbf{Step 8. Scope and the forward hook.} The proof secretly
 depended on squares mod $10$ being \emph{rich}: $\Q$ fills six of the ten
 residues, enough that both difference lists $\{2, 1, 9, 8\}$ and
 $\{7, 6, 4, 3\}$ caught at least one member --- had $\Q$ missed either
@@ -826,9 +822,7 @@ Therefore $G(n) = 0 \iff n \equiv 0 \pmod 2$.
 
 \smallskip
 \noindent\emph{Lemma B (Full Sequence Equivalence).}
-\textbf{Answers to the Referee Questions.}
-
-\textbf{Question 1 (even positions).} What is $\mathrm{mex}(\{v\})$ when
+\textbf{Even positions.} What is $\mathrm{mex}(\{v\})$ when
 $v \ne 0$, and what does that force $G(n)$ to be for even $n$?
 
 For even $n$, the reachable set is either empty (if $n < a$) or
@@ -838,7 +832,7 @@ $v > 0$. Therefore $G(n) = 0$ for every even $n$, regardless of the
 specific value of $v$, and regardless of whether the move exists at all.
 The parameter $a$ evaporates at every even step.
 
-\textbf{Question 2 (odd positions).} At odd $n$, split the available
+\textbf{Odd positions.} At odd $n$, split the available
 squares $k^2$ by parity: which earlier positions' Grundy values enter the
 mex?
 
@@ -906,7 +900,7 @@ $13$'s \PP-ness by the period, which the sweep refutes ($31$ is \NN); so
 every correct fit begins at $14$, and the minimal preperiod is exactly
 rebel $+\, 1 = 14$. The period is $2m = 18$, and the \PP-residues are the
 foreign bottoms $\{0, \dots, 8\} \setminus \{4\} = \{0, 1, 2, 3, 5, 6, 7,
-8\}$. Provenance note, owed and recorded: an earlier session claimed from
+8\}$. Provenance note, owed and recorded: an earlier draft claimed from
 memory that every diagonal cell's preperiod was $\le 1$ and built a
 certificate on that claim; the file said otherwise all along, the claim
 and the certificate are struck, and this line enters the paper as the
