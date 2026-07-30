@@ -94,6 +94,15 @@ move reaches an \NN-position, the terminal case satisfying this clause
 vacuously.
 \end{definition}
 
+\begin{lemma}[Verification principle; see, e.g., \cite{lessons}]
+\label{lem:verify}
+Let $S$ be a set of positions of an impartial game under normal play.
+If (i) every terminal position lies in $S$, (ii) no move from a position
+in $S$ leads to a position in $S$, and (iii) from every position not in
+$S$ some move leads to a position in $S$, then $S$ is exactly the set of
+\PP-positions.
+\end{lemma}
+
 \begin{definition}[The diagonal games $D(m,r)$]\label{def:game}
 % PORT: escape_and_diagonal.md, "The game" paragraph:
 Let $m \ge 2$ and $0 \le r \le m-1$. $D(m,r)$ is played on the
