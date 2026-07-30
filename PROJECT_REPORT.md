@@ -216,3 +216,14 @@ aperiodicity of the two confined classes. Full text:
 proofs/escape_and_diagonal.md; examination records:
 verification/escape_viva.md and verification/diagonal_viva.md. External
 human review remains pending for all results.
+
+**Amendment (August 1):** First external human review received. Balaji
+Kadam (postdoc, IIT Bombay, group of U. Larsson) read the Foursquare
+proof; no errors were reported; he suggested a streamlined presentation
+via the standard verification principle (being adopted) and conjectured
+an extension of the move set leaving the P-positions invariant. The
+student proved the conjecture (verbatim proof in correspondence;
+machine-checked to n = 30{,}000 in
+verification/kadam_extension_check.py) and it will appear as a credited
+remark. The Foursquare result and proof were also posted publicly on the
+Art of Problem Solving forum for independent checking.
