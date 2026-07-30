@@ -29,8 +29,11 @@
 \newtheorem{remark}[theorem]{Remark}
 
 \newcommand{\Q}{\mathcal{Q}}   % squares mod 2m
-\newcommand{\PP}{\mathrm{P}}
-\newcommand{\NN}{\mathrm{N}}
+% NOTE (mechanical, added at compile time): \PP and \NN are used in text
+% mode throughout the skeleton (e.g. "a \PP-position"), so they are
+% wrapped in \ensuremath. Without this the document does not compile.
+\newcommand{\PP}{\ensuremath{\mathrm{P}}}
+\newcommand{\NN}{\ensuremath{\mathrm{N}}}
 
 % ------------------------------------------------------------------
 % TITLE — pick one, or improve on them (titles are yours to choose):
@@ -99,12 +102,35 @@ move subtracts $m$, available when $n \ge m$. Play is normal.
 
 \begin{definition}[Squares modulo $2m$]\label{def:Q}
 $\Q(2m)$ denotes the set of residues of squares modulo $2m$.
-% Include here (PORT from escape_and_diagonal.md Part III):
-% the mirror identity (2m-k)^2 \equiv k^2, the consequence that
-% k = 1..m plus 0 generates the table, and the two side facts:
-% m odd => m^2 \equiv m (mod 2m); m even => m^2 \equiv 0 (mod 2m).
-% The Q(2m)/complement table for mod 4..22 goes here as Table 1.
+% PORT: escape_and_diagonal.md Part III — mirror identity, generation of
+% the table, and the two side facts. Table 1 follows.
+The mirror tool, proved once in general: $(2m - k)^2 = 4m^2 - 4mk + k^2
+\equiv k^2 \pmod{2m}$, since $4m^2 = 2m \cdot 2m$ and $4mk = 2k \cdot 2m$.
+So every table is $k = 1..m$ plus mirrors, plus the $0$ from $k = 2m$.
+Two side facts fell out of the mirrors and are used below: for odd $m$,
+$m^2 - m = m(m - 1)$ has the even factor $m - 1$, so $m^2 \equiv m
+\pmod{2m}$; for even $m$, $m^2 = (m/2) \cdot 2m \equiv 0 \pmod{2m}$.
 \end{definition}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r l l}
+\hline
+mod & $\Q(2m)$ & complement \\
+\hline
+$4$  & $\{0, 1\}$ & $\{2, 3\}$ \\
+$6$  & $\{0, 1, 3, 4\}$ & $\{2, 5\}$ \\
+$8$  & $\{0, 1, 4\}$ & $\{2, 3, 5, 6, 7\}$ \\
+$10$ & $\{0, 1, 4, 5, 6, 9\}$ & $\{2, 3, 7, 8\}$ \\
+$12$ & $\{0, 1, 4, 9\}$ & $\{2, 3, 5, 6, 7, 8, 10, 11\}$ \\
+$14$ & $\{0, 1, 2, 4, 7, 8, 9, 11\}$ & $\{3, 5, 6, 10, 12, 13\}$ \\
+$18$ & $\{0, 1, 4, 7, 9, 10, 13, 16\}$ & $\{2, 3, 5, 6, 8, 11, 12, 14, 15, 17\}$ \\
+$22$ & $\{0, 1, 3, 4, 5, 9, 11, 12, 14, 15, 16, 20\}$ & $\{2, 6, 7, 8, 10, 13, 17, 18, 19, 21\}$ \\
+\hline
+\end{tabular}
+\caption{The engines at every modulus: $\Q(2m)$ with complements.}
+\label{tab:Q}
+\end{table}
 
 \section{The Chain Lemma}\label{sec:chain}
 
@@ -115,20 +141,104 @@ $n \ge 0$ with $n \equiv c \pmod m$:
 \[ n \text{ is a \PP-position} \iff n \equiv c \pmod{2m}. \]
 \end{lemma}
 \begin{proof}
-% PORT: proofs/chain_lemma.md — Setup remark (ii), Closure,
-% Independence, The bottom, Alternation, Assembly. Verbatim, notation
-% adapted. The Scope paragraph becomes the first sentence of
-% Section~\ref{sec:clearing}.
-[PORT: proofs/chain\_lemma.md]
+% PORT: proofs/chain_lemma.md — Setup, Closure, Independence,
+% The bottom, Alternation, Assembly. Verbatim, notation adapted.
+% The Scope paragraph opens Section~\ref{sec:clearing}.
+\textbf{Setup and notation.} Chain $c$ is the set $\{c + jm : j = 0, 1,
+2, \dots\}$, i.e.\ all positions $\equiv c \pmod m$; call $c + jm$ rung
+$j$. Two arithmetic remarks used throughout. (i) Every rung satisfies
+$c + jm \equiv c \not\equiv r \pmod m$, so every position of the chain is
+in fallback mode: its only candidate move is subtract-$m$, legal exactly
+when the position is $\ge m$. (ii) Since $n \equiv c \pmod m$, the
+residue of $n$ mod $2m$ is either $c$ or $c + m$; and $n = c + jm \equiv
+c \pmod{2m} \iff 2m$ divides $jm \iff j$ is even. So the Lemma is
+equivalent to: rung $j$ is \PP\ iff $j$ is even. The definition doing all
+the work: a terminal position is \PP; a position is \NN\ iff at least one
+legal move reaches a \PP-position; a position is \PP\ iff every legal
+move reaches an \NN-position, the terminal case being this clause
+satisfied vacuously.
+
+\textbf{Closure.} Let $n = c + jm$ be a rung. Its only candidate move is
+$n \to n - m$. If $j = 0$, the move is illegal, since $n = c \le m - 1 <
+m$. If $j \ge 1$, the move is legal, since $n = c + jm \ge 0 + m = m$,
+and it lands on $c + (j-1)m$: the same residue $c$ mod $m$, hence rung
+$j - 1$ of the same chain. So every legal move from a chain-$c$ position
+stays inside chain $c$, descending exactly one rung, and the set of
+positions reachable from the chain is contained in the chain.
+
+\textbf{Independence.} Positions outside chain $c$ --- in particular
+class-$r$ positions firing squares --- may well have moves that land on
+rungs of the chain. This cannot disturb the rungs' statuses: by the
+definition just quoted, the status of a position is a function only of
+the statuses of its options, the positions reachable from it; the
+definition never mentions moves arriving at a position. By Closure,
+every option of every rung is again a rung, so the statuses of chain $c$
+are computed entirely within chain $c$ and would be identical if the rest
+of $D(m, r)$ were deleted. Incoming traffic affects only the travellers,
+never the rungs.
+
+\textbf{The bottom.} Rung $0$ is the position $c$, the least element of
+the chain, with $0 \le c \le m-1$. It is in fallback mode (because $c
+\not\equiv r$) and its single candidate move is illegal (because $c <
+m$). Both facts hold equally for $c = 0$ and for $c \ge 1$ --- note that
+for $c = 0$ no appeal to squares is needed: $0 \ne r$ already puts the
+position $0$ in fallback mode, where $m \le 0$ fails. So rung $0$ is
+terminal, hence a \PP-position: ``every legal move reaches an \NN''
+holds vacuously. This matches the claim, since $j = 0$ is even.
+
+\textbf{Alternation.} Claim: rung $j$ is \PP\ for even $j$ and \NN\ for
+odd $j$. Strong induction on $j$. Base, $j = 0$: done above. Step, $j
+\ge 1$: assume the claim for all smaller indices. By Closure, rung $j$
+has exactly one legal move --- legal precisely because $j \ge 1$, the
+boundary check (rung $0$ has no move at all; rung $1$'s move is legal
+since $c + m \ge m$) --- and it goes to rung $j - 1$. For a position with
+a single option $x$, the definition specializes: ``some option is \PP''
+means $x$ is \PP, so the position is \NN\ iff $x$ is \PP; ``every option
+is \NN'' means $x$ is \NN, so the position is \PP\ iff $x$ is \NN. By the
+induction hypothesis, rung $j - 1$ is \PP\ iff $j - 1$ is even. Hence
+rung $j$ is \NN\ iff $j - 1$ is even, i.e.\ iff $j$ is odd; and rung $j$
+is \PP\ iff $j - 1$ is odd, i.e.\ iff $j$ is even. Induction closed.
+
+\textbf{Assembly.} Let $c \not\equiv r$ be any class and $n \equiv c
+\pmod m$ any position; write $n = c + jm$ with $j \ge 0$ uniquely
+determined. Closure and Independence license computing $n$'s status
+inside the chain alone; the bottom is the base of the induction and
+Alternation is its step, giving: $n$ is \PP\ $\iff j$ is even $\iff jm
+\equiv 0 \pmod{2m} \iff n \equiv c \pmod{2m}$. Nothing about $c$ was used
+beyond $0 \le c \le m-1$ and $c \ne r$, so the result holds for all
+$m - 1$ such classes simultaneously.
 \end{proof}
 
 \section{Escape: the Clearing Lemma and its exceptions}\label{sec:clearing}
+
+% PORT: chain_lemma.md, Scope paragraph — per the skeleton's instruction
+% that it becomes the first sentence of this section.
+The Lemma classifies no position of class $r$ itself --- it is silent
+about every $n \equiv r \pmod m$, and in particular does not assert those
+are \NN-positions; that claim is Milestone 2, and only the two together
+give the full mod-$2m$ law.
 
 \begin{definition}[Window; free and hard residues; hard set]\label{def:window}
 % PORT: escape_and_diagonal.md IV.1 — window T(m,r) = foreign bottoms
 % mod 2m; class r splits into free residue (r, else m) and hard residue
 % (r+m, else 0); H(m,r) as displayed; the free escape by 1^2.
-[PORT: escape\_and\_diagonal.md, IV.1]
+By the Chain Lemma (general form, as accepted): fallback moves preserve
+class mod $m$, so each class $c \ne r$ is a single self-contained chain
+$c$, $c + m$, $c + 2m$, $\dots$ with terminal bottom $c$ --- no square
+moves ($c \not\equiv r$) and no affordable fallback ($c < m$) --- and
+\PP/\NN\ alternate upward from the stuck bottom: \PP\ exactly at $n
+\equiv c \pmod{2m}$. The window $T(m, r)$ is the set of foreign bottoms
+mod $2m$. Class $r$ splits mod $2m$ into the \textbf{free residue} ($r$
+when $r \ge 1$, else $m$) and the \textbf{hard residue} ($r + m$ when
+$r \ge 1$, else $0$). The free escape is immediate: $1^2$ lands the free
+residue on the bottom directly beneath it ($r - 1$, or $m - 1$ when
+$r = 0$), and is legal from the smallest free member. For the hard
+residue, a square value $s$ (mod $2m$) lands in the window iff
+\[
+s \in H(m, r) = \{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}
+\ \text{for } r \ge 1, \quad\text{or}\quad \{m+1, \dots, 2m-1\}
+\ \text{for } r = 0.
+\]
 \end{definition}
 
 \begin{lemma}[Constitutional uselessness]\label{lem:useless}
@@ -139,21 +249,31 @@ from the hard residue lands one below it in the top half, an
 \NN-position.
 \end{lemma}
 \begin{proof}
-% PORT: the corresponding sentences of IV.1.
-[PORT]
+% PORT: the corresponding sentence of IV.1.
+Constitutional uselessness, for every $m$ and $r$: $0, 1, m \notin
+H(m, r)$ --- a square $\equiv 0$ or $m \pmod{2m}$ is $\equiv 0 \pmod m$
+and stays inside class $r$, and subtracting $\equiv 1$ from the hard
+residue lands one below it in the top half, an odd rung, \NN.
 \end{proof}
 
 \begin{lemma}[Clearing Lemma]\label{lem:clearing}
 % PORT statement exactly from IV.2 (both the r >= 1 and r = 0 branches).
-Suppose some square $s \ne m$ lies in the interval $(r,\, m+r]$ when
-$r \ge 1$, or in $(m,\,2m)$ when $r = 0$. Then every position of the
-hard residue class is an \NN-position by the single move $-s$.
+Suppose some square $s \ne m$ lies in the integer interval $(r,\, m+r]$
+when $r \ge 1$, or in $(m,\,2m)$ when $r = 0$. Then the entire hard class
+is \NN\ by the single move $-s$.
 \end{lemma}
 \begin{proof}
-% PORT: IV.2 — legality (s <= m+r, the smallest hard member; for r = 0,
-% s < 2m and the smallest positive hard member is 2m) and the landing
+% PORT: IV.2 — the IV.2 heading parenthetical, legality, and the landing
 % arithmetic in both sub-cases.
-[PORT: escape\_and\_diagonal.md, IV.2]
+\emph{(Formerly the Zone Lemma --- the parity audit showed it is not a
+patch on the odd-$m$ witness but the escape engine itself, parity-free.)}
+Legality: $s \le m + r$, the smallest hard member (for $r = 0$: $s < 2m$,
+and the smallest positive hard member is $2m$), so the move is affordable
+to every member from the first. Landing: $n - s \equiv m + r - s
+\pmod{2m}$ is a foreign bottom --- in $(r, m)$ when $r < s < m$, in
+$[0, r)$ when $m < s \le m + r$; for $r = 0$, the landing $2m - s$ lies
+in $(0, m)$. Combined with the free escape, class $r$ is all \NN\ ---
+except possibly $n = 0$, handled in Lemma~\ref{lem:audit}.
 \end{proof}
 
 \begin{lemma}[The interval contains a square]\label{lem:square-exists}
@@ -165,7 +285,20 @@ every $m \ge 3$ except $m = 4$.
 % PORT: IV.3, the repaired parity-free squeeze c >= m/2,
 % c^2 >= m^2/4 > m-1 via (m-2)^2/4, degenerate only at m = 2; and the
 % r = 0 erratum with m = 4 as the lone counterexample.
-[PORT: escape\_and\_diagonal.md, IV.3]
+\emph{(IV.3: the interval always contains a square ($m \ge 3$) ---
+repaired and parity-free.)}
+For $r \ge 1$: if $(r, m + r]$ contained no square, consecutive squares
+would straddle it, $c^2 \le r$ and $(c + 1)^2 > m + r$, so $2c + 1 > m$,
+hence $c \ge m/2$ for any $m$, hence $c^2 \ge m^2/4 > m - 1 \ge r$, since
+$m^2/4 - (m - 1) = (m - 2)^2/4 > 0$ for $m \ge 3$ --- contradicting
+$c^2 \le r$. The inequality degenerates at exactly one modulus, $m = 2$,
+where $(m - 2)^2 = 0$ and the interval can indeed be empty ($(1, 3]$ in
+$D(2, 1)$ contains no square). Erratum, folded in: for $r = 0$ the
+interval reads $(m, 2m)$, which contains a square for every $m \ge 3$
+\textbf{except $m = 4$} --- $(4, 8) = \{5, 6, 7\}$ is square-free, and it
+is the lone counterexample, since the same consecutive-squares squeeze
+forces emptiness only for $m \le 5$, and $m = 3$ has its $4$, $m = 5$ its
+$9$.
 \end{proof}
 
 \begin{proposition}[The failure window]\label{prop:window}
@@ -177,7 +310,20 @@ $m = 9$ ($r \in \{4,5,6\}$).
 \begin{proof}
 % PORT: IV.4, including the m = 25 discussion as a closing remark
 % (square m is harmless once b >= 4).
-[PORT: escape\_and\_diagonal.md, IV.4]
+With a square always present, the Clearing Lemma's hypothesis can fail
+for $r \ge 1$ only if the \emph{unique} square in $(r, m + r]$ is $m$
+itself: $m = b^2$ with $(b - 1)^2 \le r$ (no smaller square intrudes) and
+$(b + 1)^2 > m + r$, i.e.\ $r \le 2b$. The window $(b - 1)^2 \le r \le
+2b$ is nonempty iff $(b - 1)^2 \le 2b$ iff $b \le 3$. Among $m \ge 3$
+that leaves exactly $m = 4$ ($b = 2$, $r \in \{1, 2, 3\}$) and $m = 9$
+($b = 3$, $r \in \{4, 5, 6\}$). With the $r = 0$ erratum, every class of
+$m = 4$ is condemned from the outside --- no clearing square exists for
+any $r$ --- while $m = 9$ is healthy at every $r$ except $4, 5, 6$.
+Squarehood of $m$ alone is harmless: at $m = 25$ ($b = 5$) the
+neighboring square $36$ sits only $2b + 1 = 11$ above $m$, deep inside a
+$25$-wide window, so it invades $(r, m + r]$ for every $r$; a square $m$
+isolates itself only when the modulus is small enough ($b \le 3$) for
+square-gaps to outrun $m$.
 \end{proof}
 
 \begin{proposition}[The rebels]\label{prop:rebels}
@@ -189,14 +335,43 @@ window.
 % PORT: IV.5 — the option analysis at n0 = m+r, the three in-game
 % receipts, and the strata sealing (25 == 7, 49 == 13, then 64 == m+1
 % resumes).
-[PORT: escape\_and\_diagonal.md, IV.5]
+At $(9, r)$ with $r \in \{4, 5, 6\}$, the smallest hard member $n_0 =
+m + r \in \{13, 14, 15\}$ can afford only the squares $k^2 \le r$ and
+$9$. A square $k^2 \le r$ lands on $m + (r - k^2)$, the odd rung directly
+above bottom $r - k^2$ --- \NN. The square $9$ lands on $r$ itself, the
+smallest free member --- \NN, since it escapes by $1^2$. Every move lands
+on \NN, so \textbf{$n_0$ is \PP.} In-game receipts: in $D(9,4)$,
+$13 \to 12, 9, 4$, all \NN; in $D(9,5)$, $14 \to 13, 10, 5$, all \NN; in
+$D(9,6)$, $15 \to 14, 11, 6$, all \NN. Above the rebel the class closes
+uniformly: the members $27 + r$ ($31, 32, 33$) are cleared by $25 \equiv
+7 \pmod{18}$, which lies in all three hard sets, landing on bottoms
+$6, 7, 8$; the members $45 + r$ ($49, 50, 51$) by $49 \equiv 13$, landing
+on bottoms $0, 1, 2$; and from $63 + r \ge 64 = (m - 1)^2$ onward, the
+witness $64 \equiv 10 = m + 1$ lands on bottom $r - 1$ forever. So each
+exceptional game carries exactly one extra \PP-position, and the
+exception set is precisely the $E$ displayed in the box.
 \end{proof}
 
 \begin{lemma}[Boundary positions corrupt nothing]\label{lem:audit}
 % PORT statement + proof from IV.6: the n = 0 clause at r = 0 (terminal,
 % hence P; unreachable-from-chains audit; spot receipts) and the
 % rebel audit (moves onto m+r force 3 | k; those positions are already N).
-[PORT: escape\_and\_diagonal.md, IV.6]
+\textbf{Corruption audits.} The $n = 0$ clause: when $r = 0$, zero is
+claimed by squares mode and is the unique squares-mode position that can
+afford no square ($k \ge 1$ forces $k^2 \ge 1 > 0$), so it is terminal,
+hence \PP\ --- while the unamended law would file residue $0$ as \NN. It
+corrupts nobody: fallback chains never visit class $0$; the positions
+that can drop to $0$ are $n = k^2 \equiv 0 \pmod m$, class-$0$ members
+the theorem already declares \NN; and the classes above escape without it
+--- spot receipts: $10 - 9 = 1$ (\PP) in $D(5,0)$, $14 - 9 = 5$ (\PP) in
+$D(7,0)$. For $r \ge 1$ the clause is absorbed, since $0$ is itself a
+foreign bottom; it earns its keep exactly at $r = 0$. The rebels, one
+sentence in the same mirror: a rebel corrupts nobody either --- fallback
+chains never enter class $r$, and the only positions with a move onto
+$m + r$ are class-$r$ members above it (a square step back into class $r$
+forces $k^2 \equiv 0 \bmod 9$, i.e.\ $3 \mid k$), which the theorem
+already declares \NN, so the rebel's \PP-ness merely hands them one more
+witness for what they already were.
 \end{lemma}
 
 \section{The Diagonal Theorem}\label{sec:main}
@@ -227,7 +402,16 @@ unverified zones.
 \begin{remark}[The historical witness]
 % PORT: IV.7(1) — (m-1)^2 == m+1 (mod 2m) for odd m; superseded by the
 % Clearing Lemma; kept as the original route.
-[PORT: escape\_and\_diagonal.md, IV.7(1)]
+\emph{The odd-$m$ witness identity, the original route.} For odd $m$,
+$(m - 1)^2 = m^2 - 2m + 1 \equiv m^2 + 1 \equiv \mathbf{m + 1}
+\pmod{2m}$, using $m^2 \equiv m$ from Part~III; and $m + 1$ belongs to
+every hard set, landing the hard residue exactly on bottom $r - 1$
+($m - 1$ when $r = 0$). So the pair $(1^2, (m - 1)^2)$ is a universal
+witness pair for all odd $m$ at once --- at the price of the threshold
+$n \ge (m - 1)^2$. The Clearing Lemma supersedes it: a square below
+$m + r$ does the same job with legality free, for both parities, with no
+threshold. The identity remains the cleanest line in this file and the
+historical door to everything above.
 \end{remark}
 
 \section{The diseased moduli}\label{sec:disease}
@@ -242,12 +426,38 @@ $r$ or lands on an \NN-position of a foreign chain.
 % PORT: V.1, including the consequence paragraph (self-contained
 % internal recursion; 3 is P in D(2,1), 5 is P in D(4,1)) and the
 % calibration sentences (confinement proved; aperiodicity NOT proved).
-[PORT: escape\_and\_diagonal.md, V.1]
+For $m \in \{2, 4\}$ and every $r$: $\Q(2m) \subseteq \{0, 1, m\}$ ---
+read directly off the mod-$4$ and mod-$8$ rows of Table~\ref{tab:Q} ---
+while every hard set $H(m, r)$ excludes $0$, $1$, and $m$
+(Definition~\ref{def:window}). Hence from any hard-residue position,
+every legal square move either stays inside class $r$ (a square $\equiv
+0$ or $m$ mod $2m$ is $\equiv 0$ mod $m$) or lands one below on the odd
+rung above a bottom (a square $\equiv 1$), an \NN-position --- never on a
+\PP-position of a foreign chain. \emph{Proof:} only-options enumeration
+over $\Q(2m)$, the mirror image of the Independence section --- there,
+fallback moves cannot leave a chain; here, square moves cannot leave the
+class except onto \NN. \emph{Consequence:} the hard class's \PP/\NN\
+structure is decided by a self-contained internal recursion, and its very
+first member already defies the chain law: $3$ is \PP\ in $D(2,1)$ and
+$5$ is \PP\ in $D(4,1)$, where escape, if it existed, would force \NN.
+Calibration, as accepted at the viva: for $m = 2$ and $m = 4$ we prove
+confinement --- no square door into the window, so the class turns
+inward. We do \textbf{not} prove that these confined classes obey no
+eventual law of their own: ``no period and no modulus up to 200 fits'' is
+a reading from the search instrument, not a theorem, and their
+aperiodicity remains open.
 \end{proof}
 
 \begin{remark}[Double condemnation]
 % PORT: V.2 verbatim.
-[PORT: escape\_and\_diagonal.md, V.2]
+The two diseased moduli are exactly the two the parity-free engine cannot
+serve. At $m = 2$ the engine is silent: the always-a-square inequality
+degenerates ($(m - 2)^2 = 0$) and the clearing interval $(1, 3]$ is
+genuinely square-free. At $m = 4$ the engine convicts every class from
+the outside: the failure window covers $r \in \{1, 2, 3\}$, and the
+$r = 0$ interval $(4, 8)$ is square-free. Outside view and inside view
+agree because both are reading the same two table rows: $\Q(2m)
+\subseteq \{0, 1, m\}$.
 \end{remark}
 
 \section{Further solved games}\label{sec:examples}
@@ -255,11 +465,129 @@ $r$ or lands on an \NN-position of a foreign chain.
 \begin{example}[$D(5,2)$, solved]\label{ex:d52}
 A position $n$ of $D(5,2)$ is a \PP-position if and only if
 $n \equiv 0, 1, 3,$ or $4 \pmod{10}$.
-% PORT: the eight-obligation proof, escape_and_diagonal.md Part II,
-% compressed or in full (your call; full is fine for a first draft),
-% plus the workbook verification II.9 as a remark. Fold in IV.7(2):
-% P-set = window, by construction, wherever escape holds.
 \end{example}
+
+% PORT: escape_and_diagonal.md Part II, II.1–II.8, in full.
+\noindent\textbf{II.1 Statement.} There is an explicit threshold $N_0$,
+computed in II.6 below, such that every position $n \equiv 2 \pmod 5$
+with $n \ge N_0$ has at least one legal square move --- some $k$ with
+$k^2 \le n$ --- whose landing $n - k^2$ is a \PP-position of a fallback
+chain. Consequently every such $n$ is an \NN-position.
+
+\noindent\textbf{II.2 The target window.} By the Chain Lemma, the
+fallback classes $0, 1, 3, 4 \pmod 5$ have their \PP-positions exactly at
+$n \equiv 0, 1, 3, 4 \pmod{10}$; call that set $T = \{0, 1, 3, 4\}
+\pmod{10}$. A landing in $T$ is genuinely \PP: a number $\equiv 0, 1, 3,$
+or $4 \pmod{10}$ is $\equiv 0, 1, 3,$ or $4 \pmod 5$, so it lives in a
+fallback chain where the lemma has jurisdiction, and its residue mod $10$
+matching the chain bottom's means it sits an even number of rungs up ---
+precisely the lemma's \PP-rungs.
+
+\noindent\textbf{II.3 The split.} Write $n = 5q + 2$: if $q = 2t$ then
+$n = 10t + 2$, and if $q = 2t + 1$ then $n = 10t + 7$, so a class-$2$
+position is $\equiv 2$ or $7 \pmod{10}$ --- that is, $r$ or $r + m$ ---
+and the proof forks on the parity of $q$ exactly the way the chain proof
+forked on the parity of $j$.
+
+\noindent\textbf{II.4 Coverage line one.} For $n \equiv 2 \pmod{10}$: the
+differences $2 - T$ are $\{2-0, 2-1, 2-3, 2-4\} \equiv \{2, 1, 9, 8\}
+\pmod{10}$, and intersecting with $\Q = \{0, 1, 4, 5, 6, 9\}$ leaves
+$\{1, 9\}$; take the smallest, $s = 1$, so subtracting $1^2$ gives
+$n - 1 \equiv 1 \pmod{10} \in T$.
+
+\noindent\textbf{II.5 Coverage line two.} For $n \equiv 7 \pmod{10}$: the
+differences $7 - T$ are $\{7, 6, 4, 3\} \pmod{10}$, intersecting with
+$\Q$ leaves $\{4, 6\}$; take $s = 4$, so subtracting $2^2$ gives
+$n - 4 \equiv 3 \pmod{10} \in T$. Both keystones came with a spare ---
+$9 = 3^2$ also rescues residue $2$, and $16 = 4^2$ also rescues residue
+$7$. The corridor is wider than it needs to be.
+
+\noindent\textbf{II.6 Legality and the threshold.} The rescue squares are
+the concrete numbers $1$ and $4$. For the residue-$2$ class, whose
+members are $2, 12, 22, \dots$, legality demands $1 \le n$, which already
+holds at the smallest member. For the residue-$7$ class, members
+$7, 17, 27, \dots$, legality demands $4 \le n$, which holds at $7$. So
+both rescues are legal for every member of their class, and the threshold
+collapses: $\mathbf{N_0 = 2}$, the smallest class-$2$ position in
+existence. Below $N_0$ there are no class-$2$ positions at all, so the
+hand-check zone is empty --- verdict: vacuous. Checking the workbook rows
+anyway, as ordered: $2 - 1 = 1$ (\PP) $\checkmark$, $7 - 4 = 3$ (\PP)
+$\checkmark$, $12 - 1 = 11$ (\PP) $\checkmark$, $17 - 4 = 13$ (\PP)
+$\checkmark$, $22 - 1 = 21$ (\PP) $\checkmark$, $27 - 4 = 23$ (\PP)
+$\checkmark$. Every row is rescued-anyway, rebels: none. Worth recording
+why it collapsed: the rescue squares $1$ and $4$ happen to be smaller
+than the smallest members of their classes. Nothing guarantees that luck
+at other moduli, which is exactly why the theorem was written with $N_0$
+as a named unknown.
+
+\noindent\textbf{II.7 Assembly.} The Chain Lemma classifies the four
+fallback classes everywhere: \PP\ exactly at $n \equiv 0, 1, 3, 4
+\pmod{10}$, \NN\ at $5, 6, 8, 9$. The Escape Theorem classifies class $2$
+everywhere, since $N_0 = 2$ means ``past the threshold'' is all of it:
+residues $2$ and $7 \pmod{10}$ are all \NN. Union the two and every
+residue mod $10$ is accounted for, with no unexplained positions beneath
+any threshold.
+
+\begin{quote}
+\textbf{Theorem ($D(5,2)$, solved).} A position $n$ is \PP\ if and only
+if $n \equiv 0, 1, 3,$ or $4 \pmod{10}$.
+\end{quote}
+
+\noindent One coincidence too pretty not to flag: the \PP-set of the
+whole game \emph{is} the target window $T$ --- the landing pads and the
+answer turned out to be the same four residues. [Resolved:
+Remark~\ref{rem:coincidence}.]
+
+\noindent\textbf{II.8 Scope and the forward hook.} The proof secretly
+depended on squares mod $10$ being \emph{rich}: $\Q$ fills six of the ten
+residues, enough that both difference lists $\{2, 1, 9, 8\}$ and
+$\{7, 6, 4, 3\}$ caught at least one member --- had $\Q$ missed either
+list entirely, one residue of class $2$ would have had no escape and the
+whole corridor would have collapsed. Generalizing to $D(m, r)$ therefore
+means asking whether that richness survives at other moduli --- whether
+squares mod $2m$ keep intersecting the difference sets $\rho - T$ for
+both $\rho \in \{r, r + m\}$ --- and since quadratic residues thin out
+and organize themselves as the modulus grows, that question, not the game
+logic, is the real content of what follows.
+
+\begin{remark}[Verification against the workbook]\label{rem:workbook}
+% PORT: escape_and_diagonal.md II.9.
+Prediction first, then the rows: residue-$2$ positions ($2, 12, 22$)
+should be rescued by any legal square $\equiv 1$ or $9 \pmod{10}$,
+residue-$7$ positions ($7, 17$) by any square $\equiv 4$ or $6
+\pmod{10}$, and every other square should be wasted.
+\begin{itemize}[nosep]
+\item $n = 2$: only move $2-1 = 1$ (\PP). Predicted rescue $1^2$ present
+  $\checkmark$, nothing else in the row to waste.
+\item $n = 7$: $7-1 = 6$ (\NN), $7-4 = 3$ (\PP). Rescue $2^2$ present
+  $\checkmark$; the $1^2$ is wasted exactly as the congruence says
+  ($1 \notin \{4, 6\}$ mod $10$, landing $\equiv 6$).
+\item $n = 12$: $12-1 = 11$ (\PP), $12-4 = 8$ (\NN), $12-9 = 3$ (\PP).
+  Primary rescue $1^2$ $\checkmark$, and the spare $9 = 3^2$ makes its
+  first appearance in the first row big enough to afford it.
+\item $n = 17$: $17-1 = 16$ (\NN), $17-4 = 13$ (\PP), $17-9 = 8$ (\NN),
+  $17-16 = 1$ (\PP). Primary $2^2$ $\checkmark$ and spare $4^2$
+  $\checkmark$.
+\item $n = 22$: $22-1 = 21$ (\PP), $22-4 = 18$ (\NN), $22-9 = 13$ (\PP),
+  $22-16 = 6$ (\NN). Primary $1^2$ $\checkmark$, spare $3^2$
+  $\checkmark$.
+\end{itemize}
+The check came back stronger than required: not only does the predicted
+rescue sit in every row, every wasted square is wasted for the predicted
+reason --- its residue misses the survivor set, and every wasted landing
+is $\equiv 6$ or $8 \pmod{10}$, both \NN-residues. The congruence
+machinery reproduces the workbook letter-for-letter, and the $200{,}000$
+mechanical sweep stands as the bulk consistency evidence behind it.
+\end{remark}
+
+\begin{remark}[The $D(5,2)$ coincidence, resolved]\label{rem:coincidence}
+% PORT: escape_and_diagonal.md IV.7(2).
+For any escaped game the \PP-set equals its window by construction:
+\PP-set $=$ (chain \PP's) $\cup$ (class-$r$ \PP's) $= T \cup \emptyset =
+T$. The equality fails exactly where escape does --- the three
+exceptional games have \PP-set $= T \cup \{m + r\}$, and the diseased
+games' \PP-sets properly contain their windows.
+\end{remark}
 
 \begin{theorem}[Foursquare]\label{thm:foursquare}
 % This game is NOT diagonal (fallback set {3,8,9}); it is the paper's
@@ -270,22 +598,219 @@ normal play. Then $n$ is a \PP-position if and only if
 $n \equiv 0, 2, 4,$ or $6 \pmod{16}$, for all $n \ge 0$ with no
 preperiod.
 \end{theorem}
+
+% PORT: foursquare_proof.md §2, Partition Exhaustiveness paragraph.
+\noindent\emph{Partition Exhaustiveness:} The set of residues modulo $16$
+is exhaustively partitioned into claimed \PP-positions $\mathcal{P} =
+\{0, 2, 4, 6\} \pmod{16}$ and claimed \NN-positions $\mathcal{N} =
+\{1, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15\} \pmod{16}$, such that
+$\mathcal{P} \cup \mathcal{N} = \mathbb{Z} / 16\mathbb{Z}$ and
+$\mathcal{P} \cap \mathcal{N} = \emptyset$.
+
+\begin{lemma}[Orientation Lemma]\label{lem:orient}
+% PORT: foursquare_proof.md, Lemma 1.
+Every state $n \equiv 0, 2, 4,$ or $6 \pmod{16}$ is even. Consequently,
+$n \not\equiv 1 \pmod 4$.
+\end{lemma}
 \begin{proof}
-% PORT: proofs/foursquare_proof.md — Lemmas 1–2, base cases, closure,
-% escape, assembly. Verbatim, notation adapted.
-[PORT: proofs/foursquare\_proof.md]
+For any $r \in \{0, 2, 4, 6\}$, $n = 16q + r \equiv r \equiv 0 \pmod 2$.
+Since $n$ is even, $n \bmod 4 \in \{0, 2\}$, which implies $n \not\equiv
+1 \pmod 4$. Thus, Square Mode never applies at any claimed \PP-position,
+and for $n \ge 9$, the full move set $\{3, 8, 9\}$ is strictly available.
 \end{proof}
 
+\begin{lemma}[Odd Squares Modulo 16 Lemma]\label{lem:oddsq}
+% PORT: foursquare_proof.md, Lemma 2.
+For any odd integer $k \in \mathbb{Z}$, $k^2 \equiv 1$ or $9 \pmod{16}$.
+\end{lemma}
+\begin{proof}
+Express any odd integer as $k = 2m + 1$ for some $m \in \mathbb{Z}$.
+Squaring yields:
+\[ k^2 = (2m + 1)^2 = 4m^2 + 4m + 1 = 4m(m + 1) + 1 \]
+Because $m(m + 1)$ is the product of two consecutive integers, it is
+always even. Let $m(m + 1) = 2j$ for $j \in \mathbb{Z}$. Substituting
+gives:
+\[ k^2 = 4(2j) + 1 = 8j + 1 \]
+If $j$ is even ($j = 2l$), $k^2 = 16l + 1 \equiv 1 \pmod{16}$. If $j$ is
+odd ($j = 2l + 1$), $k^2 = 16l + 9 \equiv 9 \pmod{16}$. Thus, every odd
+square is congruent to $1$ or $9 \pmod{16}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:foursquare}]
+% PORT: proofs/foursquare_proof.md §4 — base cases, closure, escape,
+% assembly. Verbatim, notation adapted.
+(By Strong Induction on $n$.)
+
+\textbf{Base Cases ($0 \le n \le 8$).} Direct manual calculation of legal
+move bounds and reachable states confirms:
+\begin{itemize}[nosep]
+\item $n = 0$: Standard mode, no moves $\le 0$. \textbf{\PP-position}.
+\item $n = 1$: Square mode, move $s = 1^2 \to 0$ (\PP).
+  \textbf{\NN-position}.
+\item $n = 2$: Standard mode, no moves $\le 2$. \textbf{\PP-position}.
+\item $n = 3$: Standard mode, move $s = 3 \to 0$ (\PP).
+  \textbf{\NN-position}.
+\item $n = 4$: Standard mode, move $s = 3 \to 1$ (\NN). All legal moves
+  go to \NN. \textbf{\PP-position}.
+\item $n = 5$: Square mode, moves $s = 1^2 \to 4$ (\PP), $s = 2^2 \to 1$
+  (\NN). \textbf{\NN-position}.
+\item $n = 6$: Standard mode, move $s = 3 \to 3$ (\NN).
+  \textbf{\PP-position}.
+\item $n = 7$: Standard mode, move $s = 3 \to 4$ (\PP).
+  \textbf{\NN-position}.
+\item $n = 8$: Standard mode, move $s = 8 \to 0$ (\PP).
+  \textbf{\NN-position}.
+\end{itemize}
+
+\textbf{Inductive Step ($n \ge 9$).} Assume the theorem holds for all
+states $m < n$.
+
+\smallskip
+\noindent\emph{Part 1: Closure (Claimed \PP-positions).} Let $n \equiv r
+\pmod{16}$ with $r \in \{0, 2, 4, 6\}$. By Lemma~\ref{lem:orient},
+$n \not\equiv 1 \pmod 4$. For all $n \ge 9$, all of $\{3, 8, 9\}$ are
+legal moves since $s \le n$. We compute $r - s \pmod{16}$ across all $12$
+combinations:
+\begin{itemize}[nosep]
+\item $r = 0 \implies 0 - 3 \equiv 13, \quad 0 - 8 \equiv 8, \quad
+  0 - 9 \equiv 7 \pmod{16}$
+\item $r = 2 \implies 2 - 3 \equiv 15, \quad 2 - 8 \equiv 10, \quad
+  2 - 9 \equiv 9 \pmod{16}$
+\item $r = 4 \implies 4 - 3 \equiv 1, \quad 4 - 8 \equiv 12, \quad
+  4 - 9 \equiv 11 \pmod{16}$
+\item $r = 6 \implies 6 - 3 \equiv 3, \quad 6 - 8 \equiv 14, \quad
+  6 - 9 \equiv 13 \pmod{16}$
+\end{itemize}
+None of the resulting residues belong to $\{0, 2, 4, 6\} \pmod{16}$. By
+the strong induction hypothesis, every reachable state $n - s < n$ is an
+\NN-position. Hence, $n$ is a \textbf{\PP-position}.
+
+\smallskip
+\noindent\emph{Part 2: Escape (Claimed \NN-positions).} Let $n \equiv r
+\pmod{16}$ with $r \in \mathcal{N}$. We display a legal move $s$ such
+that $n - s \in \mathcal{P}$:
+
+\begin{enumerate}[nosep]
+\item \textbf{Non-Square Residues ($r \in \{3, 7, 8, 10, 11, 12, 14,
+  15\}$):}
+  \begin{itemize}[nosep]
+  \item $r = 3$: $s = 3 \implies 3 - 3 \equiv 0 \in \mathcal{P}$
+  \item $r = 7$: $s = 3 \implies 7 - 3 \equiv 4 \in \mathcal{P}$
+  \item $r = 8$: $s = 8 \implies 8 - 8 \equiv 0 \in \mathcal{P}$
+  \item $r = 10$: $s = 8 \implies 10 - 8 \equiv 2 \in \mathcal{P}$
+  \item $r = 11$: $s = 9 \implies 11 - 9 \equiv 2 \in \mathcal{P}$
+  \item $r = 12$: $s = 8 \implies 12 - 8 \equiv 4 \in \mathcal{P}$
+  \item $r = 14$: $s = 8 \implies 14 - 8 \equiv 6 \in \mathcal{P}$
+  \item $r = 15$: $s = 9 \implies 15 - 9 \equiv 6 \in \mathcal{P}$
+  \end{itemize}
+  Since $n \ge 9$, $s \le n$ is satisfied in all cases.
+\item \textbf{Square-Mode Residues ($r \in \{1, 5, 9, 13\}$):} By
+  Lemma~\ref{lem:oddsq}, odd squares satisfy $k^2 \equiv 1$ or $9
+  \pmod{16}$. Using $s = 1^2 = 1$ or $s = 3^2 = 9$:
+  \begin{itemize}[nosep]
+  \item $r = 1$: $s = 1 \implies 1 - 1 \equiv 0 \in \mathcal{P}$
+  \item $r = 5$: $s = 1 \implies 5 - 1 \equiv 4 \in \mathcal{P}$
+  \item $r = 9$: $s = 9 \implies 9 - 9 \equiv 0 \in \mathcal{P}$
+  \item $r = 13$: $s = 9 \implies 13 - 9 \equiv 4 \in \mathcal{P}$
+  \end{itemize}
+  For $r \in \{1, 5\}$, $s = 1 \le n$ holds for $n \ge 1$. For
+  $r \in \{9, 13\}$, $s = 9 \le n$ holds for $n \ge 9$.
+\end{enumerate}
+By strong induction, every state $n \in \mathcal{N}$ can transition to a
+\PP-position $n - s < n$. Thus, $n$ is an \textbf{\NN-position}.
+\end{proof}
+
+\begin{remark}[No-Preperiod Remark]\label{rem:nopreperiod}
+% PORT: foursquare_proof.md §5, Closing Remark.
+The periodicity of \PP-positions ($\text{period} = 16$) holds strictly
+and purely from $n = 0$ onward, exhibiting no initial non-periodic
+transient phase (preperiod $= 0$).
+\end{remark}
+
 \begin{proposition}[Odd-fallback collapse at $m=2$]\label{prop:collapse}
-% PORT statements of Lemmas A and B from proofs/collapse_theorem.md:
-% P-positions are the evens for every odd fallback a; moreover
-% G_a(n) = G_{a'}(n) for all odd a, a' and all n.
-[PORT statements]
+% PORT statements of Lemmas A and B from proofs/collapse_theorem.md.
+\emph{(Lemma A.)} For every odd integer $a \ge 1$, the set of
+\PP-positions (states $n$ with $G(n) = 0$) consists precisely of all even
+integers. Consequently, the emergent period is $2$ with a residue-set
+size of $1$.
+
+\emph{(Lemma B.)} For all odd fallbacks $a, a' \ge 1$ and all states
+$n \ge 0$, the Grundy values satisfy $G_a(n) = G_{a'}(n)$.
 \end{proposition}
 \begin{proof}
-% PORT: proofs/collapse_theorem.md, both lemmas, plus the quarantine
-% mechanism as a closing remark.
-[PORT: proofs/collapse\_theorem.md]
+% PORT: proofs/collapse_theorem.md — Setup, Lemma A, Lemma B.
+% NOTE: the skeleton also asks for "the quarantine mechanism as a closing
+% remark", but proofs/collapse_theorem.md contains no such section.
+% See the fidelity report, flag F13.
+\textbf{Setup.} We fix $r = 1$: squares fire on odd $n$, and the fallback
+rule applies on even $n$, making the allowed move from $n$ to $n - a$.
+Let $G(n)$ denote the Grundy value of state $n$, with $G(0) = 0$.
+
+\smallskip
+\noindent\emph{Lemma A (\PP-positions $=$ Even Numbers).} We proceed by
+induction on $n$.
+
+\textbf{Base case ($n = 0$).} Terminal position, $G(0) = 0$, so $0$ is a
+\PP-position.
+
+\textbf{Inductive step.} Assume for all $k < n$ that $G(k) = 0 \iff k$ is
+even (equivalently, $G(k) > 0 \iff k$ is odd).
+
+\textbf{Case 1: $n$ is even.} The only available move is subtraction of
+the odd fallback $a$: $n \to n - a$. Since $n$ is even and $a$ is odd,
+the destination $n - a$ is strictly odd. By the induction hypothesis,
+$G(n - a) \ne 0$ (if $n - a \ge 0$), or the move set is empty (if
+$a > n$).
+\begin{itemize}[nosep]
+\item If $a > n$: the move set is $\emptyset$, so
+  $\mathrm{mex}(\emptyset) = 0$ and $G(n) = 0$.
+\item If $a \le n$: the set of reachable values is $\{G(n - a)\}$ with
+  $G(n - a) \ne 0$, so $\mathrm{mex}(\{G(n - a)\}) = 0$ and $G(n) = 0$.
+\end{itemize}
+In both cases $G(n) = 0$. Thus all even positions are \PP-positions.
+
+\textbf{Case 2: $n$ is odd.} The move set consists of square
+subtractions $n \to n - k^2$ for all integers $k \ge 1$ with $k^2 \le n$.
+Choosing $k = 1$ gives a legal move to $n - 1$. Since $n$ is odd,
+$n - 1$ is even, so $G(n - 1) = 0$ by the strong induction hypothesis.
+Thus $0 \in \{G(n - k^2) : k^2 \le n\}$, forcing the mex to be positive,
+so $G(n) \ne 0$.
+
+Therefore $G(n) = 0 \iff n \equiv 0 \pmod 2$.
+
+\smallskip
+\noindent\emph{Lemma B (Full Sequence Equivalence).}
+\textbf{Answers to the Referee Questions.}
+
+\textbf{Question 1 (even positions).} What is $\mathrm{mex}(\{v\})$ when
+$v \ne 0$, and what does that force $G(n)$ to be for even $n$?
+
+For even $n$, the reachable set is either empty (if $n < a$) or
+$\{G(n - a)\}$. By Lemma A, since $n - a$ is odd, $G(n - a) = v > 0$. Now
+$\mathrm{mex}(\emptyset) = 0$, and $\mathrm{mex}(\{v\}) = 0$ whenever
+$v > 0$. Therefore $G(n) = 0$ for every even $n$, regardless of the
+specific value of $v$, and regardless of whether the move exists at all.
+The parameter $a$ evaporates at every even step.
+
+\textbf{Question 2 (odd positions).} At odd $n$, split the available
+squares $k^2$ by parity: which earlier positions' Grundy values enter the
+mex?
+
+For odd $n$: if $k$ is even, $k^2$ is even, so $n - k^2$ is odd; if $k$
+is odd, $k^2$ is odd, so $n - k^2$ is even. By Lemma A, for every odd $k$
+the landing $n - k^2$ is even with $G(n - k^2) = 0$. Thus the reachable
+Grundy values from odd $n$ are $\{0\} \cup \{G(n - k^2) : k$ even,
+$k^2 \le n\}$. The value $0$ is guaranteed by the odd square moves
+($k = 1, 3, 5, \dots$), and the non-zero entries depend exclusively on
+$G(n - k^2)$ for even $k$ --- landings on smaller odd numbers. So $G$ at
+odd $n$ is computed purely from earlier odd states, completely bypassing
+all even positions, and thus bypassing $a$ entirely.
+
+By induction on $n$: $G(0) = 0$; every even state yields $G = 0$
+independent of $a$; and every odd state's value is computed from prior
+odd states via even-square subtractions, in which $a$ nowhere appears.
+The parameter $a$ never impacts the Grundy sequence, so all odd fallbacks
+collapse to the exact same game.
 \end{proof}
 
 \section{Discovery methodology and retrodictions}\label{sec:method}
