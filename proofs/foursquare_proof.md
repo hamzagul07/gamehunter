@@ -43,6 +43,7 @@ If $j$ is even ($j = 2l$), $k^2 = 16l + 1 \equiv 1 \pmod{16}$. If $j$ is odd ($j
 
 ### Base Cases ($0 \le n \le 8$)
 Direct manual calculation of legal move bounds and reachable states confirms:
+
 * $n = 0$: Standard mode, no moves $\le 0$. **P-position**.
 * $n = 1$: Square mode, move $s = 1^2 \to 0$ (P). **N-position**.
 * $n = 2$: Standard mode, no moves $\le 2$. **P-position**.
@@ -58,6 +59,7 @@ Assume the theorem holds for all states $m < n$.
 
 #### Part 1: Closure (Claimed P-positions)
 Let $n \equiv r \pmod{16}$ with $r \in \{0, 2, 4, 6\}$. By Lemma 1, $n \not\equiv 1 \pmod 4$. For all $n \ge 9$, all of $\{3, 8, 9\}$ are legal moves since $s \le n$. We compute $r - s \pmod{16}$ across all 12 combinations:
+
 * $r = 0 \implies 0 - 3 \equiv 13, \quad 0 - 8 \equiv 8, \quad 0 - 9 \equiv 7 \pmod{16}$
 * $r = 2 \implies 2 - 3 \equiv 15, \quad 2 - 8 \equiv 10, \quad 2 - 9 \equiv 9 \pmod{16}$
 * $r = 4 \implies 4 - 3 \equiv 1, \quad 4 - 8 \equiv 12, \quad 4 - 9 \equiv 11 \pmod{16}$
