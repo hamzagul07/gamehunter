@@ -16,6 +16,9 @@
 \usepackage[margin=1.1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{enumitem}
+\usepackage{alltt}   % literal setting of the D(9,4) ledger line (F15)
+\emergencystretch=2em  % layout only (F16): lets stubborn lines stretch
+                       % rather than overrun the text block
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -132,6 +135,18 @@ $22$ & $\{0, 1, 3, 4, 5, 9, 11, 12, 14, 15, 16, 20\}$ & $\{2, 6, 7, 8, 10, 13, 1
 \label{tab:Q}
 \end{table}
 
+% PORT: escape_and_diagonal.md, Part III closing paragraph (line 83),
+% verbatim except the internal cross-reference.
+The mod-$4$ and mod-$8$ rows are the indictment written out: $\Q(4) =
+\{0, 1\}$ and $\Q(8) = \{0, 1, 4\}$ both sit entirely inside the triple
+$\{0, 1, m\}$, so their complements swallow every value any hard set will
+ever contain (Section~\ref{sec:clearing}) --- the disease of $m = 2$ and
+$m = 4$ is visible in these two rows before any game logic starts. One
+eyebrow kept raised on purpose: the thinnest \emph{odd} table is mod
+$18$, thinned because $9$ is itself a square and the rows $k = 3$ and
+$k = 9$ collide there --- $m = 9$'s anomaly is foreshadowed in its own
+table.
+
 \section{The Chain Lemma}\label{sec:chain}
 
 \begin{lemma}[Chain Lemma]\label{lem:chain}
@@ -152,11 +167,8 @@ in fallback mode: its only candidate move is subtract-$m$, legal exactly
 when the position is $\ge m$. (ii) Since $n \equiv c \pmod m$, the
 residue of $n$ mod $2m$ is either $c$ or $c + m$; and $n = c + jm \equiv
 c \pmod{2m} \iff 2m$ divides $jm \iff j$ is even. So the Lemma is
-equivalent to: rung $j$ is \PP\ iff $j$ is even. The definition doing all
-the work: a terminal position is \PP; a position is \NN\ iff at least one
-legal move reaches a \PP-position; a position is \PP\ iff every legal
-move reaches an \NN-position, the terminal case being this clause
-satisfied vacuously.
+equivalent to: rung $j$ is \PP\ iff $j$ is even. (All outcome
+computations below use Definition~\ref{def:pn}.)
 
 \textbf{Closure.} Let $n = c + jm$ be a rung. Its only candidate move is
 $n \to n - m$. If $j = 0$, the move is illegal, since $n = c \le m - 1 <
@@ -215,19 +227,17 @@ $m - 1$ such classes simultaneously.
 % that it becomes the first sentence of this section.
 The Lemma classifies no position of class $r$ itself --- it is silent
 about every $n \equiv r \pmod m$, and in particular does not assert those
-are \NN-positions; that claim is Milestone 2, and only the two together
-give the full mod-$2m$ law.
+are \NN-positions; that claim is the subject of
+Section~\ref{sec:clearing}, and only the two together give the full
+mod-$2m$ law.
 
 \begin{definition}[Window; free and hard residues; hard set]\label{def:window}
 % PORT: escape_and_diagonal.md IV.1 — window T(m,r) = foreign bottoms
 % mod 2m; class r splits into free residue (r, else m) and hard residue
 % (r+m, else 0); H(m,r) as displayed; the free escape by 1^2.
-By the Chain Lemma (general form, as accepted): fallback moves preserve
-class mod $m$, so each class $c \ne r$ is a single self-contained chain
-$c$, $c + m$, $c + 2m$, $\dots$ with terminal bottom $c$ --- no square
-moves ($c \not\equiv r$) and no affordable fallback ($c < m$) --- and
-\PP/\NN\ alternate upward from the stuck bottom: \PP\ exactly at $n
-\equiv c \pmod{2m}$. The window $T(m, r)$ is the set of foreign bottoms
+By Lemma~\ref{lem:chain}, each class $c \ne r$ is a self-contained chain
+whose \PP-positions are exactly $n \equiv c \pmod{2m}$.
+The window $T(m, r)$ is the set of foreign bottoms
 mod $2m$. Class $r$ splits mod $2m$ into the \textbf{free residue} ($r$
 when $r \ge 1$, else $m$) and the \textbf{hard residue} ($r + m$ when
 $r \ge 1$, else $0$). The free escape is immediate: $1^2$ lands the free
@@ -235,9 +245,12 @@ residue on the bottom directly beneath it ($r - 1$, or $m - 1$ when
 $r = 0$), and is legal from the smallest free member. For the hard
 residue, a square value $s$ (mod $2m$) lands in the window iff
 \[
-s \in H(m, r) = \{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}
-\ \text{for } r \ge 1, \quad\text{or}\quad \{m+1, \dots, 2m-1\}
+\begin{aligned}
+s \in H(m, r) = {}&\{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}
+\ \text{for } r \ge 1,\\
+&\quad\text{or}\quad \{m+1, \dots, 2m-1\}
 \ \text{for } r = 0.
+\end{aligned}
 \]
 \end{definition}
 
@@ -265,8 +278,6 @@ is \NN\ by the single move $-s$.
 \begin{proof}
 % PORT: IV.2 — the IV.2 heading parenthetical, legality, and the landing
 % arithmetic in both sub-cases.
-\emph{(Formerly the Zone Lemma --- the parity audit showed it is not a
-patch on the odd-$m$ witness but the escape engine itself, parity-free.)}
 Legality: $s \le m + r$, the smallest hard member (for $r = 0$: $s < 2m$,
 and the smallest positive hard member is $2m$), so the move is affordable
 to every member from the first. Landing: $n - s \equiv m + r - s
@@ -285,8 +296,6 @@ every $m \ge 3$ except $m = 4$.
 % PORT: IV.3, the repaired parity-free squeeze c >= m/2,
 % c^2 >= m^2/4 > m-1 via (m-2)^2/4, degenerate only at m = 2; and the
 % r = 0 erratum with m = 4 as the lone counterexample.
-\emph{(IV.3: the interval always contains a square ($m \ge 3$) ---
-repaired and parity-free.)}
 For $r \ge 1$: if $(r, m + r]$ contained no square, consecutive squares
 would straddle it, $c^2 \le r$ and $(c + 1)^2 > m + r$, so $2c + 1 > m$,
 hence $c \ge m/2$ for any $m$, hence $c^2 \ge m^2/4 > m - 1 \ge r$, since
@@ -353,9 +362,14 @@ exception set is precisely the $E$ displayed in the box.
 \end{proof}
 
 \begin{lemma}[Boundary positions corrupt nothing]\label{lem:audit}
-% PORT statement + proof from IV.6: the n = 0 clause at r = 0 (terminal,
-% hence P; unreachable-from-chains audit; spot receipts) and the
-% rebel audit (moves onto m+r force 3 | k; those positions are already N).
+In $D(m,r)$: (i) if $r = 0$ then $n = 0$ is a \PP-position, and its
+status alters no other position's; (ii) for $(m,r) \in E$, the
+\PP-position $n = m + r$ alters no other position's status.
+\end{lemma}
+\begin{proof}
+% PORT: IV.6 — the n = 0 clause at r = 0 (terminal, hence P;
+% unreachable-from-chains audit; spot receipts) and the rebel audit
+% (moves onto m+r force 3 | k; those positions are already N).
 \textbf{Corruption audits.} The $n = 0$ clause: when $r = 0$, zero is
 claimed by squares mode and is the unique squares-mode position that can
 afford no square ($k \ge 1$ forces $k^2 \ge 1 > 0$), so it is terminal,
@@ -372,7 +386,7 @@ $m + r$ are class-$r$ members above it (a square step back into class $r$
 forces $k^2 \equiv 0 \bmod 9$, i.e.\ $3 \mid k$), which the theorem
 already declares \NN, so the rebel's \PP-ness merely hands them one more
 witness for what they already were.
-\end{lemma}
+\end{proof}
 
 \section{The Diagonal Theorem}\label{sec:main}
 
@@ -381,10 +395,12 @@ Let $m \ge 3$ with $m \ne 4$, and let $0 \le r \le m-1$. Define
 $E = \{(9,4),(9,5),(9,6)\}$. In $D(m,r)$, a position $n$ is a
 \PP-position if and only if
 \[
-n \equiv b \pmod{2m} \text{ for some foreign bottom }
-b \in \{0,1,\dots,m-1\}\setminus\{r\},
-\quad\text{or}\quad n = 0,
+\begin{aligned}
+&n \equiv b \pmod{2m} \text{ for some foreign bottom }
+b \in \{0,1,\dots,m-1\}\setminus\{r\},\\
+&\quad\text{or}\quad n = 0,
 \quad\text{or}\quad (m,r) \in E \text{ and } n = m+r.
+\end{aligned}
 \]
 The law holds for both parities of $m$, with no thresholds and no
 unverified zones.
@@ -528,15 +544,10 @@ residues $2$ and $7 \pmod{10}$ are all \NN. Union the two and every
 residue mod $10$ is accounted for, with no unexplained positions beneath
 any threshold.
 
-\begin{quote}
-\textbf{Theorem ($D(5,2)$, solved).} A position $n$ is \PP\ if and only
-if $n \equiv 0, 1, 3,$ or $4 \pmod{10}$.
-\end{quote}
-
 \noindent One coincidence too pretty not to flag: the \PP-set of the
 whole game \emph{is} the target window $T$ --- the landing pads and the
-answer turned out to be the same four residues. [Resolved:
-Remark~\ref{rem:coincidence}.]
+answer turned out to be the same four residues (resolved in
+Remark~\ref{rem:coincidence}).
 
 \noindent\textbf{II.8 Scope and the forward hook.} The proof secretly
 depended on squares mod $10$ being \emph{rich}: $\Q$ fills six of the ten
@@ -600,12 +611,14 @@ preperiod.
 \end{theorem}
 
 % PORT: foursquare_proof.md §2, Partition Exhaustiveness paragraph.
+\begin{sloppypar}  % layout only (F16)
 \noindent\emph{Partition Exhaustiveness:} The set of residues modulo $16$
 is exhaustively partitioned into claimed \PP-positions $\mathcal{P} =
 \{0, 2, 4, 6\} \pmod{16}$ and claimed \NN-positions $\mathcal{N} =
 \{1, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15\} \pmod{16}$, such that
 $\mathcal{P} \cup \mathcal{N} = \mathbb{Z} / 16\mathbb{Z}$ and
 $\mathcal{P} \cap \mathcal{N} = \emptyset$.
+\end{sloppypar}
 
 \begin{lemma}[Orientation Lemma]\label{lem:orient}
 % PORT: foursquare_proof.md, Lemma 1.
@@ -739,9 +752,6 @@ $n \ge 0$, the Grundy values satisfy $G_a(n) = G_{a'}(n)$.
 \end{proposition}
 \begin{proof}
 % PORT: proofs/collapse_theorem.md — Setup, Lemma A, Lemma B.
-% NOTE: the skeleton also asks for "the quarantine mechanism as a closing
-% remark", but proofs/collapse_theorem.md contains no such section.
-% See the fidelity report, flag F13.
 \textbf{Setup.} We fix $r = 1$: squares fire on odd $n$, and the fallback
 rule applies on even $n$, making the allowed move from $n$ to $n - a$.
 Let $G(n)$ denote the Grundy value of state $n$, with $G(0) = 0$.
@@ -827,6 +837,45 @@ collapse to the exact same game.
 %    line (preperiod 14 = rebel + 1, derived with zero freedom).
 %  - Reproducibility sentence: seeds, logs, code at [repo URL].
 
+\subsection*{Retrodiction I: the fingerprints}
+% PORT: escape_and_diagonal.md V.3, verbatim.
+During the Chain Lemma verification sweeps --- recorded weeks before any
+escape machinery existed --- the ledger logged unexplained \PP-positions
+$3, 11, 23$ in $D(2,1)$ and $5, 13, 37$ in $D(4,1)$, anomalies with no
+mechanism attached. The Confinement Lemma now computes those games' hard
+residues as $3 \pmod 4$ and $5 \pmod 8$, and all six fingerprints satisfy
+their congruence without exception. The theory did not accommodate old
+data; it specified coordinates for where lawlessness is possible, and
+data recorded before the theory existed turns out to have been sitting on
+those coordinates the entire time.
+
+\subsection*{Retrodiction II: the $D(9,4)$ receipt}
+% PORT: escape_and_diagonal.md V.4, verbatim; ledger line set literally.
+Primary source, quoted verbatim from \texttt{DIAGONAL\_WORKBOOK.md} and
+the raw JSON behind it:
+
+\begin{quote}
+\scriptsize
+\begin{alltt}
+| D(9,4) | mod 18 | P \(\equiv\) 0,1,2,3,5,6,7,8 | preperiod 14 | period 18 | swept 200,000 |
+\{"game":[9,4],"preperiod":14,"period":18,"p_res":[0,1,2,3,5,6,7,8],"pre_P":[0,1,2,3,5,6,7,8,13]\}
+\end{alltt}
+\end{quote}
+
+\noindent This line was recorded before the rebel mechanism existed, and
+the mechanism now derives every number on it with zero freedom. The rebel
+$13$ is the lone off-residue \PP, named in the \texttt{pre\_P} field. Any
+eventually-periodic fit beginning at or before $13$ would propagate
+$13$'s \PP-ness by the period, which the sweep refutes ($31$ is \NN); so
+every correct fit begins at $14$, and the minimal preperiod is exactly
+rebel $+\, 1 = 14$. The period is $2m = 18$, and the \PP-residues are the
+foreign bottoms $\{0, \dots, 8\} \setminus \{4\} = \{0, 1, 2, 3, 5, 6, 7,
+8\}$. Provenance note, owed and recorded: an earlier session claimed from
+memory that every diagonal cell's preperiod was $\le 1$ and built a
+certificate on that claim; the file said otherwise all along, the claim
+and the certificate are struck, and this line enters the paper as the
+primary-source receipt that replaced them.
+
 \section{Open question}\label{sec:open}
 % WRITE (3–5 sentences): the internal behavior of the two confined
 % classes (m = 2, 4). State what is proved (confinement) vs. observed
@@ -844,17 +893,16 @@ collapse to the exact same game.
 \begin{thebibliography}{9}
 % Verify every field on arXiv/MathSciNet before Checkpoint 2.
 % Fields resolved from primary sources; URLs recorded in the fidelity
-% report. Two entries could not be reached at a primary source and keep
-% their [check] flags: golomb (Elsevier returns HTTP 403) and
-% siegel-thesis (no Dalhousie catalogue record reachable).
+% report. The golomb and siegel-thesis fields are taken from the
+% reference lists of arXiv:2405.20054 and arXiv:1201.3299 respectively.
 \bibitem{duchene-rigo} E.~Duch\^ene and M.~Rigo, Invariant games,
   \emph{Theoret.\ Comput.\ Sci.} 411 (2010) 3169--3180.
 \bibitem{golomb} S.~W.~Golomb, A mathematical investigation of games of
-  ``take-away'', \emph{J.~Combin.\ Theory} 1 (1966) 443--458. [check]
+  ``take-away'', \emph{J.~Combin.\ Theory} 1 (1966), no.~4, 443--458.
 \bibitem{survey} U.~Larsson and I.~Saha, A brief conversation about
   subtraction games, arXiv:2405.20054 (2024).
-\bibitem{siegel-thesis} A.~Siegel, Finite excluded subtraction sets and
-  infinite modular Nim, M.Sc.\ thesis, Dalhousie University, 2005. [check]
+\bibitem{siegel-thesis} A.~A.~Siegel, Finite excluded subtraction sets
+  and infinite modular Nim, M.Sc.\ thesis, Dalhousie University, 2005.
 \bibitem{sleator} D.~Sleator and M.~Slusky, Subtraction games with FES
   sets of size 3, arXiv:1201.3299 (2012).
 \bibitem{holshouser} A.~Holshouser and H.~Reiter, One pile Nim with
