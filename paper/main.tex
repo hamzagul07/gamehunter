@@ -1,0 +1,339 @@
+% =====================================================================
+%  PAPER SKELETON — Mode-Switching Subtraction Games / Diagonal Theorem
+%  Built July 30, 2026 from the vaulted, referee-accepted proofs.
+%
+%  PORTING RULES (read before typing anything):
+%   1. Every \begin{proof} ... \end{proof} block marked "PORT:" is filled
+%      by transcribing YOUR accepted text from the named vault file,
+%      adapting notation to LaTeX only. No new mathematics, no rewording
+%      of load-bearing sentences.
+%   2. Sections marked "WRITE (your voice):" are fresh prose by you.
+%      PROJECT_REPORT.md supplies facts for them, never sentences.
+%   3. Resolve every [check] and every TODO before Checkpoint 1.
+%   4. Compile early, compile often (Overleaf recommended).
+% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathcal{Q}}   % squares mod 2m
+\newcommand{\PP}{\mathrm{P}}
+\newcommand{\NN}{\mathrm{N}}
+
+% ------------------------------------------------------------------
+% TITLE — pick one, or improve on them (titles are yours to choose):
+%   (a) Mode-Switching Subtraction Games and a Complete Diagonal Theorem
+%   (b) Chains, Clearings, and Rebels: Solving a Family of
+%       Mode-Switching Subtraction Games
+%   (c) A Machine-Guided Classification of Diagonal Mode-Switching
+%       Subtraction Games
+% ------------------------------------------------------------------
+\title{[TITLE — choose from the options above or write your own]}
+\author{[Full name]\\ \small [School], Rawalpindi, Pakistan}
+\date{[Month] 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% WRITE (your voice), 6–9 sentences following this shape:
+%  1. Define the family in one sentence (move set depends on n mod m).
+%  2. Name the diagonal subfamily D(m,r) in one sentence.
+%  3. State the main theorem informally: complete P-position
+%     classification for every m >= 3 except m = 4, both parities,
+%     with the exception set determined (n = 0 at r = 0; three rebel
+%     positions at m = 9).
+%  4. One sentence on the diseased moduli m = 2, 4 (confinement).
+%  5. One sentence on method: candidates proposed by an automated
+%     search system; all proofs human-written; two retrodictions.
+%  6. One sentence naming the open question (aperiodicity of the
+%     confined classes).
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+% WRITE (your voice). Target 1–1.5 pages. Cover, in order:
+%  - Subtraction games in one paragraph; invariant vs.\ non-invariant
+%    rulesets \cite{duchene-rigo}; where this family sits.
+%  - The mode-switching family, informally, with D(m,r) as the
+%    protagonist; why "diagonal" (fallback amount equals m).
+%  - Main results, stated informally, as a short contributions list:
+%    (i) the Chain Lemma; (ii) the Clearing Lemma and the complete
+%    Diagonal Theorem with exception set; (iii) confinement at
+%    m = 2, 4; (iv) further solved games (Foursquare; the odd-fallback
+%    collapse); (v) the discovery methodology and two retrodictions.
+%  - One honest paragraph on method and AI use, pointing to
+%    Section~\ref{sec:method}.
+%  - Roadmap sentence.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\begin{definition}[Positions and outcomes]\label{def:pn}
+% PORT: your accepted P/N definition (chain_lemma.md, Setup):
+A terminal position (no legal moves) is a \PP-position; a position is an
+\NN-position if and only if at least one legal move reaches a
+\PP-position; a position is a \PP-position if and only if every legal
+move reaches an \NN-position, the terminal case satisfying this clause
+vacuously.
+\end{definition}
+
+\begin{definition}[The diagonal games $D(m,r)$]\label{def:game}
+% PORT: escape_and_diagonal.md, "The game" paragraph:
+Let $m \ge 2$ and $0 \le r \le m-1$. $D(m,r)$ is played on the
+non-negative integers. From a position $n \equiv r \pmod m$
+(\emph{squares mode}) a move subtracts any square $k^2$ with $k \ge 1$
+and $k^2 \le n$. From any other position (\emph{fallback mode}) the only
+move subtracts $m$, available when $n \ge m$. Play is normal.
+\end{definition}
+
+\begin{definition}[Squares modulo $2m$]\label{def:Q}
+$\Q(2m)$ denotes the set of residues of squares modulo $2m$.
+% Include here (PORT from escape_and_diagonal.md Part III):
+% the mirror identity (2m-k)^2 \equiv k^2, the consequence that
+% k = 1..m plus 0 generates the table, and the two side facts:
+% m odd => m^2 \equiv m (mod 2m); m even => m^2 \equiv 0 (mod 2m).
+% The Q(2m)/complement table for mod 4..22 goes here as Table 1.
+\end{definition}
+
+\section{The Chain Lemma}\label{sec:chain}
+
+\begin{lemma}[Chain Lemma]\label{lem:chain}
+Fix integers $m \ge 2$ and $0 \le r \le m-1$, and let $c$ be any residue
+with $0 \le c \le m-1$ and $c \ne r$. In $D(m,r)$, for every position
+$n \ge 0$ with $n \equiv c \pmod m$:
+\[ n \text{ is a \PP-position} \iff n \equiv c \pmod{2m}. \]
+\end{lemma}
+\begin{proof}
+% PORT: proofs/chain_lemma.md — Setup remark (ii), Closure,
+% Independence, The bottom, Alternation, Assembly. Verbatim, notation
+% adapted. The Scope paragraph becomes the first sentence of
+% Section~\ref{sec:clearing}.
+[PORT: proofs/chain\_lemma.md]
+\end{proof}
+
+\section{Escape: the Clearing Lemma and its exceptions}\label{sec:clearing}
+
+\begin{definition}[Window; free and hard residues; hard set]\label{def:window}
+% PORT: escape_and_diagonal.md IV.1 — window T(m,r) = foreign bottoms
+% mod 2m; class r splits into free residue (r, else m) and hard residue
+% (r+m, else 0); H(m,r) as displayed; the free escape by 1^2.
+[PORT: escape\_and\_diagonal.md, IV.1]
+\end{definition}
+
+\begin{lemma}[Constitutional uselessness]\label{lem:useless}
+For every $m$ and $r$: $0, 1, m \notin H(m,r)$; a square
+$\equiv 0$ or $m \pmod{2m}$ is $\equiv 0 \pmod m$ and keeps a class-$r$
+position inside class $r$; and subtracting a square $\equiv 1 \pmod{2m}$
+from the hard residue lands one below it in the top half, an
+\NN-position.
+\end{lemma}
+\begin{proof}
+% PORT: the corresponding sentences of IV.1.
+[PORT]
+\end{proof}
+
+\begin{lemma}[Clearing Lemma]\label{lem:clearing}
+% PORT statement exactly from IV.2 (both the r >= 1 and r = 0 branches).
+Suppose some square $s \ne m$ lies in the interval $(r,\, m+r]$ when
+$r \ge 1$, or in $(m,\,2m)$ when $r = 0$. Then every position of the
+hard residue class is an \NN-position by the single move $-s$.
+\end{lemma}
+\begin{proof}
+% PORT: IV.2 — legality (s <= m+r, the smallest hard member; for r = 0,
+% s < 2m and the smallest positive hard member is 2m) and the landing
+% arithmetic in both sub-cases.
+[PORT: escape\_and\_diagonal.md, IV.2]
+\end{proof}
+
+\begin{lemma}[The interval contains a square]\label{lem:square-exists}
+For $m \ge 3$ and $1 \le r \le m-1$, the interval $(r,\, m+r]$ contains
+a square. For $r = 0$, the interval $(m,\,2m)$ contains a square for
+every $m \ge 3$ except $m = 4$.
+\end{lemma}
+\begin{proof}
+% PORT: IV.3, the repaired parity-free squeeze c >= m/2,
+% c^2 >= m^2/4 > m-1 via (m-2)^2/4, degenerate only at m = 2; and the
+% r = 0 erratum with m = 4 as the lone counterexample.
+[PORT: escape\_and\_diagonal.md, IV.3]
+\end{proof}
+
+\begin{proposition}[The failure window]\label{prop:window}
+The hypothesis of Lemma~\ref{lem:clearing} fails for $r \ge 1$ only if
+$m = b^2$ with $(b-1)^2 \le r \le 2b$, which is possible only for
+$b \le 3$: among $m \ge 3$, exactly $m = 4$ ($r \in \{1,2,3\}$) and
+$m = 9$ ($r \in \{4,5,6\}$).
+\end{proposition}
+\begin{proof}
+% PORT: IV.4, including the m = 25 discussion as a closing remark
+% (square m is harmless once b >= 4).
+[PORT: escape\_and\_diagonal.md, IV.4]
+\end{proof}
+
+\begin{proposition}[The rebels]\label{prop:rebels}
+For $(m,r) \in \{(9,4),(9,5),(9,6)\}$ the position $n = m + r$ is a
+\PP-position, and it is the unique \PP-position of $D(m,r)$ outside the
+window.
+\end{proposition}
+\begin{proof}
+% PORT: IV.5 — the option analysis at n0 = m+r, the three in-game
+% receipts, and the strata sealing (25 == 7, 49 == 13, then 64 == m+1
+% resumes).
+[PORT: escape\_and\_diagonal.md, IV.5]
+\end{proof}
+
+\begin{lemma}[Boundary positions corrupt nothing]\label{lem:audit}
+% PORT statement + proof from IV.6: the n = 0 clause at r = 0 (terminal,
+% hence P; unreachable-from-chains audit; spot receipts) and the
+% rebel audit (moves onto m+r force 3 | k; those positions are already N).
+[PORT: escape\_and\_diagonal.md, IV.6]
+\end{lemma}
+
+\section{The Diagonal Theorem}\label{sec:main}
+
+\begin{theorem}[Diagonal Law]\label{thm:main}
+Let $m \ge 3$ with $m \ne 4$, and let $0 \le r \le m-1$. Define
+$E = \{(9,4),(9,5),(9,6)\}$. In $D(m,r)$, a position $n$ is a
+\PP-position if and only if
+\[
+n \equiv b \pmod{2m} \text{ for some foreign bottom }
+b \in \{0,1,\dots,m-1\}\setminus\{r\},
+\quad\text{or}\quad n = 0,
+\quad\text{or}\quad (m,r) \in E \text{ and } n = m+r.
+\]
+The law holds for both parities of $m$, with no thresholds and no
+unverified zones.
+\end{theorem}
+\begin{proof}
+% WRITE (short assembly, ~6 sentences, your voice): chains by
+% Lemma~\ref{lem:chain}; free residue by 1^2; hard residue by
+% Lemmas~\ref{lem:clearing}+\ref{lem:square-exists} outside the failure
+% window; the window cases by Proposition~\ref{prop:rebels}; boundary
+% clauses by Lemma~\ref{lem:audit}. Model it on your II.7/IV assembly
+% paragraphs.
+[WRITE: assembly paragraph]
+\end{proof}
+
+\begin{remark}[The historical witness]
+% PORT: IV.7(1) — (m-1)^2 == m+1 (mod 2m) for odd m; superseded by the
+% Clearing Lemma; kept as the original route.
+[PORT: escape\_and\_diagonal.md, IV.7(1)]
+\end{remark}
+
+\section{The diseased moduli}\label{sec:disease}
+
+\begin{lemma}[Confinement Lemma]\label{lem:confine}
+For $m \in \{2,4\}$ and every $r$: $\Q(2m) \subseteq \{0,1,m\}$, while
+$H(m,r)$ excludes $0$, $1$, and $m$. Hence no square move from a
+hard-residue position reaches the window: every move stays inside class
+$r$ or lands on an \NN-position of a foreign chain.
+\end{lemma}
+\begin{proof}
+% PORT: V.1, including the consequence paragraph (self-contained
+% internal recursion; 3 is P in D(2,1), 5 is P in D(4,1)) and the
+% calibration sentences (confinement proved; aperiodicity NOT proved).
+[PORT: escape\_and\_diagonal.md, V.1]
+\end{proof}
+
+\begin{remark}[Double condemnation]
+% PORT: V.2 verbatim.
+[PORT: escape\_and\_diagonal.md, V.2]
+\end{remark}
+
+\section{Further solved games}\label{sec:examples}
+
+\begin{example}[$D(5,2)$, solved]\label{ex:d52}
+A position $n$ of $D(5,2)$ is a \PP-position if and only if
+$n \equiv 0, 1, 3,$ or $4 \pmod{10}$.
+% PORT: the eight-obligation proof, escape_and_diagonal.md Part II,
+% compressed or in full (your call; full is fine for a first draft),
+% plus the workbook verification II.9 as a remark. Fold in IV.7(2):
+% P-set = window, by construction, wherever escape holds.
+\end{example}
+
+\begin{theorem}[Foursquare]\label{thm:foursquare}
+% This game is NOT diagonal (fallback set {3,8,9}); it is the paper's
+% motivating solved example of the wider mode-switching family.
+Consider the game on $n \ge 0$: if $n \equiv 1 \pmod 4$, subtract any
+positive square $\le n$; otherwise subtract $s \in \{3,8,9\}$, $s \le n$;
+normal play. Then $n$ is a \PP-position if and only if
+$n \equiv 0, 2, 4,$ or $6 \pmod{16}$, for all $n \ge 0$ with no
+preperiod.
+\end{theorem}
+\begin{proof}
+% PORT: proofs/foursquare_proof.md — Lemmas 1–2, base cases, closure,
+% escape, assembly. Verbatim, notation adapted.
+[PORT: proofs/foursquare\_proof.md]
+\end{proof}
+
+\begin{proposition}[Odd-fallback collapse at $m=2$]\label{prop:collapse}
+% PORT statements of Lemmas A and B from proofs/collapse_theorem.md:
+% P-positions are the evens for every odd fallback a; moreover
+% G_a(n) = G_{a'}(n) for all odd a, a' and all n.
+[PORT statements]
+\end{proposition}
+\begin{proof}
+% PORT: proofs/collapse_theorem.md, both lemmas, plus the quarantine
+% mechanism as a closing remark.
+[PORT: proofs/collapse\_theorem.md]
+\end{proof}
+
+\section{Discovery methodology and retrodictions}\label{sec:method}
+% WRITE (your voice), ~1 page, facts from PROJECT_REPORT.md and the
+% repo. Must cover honestly:
+%  - GameHunter: proposer/verifier architecture (cite Graffiti,
+%    Ramanujan Machine, FunSearch lineage), seeded hunts, deterministic
+%    detectors, OEIS filter; census sizes (1120; extended 1848; 842
+%    laws; survival record) with the instrument-vs-theorem caveat.
+%  - The human/machine division of labor and the integrity protocol
+%    (agents never verify conjectures; proofs human-authored; receipts).
+%  - Retrodiction I: PORT V.3 (fingerprints 3,11,23 and 5,13,37).
+%  - Retrodiction II: PORT V.4 including the verbatim D(9,4) ledger
+%    line (preperiod 14 = rebel + 1, derived with zero freedom).
+%  - Reproducibility sentence: seeds, logs, code at [repo URL].
+
+\section{Open question}\label{sec:open}
+% WRITE (3–5 sentences): the internal behavior of the two confined
+% classes (m = 2, 4). State what is proved (confinement) vs. observed
+% (no period, no modulus <= 200, to 200{,}000) and pose aperiodicity as
+% the open problem. One sentence connecting to Problem A1 of
+% \cite{gonc6} (rule structure vs. period structure).
+
+\section*{Acknowledgments and AI disclosure}
+% WRITE (your voice), 3–4 sentences, consistent with the repository's
+% provenance records: the search system was built with AI assistance;
+% AI systems served as referee and operations agents under a written
+% protocol; all proofs are human-authored; examination transcripts and
+% full logs are public at [repo URL].
+
+\begin{thebibliography}{9}
+% Verify every field on arXiv/MathSciNet before Checkpoint 2.
+\bibitem{duchene-rigo} E.~Duch\^ene and M.~Rigo, Invariant games,
+  \emph{Theoret.\ Comput.\ Sci.} 411 (2010). [check pages]
+\bibitem{golomb} S.~W.~Golomb, A mathematical investigation of games of
+  ``take-away'', \emph{J.~Combin.\ Theory} 1 (1966) 443--458. [check]
+\bibitem{survey} U.~Larsson, [co-authors -- check], A brief conversation
+  about subtraction games, arXiv:2405.20054 (2024). [check authors/title]
+\bibitem{siegel-thesis} A.~Siegel, Finite excluded subtraction sets and
+  infinite modular Nim, M.Sc.\ thesis, Dalhousie University, 2005. [check]
+\bibitem{sleator} D.~Sleator and [co-author -- check], [title -- the
+  arithmetic-periodicity extension of FES games]. [check]
+\bibitem{holshouser} A.~Holshouser and H.~Reiter, [dynamic one-pile Nim
+  paper -- check exact title/venue].
+\bibitem{fox} N.~Fox, On aperiodic subtraction games with bounded Nim
+  sequence, arXiv:1407.2823. [check]
+\bibitem{gonc6} [Editors -- check], Unsolved problems in combinatorial
+  games, in \emph{Games of No Chance~6}, 2025. [check]
+\end{thebibliography}
+
+\end{document}
