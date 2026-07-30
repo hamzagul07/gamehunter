@@ -198,3 +198,21 @@ theorem, produced from the referee's full specification, was verified
 correct and is retained in the repository as an independent cross-check
 (verification/collapse_independent_check.md). All accepted mathematics in
 the proofs/ directory remains human-authored.
+
+**Amendment (July 30):** The Diagonal Law reported in §5 as "validated but
+**not proved**" is now a theorem. The student proved: for every m ≥ 3
+except m = 4 and every r, the P-positions of D(m, r) are exactly the
+foreign-bottom residues modulo 2m, together with an explicitly determined
+exception set — n = 0 when r = 0, plus one extra P-position n = m + r in
+each of the three games (9,4), (9,5), (9,6) — covering both parities of m
+with no thresholds and no unverified zones. The proof route replaced the
+original odd-m witness identity with a parity-free Clearing Lemma; the
+diseased moduli m = 2 and m = 4 are excluded by a Confinement Lemma and
+independently condemned by the failure-window analysis. Two retrodictions
+are on record: the confinement fingerprints, and the D(9,4) preperiod-14
+ledger line, every number of which the mechanism now derives with zero
+freedom. The sole remaining open question in the program is the
+aperiodicity of the two confined classes. Full text:
+proofs/escape_and_diagonal.md; examination records:
+verification/escape_viva.md and verification/diagonal_viva.md. External
+human review remains pending for all results.
