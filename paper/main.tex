@@ -740,6 +740,61 @@ against return, reachable from everywhere outside --- so it is the P-set
 of $F'$, and it coincides with Foursquare's.
 \end{proof}
 
+\begin{remark}[The mechanism: why $16$, and why $\{3,8,9\}$]\label{rem:mechanism}
+Foursquare's board splits three ways, because square mode lives only at
+$n \equiv 1 \pmod 4$: the evens, the standard-mode odds
+$\equiv 3, 7, 11, 15 \pmod{16}$, and the square-mode odds
+$\equiv 1, 5, 9, 13$. Within the evens, sort the standard moves by parity
+and the game simplifies at a stroke: $3$ and $9$ land among the odds,
+never on the all-even P-set, so the single even move $8$ governs the even
+world alone. That world under one jump of $8$ is precisely the shape of
+the Chain Lemma (Lemma~\ref{lem:chain}) --- four chains by residue modulo
+$8$, with bottoms $0, 2, 4, 6$ too poor to afford the jump, and a jump of
+size $m$ minting a law of modulus $2m$ --- so $8$ mints $16$, with P at
+the even rungs: $n \equiv 0, 2, 4, 6 \pmod{16}$,
+Theorem~\ref{thm:foursquare}, its four residues revealed as chain bottoms;
+and running the law modulo $8$ instead kills closure on the spot,
+$8 \to 0$ being a move from the candidate into itself. The honest
+experiment has two halves: restricted to the even world, $\{8\}$ alone
+reproduces the law perfectly to $2{,}000$ --- the governor proved on its
+own domain --- while in the full game $\{8\}$ alone breaks at once, first
+at $n = 3$, exactly where the fired rescuers' constituents live. For $3$
+and $9$ are not decoys: on the standard-mode odds, where squares are
+illegal, they are the sole rescuers --- residue $3$'s only witness is $3$
+(to bottom $0$), residue $7$'s is $3$ (to $4$), residue $11$'s is $9$ (to
+$2$), residue $15$'s is $9$ (to $6$) --- while the squares police only
+their legal home, the value $1$ carrying residues $\{1, 5\}$ to bottoms
+$0$ and $4$ and the value $9$ carrying $\{9, 13\}$ to the same two
+bottoms. Here is the number-theoretic heart at its true address: odd
+squares modulo $16$ take exactly two values, $1$ and $9$
+(Remark~\ref{rem:odd-squares}), and the second is load-bearing precisely
+at residues $9$ and $13$ --- the square-mode residues, no others --- while
+modulo $8$ every odd square is $1$ and those residues would be stranded:
+the same poverty of squares modulo powers of two that confines
+$D(2,\cdot)$ and $D(4,\cdot)$, one refinement up and just barely wealth
+enough. So "why $\{3, 8, 9\}$" has its complete answer --- three moves,
+three jobs, zero waste: one governor $\equiv 8 \pmod{16}$ whose doubling
+is the modulus, plus a pair of odd rescuers whose residues cover all four
+standard-odd classes; and the number $9$'s double life upgrades rather
+than dissolves --- rescuer in both modes, carrying $\{11, 15\}$ as a move
+and $\{9, 13\}$ as a square, the entire upper odd world leaning on the
+value $9$. The mechanism classifies tampering as well: an enlargement of
+the standard set leaves the P-set fixed exactly when every added move is
+either odd, landing, from any candidate position, on the all-N odd world,
+or $\equiv 8 \pmod{16}$, a clone of the governor --- verified: $1$, $5$,
+and $24$ preserve the law, $2$, $4$, and $16$ break it at $n = 2, 4, 16$,
+and the maximal enlargement, every odd number plus the whole clone class,
+holds to $2{,}000$. The extension of Proposition~\ref{prop:kadam} adds
+precisely the residue classes of $3$, $9$, and $8$ themselves, squarely
+inside the harmless family, so the conjecture is not merely true but
+forced --- and busy rather than idle: below $3{,}000$ the new moves serve
+as genuine witnesses at $1{,}490$ positions, $746$ of them odd, the
+smallest being $19 \to 0$, a new odd move rescuing its own residue. None
+of this replaces the verification proof, which remains the proof of
+record; it explains why the object that proof verified could not have
+looked any other way.
+\end{remark}
+
 \begin{remark}[No-Preperiod Remark]\label{rem:nopreperiod}
 % PORT: foursquare_proof.md §5, Closing Remark.
 The periodicity of \PP-positions ($\text{period} = 16$) holds strictly
