@@ -867,18 +867,47 @@ collapse to the exact same game.
 \end{proof}
 
 \section{Discovery methodology and retrodictions}\label{sec:method}
-% WRITE (your voice), ~1 page, facts from PROJECT_REPORT.md and the
-% repo. Must cover honestly:
-%  - GameHunter: proposer/verifier architecture (cite Graffiti,
-%    Ramanujan Machine, FunSearch lineage), seeded hunts, deterministic
-%    detectors, OEIS filter; census sizes (1120; extended 1848; 842
-%    laws; survival record) with the instrument-vs-theorem caveat.
-%  - The human/machine division of labor and the integrity protocol
-%    (agents never verify conjectures; proofs human-authored; receipts).
-%  - Retrodiction I: PORT V.3 (fingerprints 3,11,23 and 5,13,37).
-%  - Retrodiction II: PORT V.4 including the verbatim D(9,4) ledger
-%    line (preperiod 14 = rebel + 1, derived with zero freedom).
-%  - Reproducibility sentence: seeds, logs, code at [repo URL].
+The instrument behind the census is GameHunter, a closed loop of four
+parts: a proposer that mutates game rules, a Grundy engine that computes
+exact values, a battery of deterministic detectors that flag periodicity
+and modular structure, and an OEIS filter that discards anything already
+catalogued. It stands in a short lineage of proposing machines --- Graffiti
+\cite{graffiti}, the Ramanujan Machine \cite{ramanujan-machine}, FunSearch
+\cite{funsearch} --- and inherits their division of labor rather than their
+architectures. The trust ritual is fixed: before and after every session
+the engine re-derives five classical laws, the subtraction game
+$\{1, 2, 3\}$ and subtract-a-square among them, so that drift anywhere in
+the stack would announce itself in the classics before it could touch a
+hunt.
+
+Seeded evolutionary hunts came first and surfaced the earliest solved
+games, Foursquare among them; systematic sweeps then enumerated the
+diagonal family, 1,120 games in the first sweep and 1,848 by the last, and
+the detectors read exact laws in 842 of them. Every law then survived six
+adversarial verification passes, at depth 20,000 and again at $10^6$, with
+zero failures; and when the 731 games that had resisted the detectors were
+rescanned at deeper range, only 6 converted. Both readings are therefore
+stable --- and neither is a theorem: detector output is a finite-range
+reading, never a proof, which is why Sections~\ref{sec:chain}
+through~\ref{sec:disease} of this paper exist.
+
+The division of labor is strict: GameHunter proposes and verifies
+mechanically, and proves nothing; every proof in this paper is
+human-written, and the repository's contribution policy states the rule in
+writing. Hunts and sweeps are seeded, and every number in the previous
+paragraph regenerates from the seeded scripts at
+\url{https://github.com/hamzagul07/gamehunter}. The rule earns its keep for
+a reason with a date on it: during drafting, the author spent three
+documents faithfully verifying a subtly different game --- correct
+simulations of the wrong object --- and the error was caught at the door
+only because the workflow requires sentences to follow printouts, never
+precede them. The ritual is not ceremony; it is why that incident is a
+footnote and not a retraction.
+
+Twice in this project the theory arrived after the numbers: mechanisms
+built weeks later rederived, digit for digit, entries the instrument had
+logged as unexplained --- coordinates recorded before any theory existed to
+predict them. The two retrodictions follow, and they speak for themselves.
 
 \subsection*{Retrodiction I: the fingerprints}
 % PORT: escape_and_diagonal.md V.3, verbatim.
