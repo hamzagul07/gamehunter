@@ -660,117 +660,44 @@ $\mathcal{P} \cup \mathcal{N} = \mathbb{Z} / 16\mathbb{Z}$ and
 $\mathcal{P} \cap \mathcal{N} = \emptyset$.
 \end{sloppypar}
 
-\begin{lemma}[Orientation Lemma]\label{lem:orient}
-% PORT: foursquare_proof.md, Lemma 1.
-Every state $n \equiv 0, 2, 4,$ or $6 \pmod{16}$ is even. Consequently,
-$n \not\equiv 1 \pmod 4$.
-\end{lemma}
-\begin{proof}
-For any $r \in \{0, 2, 4, 6\}$, $n = 16q + r \equiv r \equiv 0 \pmod 2$.
-Since $n$ is even, $n \bmod 4 \in \{0, 2\}$, which implies $n \not\equiv
-1 \pmod 4$. Thus, Square Mode never applies at any claimed \PP-position,
-and for $n \ge 9$, the full move set $\{3, 8, 9\}$ is strictly available.
-\end{proof}
-
-\begin{lemma}[Odd Squares Modulo 16 Lemma]\label{lem:oddsq}
-% PORT: foursquare_proof.md, Lemma 2.
-For any odd integer $k \in \mathbb{Z}$, $k^2 \equiv 1$ or $9 \pmod{16}$.
-\end{lemma}
-\begin{proof}
-Express any odd integer as $k = 2m + 1$ for some $m \in \mathbb{Z}$.
-Squaring yields:
-\[ k^2 = (2m + 1)^2 = 4m^2 + 4m + 1 = 4m(m + 1) + 1 \]
-Because $m(m + 1)$ is the product of two consecutive integers, it is
-always even. Let $m(m + 1) = 2j$ for $j \in \mathbb{Z}$. Substituting
-gives:
-\[ k^2 = 4(2j) + 1 = 8j + 1 \]
-If $j$ is even ($j = 2l$), $k^2 = 16l + 1 \equiv 1 \pmod{16}$. If $j$ is
-odd ($j = 2l + 1$), $k^2 = 16l + 9 \equiv 9 \pmod{16}$. Thus, every odd
-square is congruent to $1$ or $9 \pmod{16}$.
-\end{proof}
-
 \begin{proof}[Proof of Theorem~\ref{thm:foursquare}]
-% PORT: proofs/foursquare_proof.md §4 — base cases, closure, escape,
-% assembly. Verbatim, notation adapted.
-(By Strong Induction on $n$.)
-
-\textbf{Base Cases ($0 \le n \le 8$).} Direct manual calculation of legal
-move bounds and reachable states confirms:
-\begin{itemize}[nosep]
-\item $n = 0$: Standard mode, no moves $\le 0$. \textbf{\PP-position}.
-\item $n = 1$: Square mode, move $s = 1^2 \to 0$ (\PP).
-  \textbf{\NN-position}.
-\item $n = 2$: Standard mode, no moves $\le 2$. \textbf{\PP-position}.
-\item $n = 3$: Standard mode, move $s = 3 \to 0$ (\PP).
-  \textbf{\NN-position}.
-\item $n = 4$: Standard mode, move $s = 3 \to 1$ (\NN). All legal moves
-  go to \NN. \textbf{\PP-position}.
-\item $n = 5$: Square mode, moves $s = 1^2 \to 4$ (\PP), $s = 2^2 \to 1$
-  (\NN). \textbf{\NN-position}.
-\item $n = 6$: Standard mode, move $s = 3 \to 3$ (\NN).
-  \textbf{\PP-position}.
-\item $n = 7$: Standard mode, move $s = 3 \to 4$ (\PP).
-  \textbf{\NN-position}.
-\item $n = 8$: Standard mode, move $s = 8 \to 0$ (\PP).
-  \textbf{\NN-position}.
-\end{itemize}
-
-\textbf{Inductive Step ($n \ge 9$).} Assume the theorem holds for all
-states $m < n$.
-
-\smallskip
-\noindent\emph{Part 1: Closure (Claimed \PP-positions).} Let $n \equiv r
-\pmod{16}$ with $r \in \{0, 2, 4, 6\}$. By Lemma~\ref{lem:orient},
-$n \not\equiv 1 \pmod 4$. For all $n \ge 9$, all of $\{3, 8, 9\}$ are
-legal moves since $s \le n$. We compute $r - s \pmod{16}$ across all $12$
-combinations:
-\begin{itemize}[nosep]
-\item $r = 0 \implies 0 - 3 \equiv 13, \quad 0 - 8 \equiv 8, \quad
-  0 - 9 \equiv 7 \pmod{16}$
-\item $r = 2 \implies 2 - 3 \equiv 15, \quad 2 - 8 \equiv 10, \quad
-  2 - 9 \equiv 9 \pmod{16}$
-\item $r = 4 \implies 4 - 3 \equiv 1, \quad 4 - 8 \equiv 12, \quad
-  4 - 9 \equiv 11 \pmod{16}$
-\item $r = 6 \implies 6 - 3 \equiv 3, \quad 6 - 8 \equiv 14, \quad
-  6 - 9 \equiv 13 \pmod{16}$
-\end{itemize}
-None of the resulting residues belong to $\{0, 2, 4, 6\} \pmod{16}$. By
-the strong induction hypothesis, every reachable state $n - s < n$ is an
-\NN-position. Hence, $n$ is a \textbf{\PP-position}.
-
-\smallskip
-\noindent\emph{Part 2: Escape (Claimed \NN-positions).} Let $n \equiv r
-\pmod{16}$ with $r \in \mathcal{N}$. We display a legal move $s$ such
-that $n - s \in \mathcal{P}$:
-
-\begin{enumerate}[nosep]
-\item \textbf{Non-Square Residues ($r \in \{3, 7, 8, 10, 11, 12, 14,
-  15\}$):}
-  \begin{itemize}[nosep]
-  \item $r = 3$: $s = 3 \implies 3 - 3 \equiv 0 \in \mathcal{P}$
-  \item $r = 7$: $s = 3 \implies 7 - 3 \equiv 4 \in \mathcal{P}$
-  \item $r = 8$: $s = 8 \implies 8 - 8 \equiv 0 \in \mathcal{P}$
-  \item $r = 10$: $s = 8 \implies 10 - 8 \equiv 2 \in \mathcal{P}$
-  \item $r = 11$: $s = 9 \implies 11 - 9 \equiv 2 \in \mathcal{P}$
-  \item $r = 12$: $s = 8 \implies 12 - 8 \equiv 4 \in \mathcal{P}$
-  \item $r = 14$: $s = 8 \implies 14 - 8 \equiv 6 \in \mathcal{P}$
-  \item $r = 15$: $s = 9 \implies 15 - 9 \equiv 6 \in \mathcal{P}$
-  \end{itemize}
-  Since $n \ge 9$, $s \le n$ is satisfied in all cases.
-\item \textbf{Square-Mode Residues ($r \in \{1, 5, 9, 13\}$):} By
-  Lemma~\ref{lem:oddsq}, odd squares satisfy $k^2 \equiv 1$ or $9
-  \pmod{16}$. Using $s = 1^2 = 1$ or $s = 3^2 = 9$:
-  \begin{itemize}[nosep]
-  \item $r = 1$: $s = 1 \implies 1 - 1 \equiv 0 \in \mathcal{P}$
-  \item $r = 5$: $s = 1 \implies 5 - 1 \equiv 4 \in \mathcal{P}$
-  \item $r = 9$: $s = 9 \implies 9 - 9 \equiv 0 \in \mathcal{P}$
-  \item $r = 13$: $s = 9 \implies 13 - 9 \equiv 4 \in \mathcal{P}$
-  \end{itemize}
-  For $r \in \{1, 5\}$, $s = 1 \le n$ holds for $n \ge 1$. For
-  $r \in \{9, 13\}$, $s = 9 \le n$ holds for $n \ge 9$.
-\end{enumerate}
-By strong induction, every state $n \in \mathcal{N}$ can transition to a
-\PP-position $n - s < n$. Thus, $n$ is an \textbf{\NN-position}.
+Let $S = \{\, n \ge 0 : n \equiv 0, 2, 4, 6 \pmod{16} \,\}$; since $S$ and
+its complement are unions of residue classes modulo $16$, every position
+lies in exactly one of the two. We verify the three conditions of
+Lemma~\ref{lem:verify} for $S$.
+\emph{(i) Terminals.} The positions $0$ and $2$ are standard-mode (both
+$\not\equiv 1 \bmod 4$) and every allowed move $3, 8, 9$ exceeds them, so
+both are terminal. Conversely, every standard-mode $n \ge 3$ has the legal
+move $3$, and every square-mode $n$ has the legal move $1^2$, since square
+mode requires $n \equiv 1 \pmod 4$ and hence $n \ge 1$. The terminal set is
+therefore exactly $\{0, 2\}$, and both members lie in $S$.
+\emph{(ii) Closure.} Every element of $S$ is even, hence
+$\not\equiv 1 \pmod 4$, hence standard-mode, so its moves are among
+$3, 8, 9$. The moves $3$ and $9$ are odd, and even minus odd is odd, so
+their landings occupy odd residues modulo $16$ --- all outside the all-even
+$S$. The move $8$ carries the residues $\{0, 2, 4, 6\}$ onto
+$\{8, 10, 12, 14\}$, also outside $S$. (Legality plays no role here: a move
+that does not exist cannot violate closure.) Hence no move from $S$ lands
+in $S$.
+\emph{(iii) Escape.} The complement of $S$ consists of the even residues
+$\{8, 10, 12, 14\}$ together with the odd residues, and the odd residues
+split by mode: $\{3, 7, 11, 15\}$ ($\equiv 3 \bmod 4$) are standard,
+$\{1, 5, 9, 13\}$ ($\equiv 1 \bmod 4$) are square. The even non-candidates
+escape by subtracting $8$, landing on $\{0, 2, 4, 6\} \subseteq S$, legal
+because the smallest member of each class is at least $8$. The
+standard-mode odds escape by $3 \to 0$ (residue $3$), $3 \to 4$ (residue
+$7$), $9 \to 2$ (residue $11$), and $9 \to 6$ (residue $15$), legal at the
+smallest members $3, 7, 11, 15$ respectively and a fortiori above. The
+square-mode odds escape by the squares $1^2$ and $3^2$: subtracting $1$
+carries the residues $\{1, 5\}$ to $\{0, 4\}$, and subtracting $9$ carries
+$\{9, 13\}$ to $\{0, 4\}$, legal since $1 \le n$ whenever square mode
+applies and $9 \le n$ on classes whose smallest members are $9$ and $13$.
+Every position outside $S$ therefore has a move into $S$ --- and the
+verification consumes only the two instances $1^2 \equiv 1$ and
+$3^2 \equiv 9 \pmod{16}$; no general fact about squares is invoked.
+By Lemma~\ref{lem:verify}, $S$ is exactly the set of P-positions of
+Foursquare: the law $n \equiv 0, 2, 4, 6 \pmod{16}$ holds for every
+$n \ge 0$, with no preperiod.
 \end{proof}
 
 \begin{remark}[No-Preperiod Remark]\label{rem:nopreperiod}
