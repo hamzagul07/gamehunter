@@ -708,6 +708,38 @@ $1^2 \equiv 1$ and $3^2 \equiv 9$; the general statement is recorded
 because the mechanism remark below leans on it.
 \end{remark}
 
+\begin{proposition}[Kadam's Extension]\label{prop:kadam}
+Let $F'$ be Foursquare with its standard-mode move set enlarged from
+$\{3, 8, 9\}$ to every $s \equiv 3, 8,$ or $9 \pmod{16}$ with $s \le n$,
+square mode unchanged. Then the P-positions of $F'$ are exactly
+$n \equiv 0, 2, 4, 6 \pmod{16}$ --- identical to Foursquare's. (Conjectured
+by Balaji Kadam, personal communication, July 2026.)
+\end{proposition}
+\begin{proof}
+Adding moves can only destroy terminality, never create it, so the
+terminals of $F'$ lie among Foursquare's terminals $\{0, 2\}$, and both
+survive because the smallest member of the extended set is still $3 > 2$
+--- the terminal set is $\{0, 2\}$, inside the candidate
+$\{0, 2, 4, 6\} \pmod{16}$. From a candidate position --- even, hence
+standard mode --- every legal move of $F'$ subtracts some
+$s \equiv 3, 8,$ or $9 \pmod{16}$, and the closure argument of
+Theorem~\ref{thm:foursquare} consumed exactly two facts about $s$, its
+parity and its residue modulo $16$, never its actual size, so it transfers
+verbatim to every member of the extended family: the $s \equiv 3$ and
+$s \equiv 9$ moves are odd and land on odd residues, none of which lie in
+the all-even candidate, while the $s \equiv 8$ moves land on
+$\{8, 10, 12, 14\} \pmod{16}$, also outside --- no move from the candidate
+returns to it. In the other direction, the extended move set contains the
+original one and square mode is untouched, so every escape witness of the
+original proof --- the standard moves and the squares $1$ and $9$ ---
+remains a legal move of $F'$ with the same landing, and a move set that
+only grows cannot lose an escape: every position outside the candidate
+still has its move into it. The candidate therefore meets all three
+conditions of Lemma~\ref{lem:verify} in $F'$ --- terminals inside, closed
+against return, reachable from everywhere outside --- so it is the P-set
+of $F'$, and it coincides with Foursquare's.
+\end{proof}
+
 \begin{remark}[No-Preperiod Remark]\label{rem:nopreperiod}
 % PORT: foursquare_proof.md §5, Closing Remark.
 The periodicity of \PP-positions ($\text{period} = 16$) holds strictly
