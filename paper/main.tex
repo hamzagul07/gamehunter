@@ -56,18 +56,29 @@ Pakistan}
 \maketitle
 
 \begin{abstract}
-% WRITE (your voice), 6–9 sentences following this shape:
-%  1. Define the family in one sentence (move set depends on n mod m).
-%  2. Name the diagonal subfamily D(m,r) in one sentence.
-%  3. State the main theorem informally: complete P-position
-%     classification for every m >= 3 except m = 4, both parities,
-%     with the exception set determined (n = 0 at r = 0; three rebel
-%     positions at m = 9).
-%  4. One sentence on the diseased moduli m = 2, 4 (confinement).
-%  5. One sentence on method: candidates proposed by an automated
-%     search system; all proofs human-written; two retrodictions.
-%  6. One sentence naming the open question (aperiodicity of the
-%     confined classes).
+Mode-switching subtraction games are non-invariant subtraction games
+whose legal moves depend on the pile size $n$ modulo a fixed $m$. The
+diagonal family $D(m, r)$ has two ingredients: from positions
+$n \equiv r \pmod m$ a player subtracts any positive square at most $n$,
+and from every other position exactly $m$. For every $m \ge 3$ except
+$m = 4$ and every $r$, the P-positions of $D(m, r)$ are precisely the
+$m - 1$ residue classes modulo $2m$ of the chain bottoms, together with
+$n = 0$ and, for $(m, r) \in \{(9, 4), (9, 5), (9, 6)\}$, a single rebel
+position $n = m + r \in \{13, 14, 15\}$; the law holds for both parities
+of $m$ with no exceptions beyond these named positions. At $m = 2$ and
+$m = 4$ the squares modulo $2m$ lie inside $\{0, 1, m\}$, so no move from
+the affected classes reaches a foreign P-position: those classes are
+confined to self-contained recursions, which a sweep to 200,000 finds
+lawless --- confinement is proved, aperiodicity is open. The same
+architecture solves Foursquare, an earlier machine-found game with moves
+$\{3, 8, 9\}$ and a square mode at $n \equiv 1 \pmod 4$: its P-positions
+are $n \equiv 0, 2, 4, 6 \pmod{16}$, and enlarging the move set to the
+full residue classes of $3$, $8$, and $9$ modulo $16$ provably leaves the
+P-set unchanged. Every conjecture was machine-proposed from a census of
+roughly 3,000 games; every proof is human-written; twice, theory
+constructed afterwards rederived numbers the instrument had recorded
+before the theory existed. Whether the confined classes of $D(2, 1)$ and
+$D(4, 1)$ ever become periodic remains open.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
