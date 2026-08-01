@@ -82,19 +82,64 @@ $D(4, 1)$ ever become periodic remains open.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
-% WRITE (your voice). Target 1–1.5 pages. Cover, in order:
-%  - Subtraction games in one paragraph; invariant vs.\ non-invariant
-%    rulesets \cite{duchene-rigo}; where this family sits.
-%  - The mode-switching family, informally, with D(m,r) as the
-%    protagonist; why "diagonal" (fallback amount equals m).
-%  - Main results, stated informally, as a short contributions list:
-%    (i) the Chain Lemma; (ii) the Clearing Lemma and the complete
-%    Diagonal Theorem with exception set; (iii) confinement at
-%    m = 2, 4; (iv) further solved games (Foursquare; the odd-fallback
-%    collapse); (v) the discovery methodology and two retrodictions.
-%  - One honest paragraph on method and AI use, pointing to
-%    Section~\ref{sec:method}.
-%  - Roadmap sentence.
+A subtraction game is played on a pile of counters: a ruleset names the
+amounts a player may remove, the players alternate, and under normal play
+whoever cannot move loses. For a fixed finite ruleset the classical
+theory ends in one word, periodicity: the sequence of previous-player
+wins is eventually periodic, and the game solves itself by a finite
+computation \cite{golomb}. The live frontier is the non-invariant games,
+whose legal moves depend on the position being played from
+\cite{duchene-rigo}. This paper studies a structured family at that
+frontier, in which the entire mode of play --- which amounts are legal,
+and why --- switches with the residue of $n$.
+
+The protagonist is the two-parameter family $D(m, r)$: from a position
+$n \equiv r \pmod m$ a player may subtract any positive square not
+exceeding $n$; from every other position the only move is to subtract
+$m$. The family is called diagonal because its members first surfaced
+along a diagonal of the census's parameter grid, one game per modulus.
+The main result can be tasted before any machinery arrives: for every
+$m \ge 3$ except $m = 4$ and every $r$, the P-positions of $D(m, r)$ are
+exactly $m - 1$ residue classes modulo $2m$ --- the bottoms of the game's
+fallback chains --- together with a completely determined finite
+exception set, for both parities of $m$ and with no unverified
+thresholds.
+
+The contributions come in the paper's own order. The Chain Lemma
+decomposes every fallback class into an independent chain whose
+P-positions alternate upward from a stuck bottom, reading the law's
+residues directly off those bottoms. The Clearing Lemma turns one small
+square per class into a complete escape argument, and with it comes the
+Diagonal Theorem: every $m \ge 3$ except $m = 4$, both parities, the
+exception set pinned to exactly three rebel positions and one boundary.
+Confinement explains the excluded moduli: at $m = 2$ and $m = 4$ the
+squares modulo $2m$ collapse into $\{0, 1, m\}$, no move reaches a
+foreign P-position, and the affected classes turn inward into
+self-contained recursions --- the census's two lawless columns,
+identified. Section 7 carries the architecture to Foursquare, the
+machine's first find: its law $n \equiv 0, 2, 4, 6 \pmod{16}$ proved in
+half a page, its mechanism of one governor and paired rescuers exposed,
+and Kadam's Extension established. Section 8 opens the instrument itself
+--- proposer, engine, detectors, filter --- and records the two
+retrodictions in which theory built afterwards rederived numbers recorded
+before the theory existed.
+
+The method deserves a plain statement on page one. Every conjecture in
+this paper was machine-proposed, drawn from a census of roughly three
+thousand games; every proof is human-written. Section 8 documents the
+pipeline, the verification regime, and the written integrity protocol
+that kept the two roles separate.
+
+Section~\ref{sec:prelim} fixes notation and the verification lemma;
+Sections~\ref{sec:chain} through~\ref{sec:main} build chains, clearings,
+and rebels into the Diagonal Theorem; Section~\ref{sec:disease} proves
+confinement at $m = 2$ and $4$; Section~\ref{sec:examples} puts the
+machinery to work three times --- $D(5, 2)$ solved in full as the worked
+example, Foursquare with its mechanism and Kadam's Extension, and the
+odd-fallback collapse; Section~\ref{sec:method} opens the instrument; and
+Section~\ref{sec:open} closes with the one question the census could not
+settle --- and hands the reader the smallest game we know that keeps it
+open.
 
 \section{Preliminaries}\label{sec:prelim}
 
