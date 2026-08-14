@@ -679,6 +679,19 @@ $1^2 \equiv 1$ and $3^2 \equiv 9$; the general statement is recorded
 because the mechanism remark below leans on it.
 \end{remark}
 
+The question of which moves may be added to a subtraction game without
+changing it is an old one: Austin answered it in 1976 for purely
+periodic subtraction games --- for each move $s$ already present, the
+move $p - s$ may be adjoined, since the reply $s$ reverses it out and
+the period $p$ absorbs the pair --- and Ho, in 2015, gave the idea its
+modern name, expansion sets \cite{austin1976, ho2015}.
+Proposition~\ref{prop:kadam} and Remark~\ref{rem:mechanism} answer the
+same question for a mode-switching game, at the level of P-positions:
+the additions Foursquare tolerates are exactly the odd moves and the
+governor's clones $\equiv 8 \pmod{16}$, and the parity-and-residue
+argument that certifies them does for mode-switching games the job that
+reversibility did classically.
+
 \begin{proposition}[Kadam's Extension]\label{prop:kadam}
 Let $F'$ be Foursquare with its standard-mode move set enlarged from
 $\{3, 8, 9\}$ to every $s \equiv 3, 8,$ or $9 \pmod{16}$ with $s \le n$,
@@ -1004,6 +1017,10 @@ undergone formal peer review.
 \bibitem{funsearch} B.~Romera-Paredes et al., Mathematical discoveries
   from program search with large language models, \emph{Nature} 625
   (2024) 468--475.
+\bibitem{austin1976} R.~B.~Austin, Impartial and partisan games,
+  M.Sc. thesis, University of Calgary, 1976.
+\bibitem{ho2015} N.~B.~Ho, On the expansion of three-element
+  subtraction sets, \emph{Theoret. Comput. Sci.} 582 (2015), 35--47.
 \end{thebibliography}
 
 \end{document}
