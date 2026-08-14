@@ -548,87 +548,39 @@ agree because both are reading the same two table rows: $\Q(2m)
 
 \section{Further solved games}\label{sec:examples}
 
-\begin{example}[$D(5,2)$, solved]\label{ex:d52}
-A position $n$ of $D(5,2)$ is a \PP-position if and only if
-$n \equiv 0, 1, 3,$ or $4 \pmod{10}$.
+\begin{example}[$D(5,2)$ solved]\label{ex:d52}
+The P-positions of $D(5,2)$ are exactly the $n \equiv 0, 1, 3, 4
+\pmod{10}$.
 \end{example}
-
-% PORT: escape_and_diagonal.md Part II, II.1–II.8, in full.
-\noindent\textbf{Step 1. Statement.} There is an explicit threshold $N_0$,
-computed in Step 6 below, such that every position $n \equiv 2 \pmod 5$
-with $n \ge N_0$ has at least one legal square move --- some $k$ with
-$k^2 \le n$ --- whose landing $n - k^2$ is a \PP-position of a fallback
-chain. Consequently every such $n$ is an \NN-position.
-
-\noindent\textbf{Step 2. The target window.} By the Chain Lemma, the
-fallback classes $0, 1, 3, 4 \pmod 5$ have their \PP-positions exactly at
-$n \equiv 0, 1, 3, 4 \pmod{10}$; call that set $T = \{0, 1, 3, 4\}
-\pmod{10}$. A landing in $T$ is genuinely \PP: a number $\equiv 0, 1, 3,$
-or $4 \pmod{10}$ is $\equiv 0, 1, 3,$ or $4 \pmod 5$, so it lives in a
-fallback chain where the lemma has jurisdiction, and its residue mod $10$
-matching the chain bottom's means it sits an even number of rungs up ---
-precisely the lemma's \PP-rungs.
-
-\noindent\textbf{Step 3. The split.} Write $n = 5q + 2$: if $q = 2t$ then
-$n = 10t + 2$, and if $q = 2t + 1$ then $n = 10t + 7$, so a class-$2$
-position is $\equiv 2$ or $7 \pmod{10}$ --- that is, $r$ or $r + m$ ---
-and the proof forks on the parity of $q$ exactly the way the chain proof
-forked on the parity of $j$.
-
-\noindent\textbf{Step 4. Coverage line one.} For $n \equiv 2 \pmod{10}$: the
-differences $2 - T$ are $\{2-0, 2-1, 2-3, 2-4\} \equiv \{2, 1, 9, 8\}
-\pmod{10}$, and intersecting with $\Q = \{0, 1, 4, 5, 6, 9\}$ leaves
-$\{1, 9\}$; take the smallest, $s = 1$, so subtracting $1^2$ gives
-$n - 1 \equiv 1 \pmod{10} \in T$.
-
-\noindent\textbf{Step 5. Coverage line two.} For $n \equiv 7 \pmod{10}$: the
-differences $7 - T$ are $\{7, 6, 4, 3\} \pmod{10}$, intersecting with
-$\Q$ leaves $\{4, 6\}$; take $s = 4$, so subtracting $2^2$ gives
-$n - 4 \equiv 3 \pmod{10} \in T$. Both keystones came with a spare ---
-$9 = 3^2$ also rescues residue $2$, and $16 = 4^2$ also rescues residue
-$7$. The corridor is wider than it needs to be.
-
-\noindent\textbf{Step 6. Legality and the threshold.} The rescue squares are
-the concrete numbers $1$ and $4$. For the residue-$2$ class, whose
-members are $2, 12, 22, \dots$, legality demands $1 \le n$, which already
-holds at the smallest member. For the residue-$7$ class, members
-$7, 17, 27, \dots$, legality demands $4 \le n$, which holds at $7$. So
-both rescues are legal for every member of their class, and the threshold
-collapses: $\mathbf{N_0 = 2}$, the smallest class-$2$ position in
-existence. Below $N_0$ there are no class-$2$ positions at all, so the
-hand-check zone is empty --- verdict: vacuous. Checking the small rows directly anyway: $2 - 1 = 1$ (\PP) $\checkmark$, $7 - 4 = 3$ (\PP)
-$\checkmark$, $12 - 1 = 11$ (\PP) $\checkmark$, $17 - 4 = 13$ (\PP)
-$\checkmark$, $22 - 1 = 21$ (\PP) $\checkmark$, $27 - 4 = 23$ (\PP)
-$\checkmark$. Every row is rescued-anyway, rebels: none. Worth recording
-why it collapsed: the rescue squares $1$ and $4$ happen to be smaller
-than the smallest members of their classes. Nothing guarantees that luck
-at other moduli, which is exactly why the theorem was written with $N_0$
-as a named unknown.
-
-\noindent\textbf{Step 7. Assembly.} The Chain Lemma classifies the four
-fallback classes everywhere: \PP\ exactly at $n \equiv 0, 1, 3, 4
-\pmod{10}$, \NN\ at $5, 6, 8, 9$. The Escape Theorem classifies class $2$
-everywhere, since $N_0 = 2$ means ``past the threshold'' is all of it:
-residues $2$ and $7 \pmod{10}$ are all \NN. Union the two and every
-residue mod $10$ is accounted for, with no unexplained positions beneath
-any threshold.
-
-\noindent One coincidence too pretty not to flag: the \PP-set of the
-whole game \emph{is} the target window $T$ --- the landing pads and the
-answer turned out to be the same four residues (resolved in
-Remark~\ref{rem:coincidence}).
-
-\noindent\textbf{Step 8. Scope and the forward hook.} The proof secretly
-depended on squares mod $10$ being \emph{rich}: $\Q$ fills six of the ten
-residues, enough that both difference lists $\{2, 1, 9, 8\}$ and
-$\{7, 6, 4, 3\}$ caught at least one member --- had $\Q$ missed either
-list entirely, one residue of class $2$ would have had no escape and the
-whole corridor would have collapsed. Generalizing to $D(m, r)$ therefore
-means asking whether that richness survives at other moduli --- whether
-squares mod $2m$ keep intersecting the difference sets $\rho - T$ for
-both $\rho \in \{r, r + m\}$ --- and since quadratic residues thin out
-and organize themselves as the modulus grows, that question, not the game
-logic, is precisely the content of Section~\ref{sec:clearing}.
+\begin{proof}
+Let $S = \{\, n \ge 0 : n \equiv 0, 1, 3, 4 \pmod{10} \,\}$; we verify
+the three conditions of Lemma~\ref{lem:verify}.
+\emph{(i) Terminals.} A squares-mode position --- $n \equiv 2 \pmod 5$ ---
+always has the legal move $1^2$, since the smallest such position is $2$;
+a fallback position has its only move $-5$ exactly when $n \ge 5$. The
+terminal set is therefore the set of fallback positions below $5$, namely
+$\{0, 1, 3, 4\}$ --- the four chain bottoms --- and all of them lie in
+$S$.
+\emph{(ii) Closure.} Every element of $S$ is $\equiv 0, 1, 3, 4
+\pmod{10}$, hence $\equiv 0, 1, 3, 4 \pmod 5$: no candidate lies in class
+$2$, so a candidate's only move is the fallback $-5$, whose landings
+occupy the residues $5, 6, 8, 9 \pmod{10}$ --- all outside $S$. (Legality
+plays no role here: a move that does not exist cannot violate closure.)
+No move from $S$ returns to $S$.
+\emph{(iii) Escape.} The complement of $S$ consists of the residues
+$\{5, 6, 8, 9\} \pmod{10}$ --- the odd rungs of the four chains ---
+together with $\{2, 7\} \pmod{10}$, which is class $2$. The odd rungs
+escape by the fallback $-5$, landing on $\{0, 1, 3, 4\} \subseteq S$,
+legal because the smallest member of each class is at least $5$. Class
+$2$ escapes by its two keystones: from $n \equiv 2 \pmod{10}$ subtract
+$1^2$, landing on residue $1$, legal from the smallest member $2$; from
+$n \equiv 7 \pmod{10}$ subtract $2^2$, landing on residue $3$, legal from
+the smallest member $7$. Every position outside $S$ has a move into $S$
+--- and the verification consumes only the two instances $1^2 \equiv 1$
+and $2^2 \equiv 4 \pmod{10}$; no general fact about squares is invoked.
+By Lemma~\ref{lem:verify}, $S$ is exactly the set of P-positions of
+$D(5,2)$: the law holds for every $n \ge 0$, with no preperiod.
+\end{proof}
 
 \begin{remark}[Verification against the workbook]\label{rem:workbook}
 % PORT: escape_and_diagonal.md II.9.
