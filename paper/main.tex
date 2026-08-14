@@ -224,69 +224,24 @@ $n \ge 0$ with $n \equiv c \pmod m$:
 \[ n \text{ is a \PP-position} \iff n \equiv c \pmod{2m}. \]
 \end{lemma}
 \begin{proof}
-% PORT: proofs/chain_lemma.md — Setup, Closure, Independence,
-% The bottom, Alternation, Assembly. Verbatim, notation adapted.
-% The Scope paragraph opens Section~\ref{sec:clearing}.
-\textbf{Setup and notation.} Chain $c$ is the set $\{c + jm : j = 0, 1,
-2, \dots\}$, i.e.\ all positions $\equiv c \pmod m$; call $c + jm$ rung
-$j$. Two arithmetic remarks used throughout. (i) Every rung satisfies
-$c + jm \equiv c \not\equiv r \pmod m$, so every position of the chain is
-in fallback mode: its only candidate move is subtract-$m$, legal exactly
-when the position is $\ge m$. (ii) Since $n \equiv c \pmod m$, the
-residue of $n$ mod $2m$ is either $c$ or $c + m$; and $n = c + jm \equiv
-c \pmod{2m} \iff 2m$ divides $jm \iff j$ is even. So the Lemma is
-equivalent to: rung $j$ is \PP\ iff $j$ is even. (All outcome
-computations below use Definition~\ref{def:pn}.)
-
-\textbf{Closure.} Let $n = c + jm$ be a rung. Its only candidate move is
-$n \to n - m$. If $j = 0$, the move is illegal, since $n = c \le m - 1 <
-m$. If $j \ge 1$, the move is legal, since $n = c + jm \ge 0 + m = m$,
-and it lands on $c + (j-1)m$: the same residue $c$ mod $m$, hence rung
-$j - 1$ of the same chain. So every legal move from a chain-$c$ position
-stays inside chain $c$, descending exactly one rung, and the set of
-positions reachable from the chain is contained in the chain.
-
-\textbf{Independence.} Positions outside chain $c$ --- in particular
-class-$r$ positions firing squares --- may well have moves that land on
-rungs of the chain. This cannot disturb the rungs' statuses: by the
-definition just quoted, the status of a position is a function only of
-the statuses of its options, the positions reachable from it; the
-definition never mentions moves arriving at a position. By Closure,
-every option of every rung is again a rung, so the statuses of chain $c$
-are computed entirely within chain $c$ and would be identical if the rest
-of $D(m, r)$ were deleted. Incoming traffic affects only the travellers,
-never the rungs.
-
-\textbf{The bottom.} Rung $0$ is the position $c$, the least element of
-the chain, with $0 \le c \le m-1$. It is in fallback mode (because $c
-\not\equiv r$) and its single candidate move is illegal (because $c <
-m$). Both facts hold equally for $c = 0$ and for $c \ge 1$ --- note that
-for $c = 0$ no appeal to squares is needed: $0 \ne r$ already puts the
-position $0$ in fallback mode, where $m \le 0$ fails. So rung $0$ is
-terminal, hence a \PP-position: ``every legal move reaches an \NN''
-holds vacuously. This matches the claim, since $j = 0$ is even.
-
-\textbf{Alternation.} Claim: rung $j$ is \PP\ for even $j$ and \NN\ for
-odd $j$. Strong induction on $j$. Base, $j = 0$: done above. Step, $j
-\ge 1$: assume the claim for all smaller indices. By Closure, rung $j$
-has exactly one legal move --- legal precisely because $j \ge 1$, the
-boundary check (rung $0$ has no move at all; rung $1$'s move is legal
-since $c + m \ge m$) --- and it goes to rung $j - 1$. For a position with
-a single option $x$, the definition specializes: ``some option is \PP''
-means $x$ is \PP, so the position is \NN\ iff $x$ is \PP; ``every option
-is \NN'' means $x$ is \NN, so the position is \PP\ iff $x$ is \NN. By the
-induction hypothesis, rung $j - 1$ is \PP\ iff $j - 1$ is even. Hence
-rung $j$ is \NN\ iff $j - 1$ is even, i.e.\ iff $j$ is odd; and rung $j$
-is \PP\ iff $j - 1$ is odd, i.e.\ iff $j$ is even. Induction closed.
-
-\textbf{Assembly.} Let $c \not\equiv r$ be any class and $n \equiv c
-\pmod m$ any position; write $n = c + jm$ with $j \ge 0$ uniquely
-determined. Closure and Independence license computing $n$'s status
-inside the chain alone; the bottom is the base of the induction and
-Alternation is its step, giving: $n$ is \PP\ $\iff j$ is even $\iff jm
-\equiv 0 \pmod{2m} \iff n \equiv c \pmod{2m}$. Nothing about $c$ was used
-beyond $0 \le c \le m-1$ and $c \ne r$, so the result holds for all
-$m - 1$ such classes simultaneously.
+\emph{Rungs.} The positions of class $c$ form the progression
+$c,\, c+m,\, c+2m,\, \dots$; call $c + jm$ rung $j$.
+\emph{Closure.} A rung is never $\equiv r \pmod{m}$, so its only allowed
+move is the fallback $-m$, legal exactly when $j \ge 1$ and landing on
+rung $j-1$; rung $0 = c < m$ has no move at all, and no move ever leaves
+the progression.
+\emph{Independence.} The status of a position is defined recursively from
+its options alone --- the definition never mentions which positions move
+in. Since Closure makes every option of a rung another rung, the chain
+computes its statuses as if the rest of the game had been deleted.
+\emph{Alternation.} We claim rung $j$ is P if and only if $j$ is even.
+Base: rung $0$ is terminal by Closure, hence P. Step: assume the claim
+for rung $j-1$; rung $j$'s single option is rung $j-1$, and a
+single-option position is P if and only if its option is N --- so for $j$
+even, rung $j-1$ is N by the assumption and rung $j$ is P, while for $j$
+odd, rung $j-1$ is P and rung $j$ is N.
+\emph{Translation.} $j$ is even exactly when $c + jm \equiv c \pmod{2m}$,
+so the P-positions of class $c$ are precisely the $n \equiv c \pmod{2m}$.
 \end{proof}
 
 \section{Escape: the Clearing Lemma and its exceptions}\label{sec:clearing}
