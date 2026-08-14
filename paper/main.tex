@@ -248,11 +248,16 @@ so the P-positions of class $c$ are precisely the $n \equiv c \pmod{2m}$.
 
 % PORT: chain_lemma.md, Scope paragraph — per the skeleton's instruction
 % that it becomes the first sentence of this section.
-Lemma~\ref{lem:chain} classifies no position of class $r$ itself --- it is silent
-about every $n \equiv r \pmod m$, and in particular does not assert those
-are \NN-positions; that claim is the subject of the
-present section, and only the two together give the full
-mod-$2m$ law.
+Lemma~\ref{lem:chain} classifies all positions outside the square-mode
+class $r \pmod m$, but it is silent about positions satisfying
+$n \equiv r \pmod m$; the purpose of this section is to determine their
+outcomes. Since this class splits into the two residue classes $r$ and
+$r + m \pmod{2m}$, we treat them separately. The first, which we call the
+free residue, has an immediate move to a P-position from
+Lemma~\ref{lem:chain}, while the second, the hard residue, requires a
+suitable square move to reach such a P-position. The Clearing Lemma
+identifies when such a move exists, and the exceptional cases arise
+precisely when this clearing mechanism fails.
 
 \begin{definition}[Window; free and hard residues; hard set]\label{def:window}
 % PORT: escape_and_diagonal.md IV.1 — window T(m,r) = foreign bottoms
