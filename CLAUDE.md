@@ -32,6 +32,10 @@ proves them. Read README.md before making changes.
 7. The proofs/ directory contains human-authored mathematics only. Agents
    may create empty placeholder files there when asked, but must never
    write, edit, summarize, or "fix" mathematical content in that directory.
+8. Every claim names its tier: executed (output pasted, execution site
+   named), drafted (author named), or asserted --- and when the artifact
+   does not exist, the only legal sentence is "there is nothing to paste."
+   Receipts are checked hardest when they flatter.
 
 ## Engineering constraints
 - Standard library only. Do not add dependencies without asking.
