@@ -619,6 +619,108 @@ def oeis_lookup(terms, cache, offline):
         return {"status": "error", "detail": str(e)[:80]}
 
 
+# --- affine reindexing pass -------------------------------------------------
+# A P-set can be a known sequence living on a sublattice: the confined class of
+# D(2,1) is n = 3 (mod 4), and t = (n-3)/4 turns it into subtract-a-square's
+# losing positions. A raw lookup of such a P-set misses, so the filter would
+# call a Golomb-reindexed classic "novel". This pass reindexes the P-set onto
+# each per-residue sublattice before novelty is declared. Deterministic: no
+# model is consulted anywhere below.
+
+AFFINE_MAX_QUERIES = 24     # politeness cap on reindexed OEIS queries per game
+
+
+def class_step(det, G, max_d=64):
+    """The step of the P-set's class structure, or None.
+
+    A detected law supplies it directly. Otherwise look for the confined-class
+    signature: a modulus whose residue classes split into at least one wholly
+    P class, one wholly non-P class, and one mixed class.
+    """
+    if det.get("residue"):
+        return det["residue"]["modulus"]
+    if det.get("period"):
+        return det["period"]["period"]
+    N = len(G) - 1
+    q0 = min(40, max(10, N // 10))
+    for d in range(2, max_d + 1):
+        full = empty = mixed = 0
+        for h in range(d):
+            tot = hits = 0
+            for n in range(q0 + ((h - q0) % d), N + 1, d):
+                tot += 1
+                if G[n] == 0:
+                    hits += 1
+            if tot == 0:
+                continue
+            if hits == tot:
+                full += 1
+            elif hits == 0:
+                empty += 1
+            else:
+                mixed += 1
+        if full and empty and mixed:
+            return d
+    return None
+
+
+def affine_reindexings(p_positions, G, det, max_queries=AFFINE_MAX_QUERIES):
+    """Candidate sublattice reindexings of the P-set, as (d, h, sequence).
+
+    Steps are the class step and twice it; offsets are every admissible h.
+    Wholly-P and wholly-empty sublattices are skipped (their reindexings are
+    0,1,2,... and the empty sequence), as are reindexings that come out as
+    arithmetic progressions -- in all three cases a hit would say nothing
+    about the game.
+    """
+    s = class_step(det, G)
+    if not s:
+        return []
+    N = len(G) - 1
+    q0 = min(40, max(10, N // 10))
+    out = []
+    for d in (s, 2 * s):
+        for h in range(d):
+            tot = hits = 0
+            for n in range(q0 + ((h - q0) % d), N + 1, d):
+                tot += 1
+                if G[n] == 0:
+                    hits += 1
+            if tot == 0 or hits == 0 or hits == tot:
+                continue
+            sub = [(n - h) // d for n in p_positions if n % d == h]
+            if len(sub) < 8:
+                continue
+            head = sub[:OEIS_TERMS]
+            gaps = {head[i + 1] - head[i] for i in range(len(head) - 1)}
+            if len(gaps) <= 1:
+                continue
+            out.append((d, h, sub))
+    return out[:max_queries]
+
+
+def affine_lookup(p_positions, G, det, cache, offline):
+    """Run the reindexing pass against OEIS; report every sublattice that hits."""
+    cands = affine_reindexings(p_positions, G, det)
+    if not cands:
+        return {"status": "no_candidates", "tried": [], "matches": []}
+    tried, matches = [], []
+    for d, h, sub in cands:
+        r = oeis_lookup(sub, cache, offline)
+        entry = {"d": d, "h": h, "status": r["status"]}
+        if r["status"] == "found":
+            entry["A"] = r["A"]
+            entry["name"] = r["name"]
+            matches.append(entry)
+        tried.append(entry)
+    if matches:
+        first = matches[0]
+        return {"status": "found", "A": first["A"], "name": first["name"],
+                "d": first["d"], "h": first["h"],
+                "matches": matches, "tried": tried}
+    return {"status": "no_match", "tried": tried, "matches": []}
+
+
 # ----------------------------------------------------------------------------
 # 8. LLM proposer hook (optional; see README §5)
 # ----------------------------------------------------------------------------
@@ -659,15 +761,40 @@ def analyze_rule(rule, N, oeis_cache=None, offline=True, deep=False):
     if deep and oeis_cache is not None:
         rec["oeis_p_positions"] = oeis_lookup(stats["p_positions"], oeis_cache, offline)
         rec["oeis_grundy"] = oeis_lookup(G[1:], oeis_cache, offline)
+        # Only worth reindexing when the P-set missed outright.
+        if rec["oeis_p_positions"]["status"] in ("not_found", "too_short"):
+            rec["oeis_p_affine"] = affine_lookup(
+                stats["p_positions"], G, det, oeis_cache, offline)
+        else:
+            rec["oeis_p_affine"] = {"status": "not_run", "tried": []}
         for key in ("oeis_p_positions", "oeis_grundy"):
             r = rec[key]
             if r["status"] == "not_found":
+                a = rec["oeis_p_affine"]
+                if key == "oeis_p_positions" and a["status"] == "found":
+                    rec["score"] = round(rec["score"] - 1.0, 2)
+                    rec["notes"].append(
+                        f"{key}: matches {a['A']} ({a['name']}) after reindexing "
+                        f"t = (n - {a['h']})/{a['d']}")
+                    continue
                 rec["score"] = round(rec["score"] + 2.0, 2)
                 rec["notes"].append(f"{key}: ABSENT from OEIS -- novelty candidate")
             elif r["status"] == "found":
                 rec["score"] = round(rec["score"] - 1.0, 2)
                 rec["notes"].append(f"{key}: matches {r['A']} ({r['name']})")
+        rec["novelty_verdict"] = _novelty_verdict(rec)
     return rec
+
+
+def _novelty_verdict(rec):
+    """known / novelty_candidate / undetermined, from the P-set lookups."""
+    raw = rec["oeis_p_positions"]["status"]
+    aff = rec["oeis_p_affine"]["status"]
+    if raw == "found" or aff == "found":
+        return "known"
+    if raw == "not_found" and aff in ("no_match", "no_candidates", "not_run"):
+        return "novelty_candidate"
+    return "undetermined"
 
 
 def print_report(rec, verbose=True):
@@ -680,9 +807,11 @@ def print_report(rec, verbose=True):
     print(f"  P-positions   : {rec['p_positions_head']} ...")
     for n in rec["notes"]:
         print(f"  note: {n}")
-    for k in ("oeis_p_positions", "oeis_grundy"):
+    for k in ("oeis_p_positions", "oeis_p_affine", "oeis_grundy"):
         if k in rec:
             print(f"  {k}: {rec[k]}")
+    if "novelty_verdict" in rec:
+        print(f"  novelty_verdict: {rec['novelty_verdict']}")
     if verbose:
         for c in rec["conjectures"]:
             print(f"  {c}")
