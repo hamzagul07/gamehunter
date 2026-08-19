@@ -546,6 +546,78 @@ agree because both are reading the same two table rows: $\Q(2m)
 \subseteq \{0, 1, m\}$.
 \end{remark}
 
+\begin{theorem}[The confined classes are Golomb's game]\label{thm:golomb}
+Let $m \in \{2, 4\}$ and $0 \le r \le m-1$, and let $h$ be the least
+representative of the hard residue: $h = m + r$ if $r \ge 1$, and $h = 0$
+if $r = 0$. Index the confined class of $D(m,r)$ by $n = 2mt + h$,
+$t \ge 0$, and let $G$ denote the set of P-positions of Golomb's
+subtract-a-square game. Then for $m = 2$ the position $4t + h$ is P in
+$D(2,r)$ if and only if $t \in G$, and for $m = 4$ the position $8t + h$
+is P in $D(4,r)$ if and only if $\lfloor t/2 \rfloor \in G$ --- the
+confined class consisting of two interleaved copies of Golomb's game, one
+on each parity of $t$.
+\end{theorem}
+\begin{proof}
+\emph{(a) The three kinds of square move.} Every $k \ge 1$ is odd,
+$\equiv 2 \pmod 4$, or a multiple of $4$; we dispatch each kind from a
+hard-class position $n = 2mt + h$. If $k$ is odd then $k^2 \equiv 1
+\pmod 8$, hence $\equiv 1 \pmod{2m}$, and the landing $\equiv h - 1
+\pmod{2m}$ is the odd rung directly above the foreign bottom $r - 1$
+(bottom $m - 1$ when $r = 0$), an N-position by Lemma~\ref{lem:chain}.
+If $k \equiv 2 \pmod 4$ then $k^2 \equiv 4 \pmod 8$: at $m = 2$ this is
+$\equiv 0 \pmod 4$ and the move stays in the class, while at $m = 4$ the
+landing $\equiv h - 4 \pmod 8$ is the free residue ($r$, or $m$ when
+$r = 0$), every member of which is N because it subtracts $1^2$ onto the
+foreign bottom directly beneath it --- P by Lemma~\ref{lem:chain}, legal
+from the smallest free member. If $4 \mid k$ then $2m \mid k^2$ and the
+move stays in the class. In the index $t$ the internal moves read: at
+$m = 2$, every even $k = 2j$ subtracts $4j^2$, i.e.\ $t \mapsto t - j^2$;
+at $m = 4$, every $k = 4i$ subtracts $16i^2$, i.e.\ $t \mapsto t - 2i^2$.
+Legality transfers exactly: since the amounts and $2mt$ are multiples of
+$2m$ while $0 \le h < 2m$, we have $4j^2 \le 4t + h \iff j^2 \le t$ and
+$16i^2 \le 8t + h \iff 2i^2 \le t$. So the internal option sets at index
+$t$ are $\{\, t - j^2 : j^2 \le t \,\}$ at $m = 2$ and
+$\{\, t - 2i^2 : 2i^2 \le t \,\}$ at $m = 4$ --- verbatim the option sets
+of subtract-a-square and of subtract-$\{2i^2\}$. The three-way sort is
+genuinely three-way only at $m = 4$: modulo $4$ the values $k^2 \equiv 4$
+and $k^2 \equiv 0$ collapse into one residue, so at $m = 2$ parity alone
+decides --- every even square stays internal --- which is why $m = 2$
+hosts Golomb's game whole while $m = 4$, whose middle class defects to
+the free residue, keeps only the doubled cousin subtract-$\{2i^2\}$.
+\emph{(b) Terminals align.} At $m = 2$ the index game has the single
+internal-terminal $t = 0$; at $m = 4$ it has $t = 0$ and $t = 1$ (the
+smallest internal move needs $2 \le t$) --- matching the terminal sets of
+subtract-a-square and subtract-$\{2i^2\}$ exactly. For $r \ge 1$ these
+positions have real moves, but by (a) every one of them exits onto an
+N-position; for $r = 0$ the alignment is literal: $h = 0$, so $t = 0$ is
+$n = 0$, a moveless position --- Golomb's own terminal in the flesh.
+\emph{(c) The transfer.} The status of a position is determined by its
+options alone, and by (a) every exiting option is N; so a hard-class
+position is P iff all of its internal options are N, and N iff some
+internal option is P --- exits can neither supply a P-witness nor block
+one. By induction on $t$, the map $t \mapsto \operatorname{status}(2mt+h)$
+therefore satisfies exactly the recursion of the subtraction game with
+the option sets of (a). At $m = 2$ that recursion is Golomb's, proving
+the first claim.
+\emph{(d) The $m = 4$ split.} In subtract-$\{2i^2\}$ every move is even,
+so the parity of $t$ is invariant, and on each parity class the move
+$t \mapsto t - 2i^2$ reads $u \mapsto u - i^2$ in the half-index
+$u = \lfloor t/2 \rfloor$ (legality $2i^2 \le t \iff i^2 \le u$ on both
+parities), with terminal $u = 0$ on each side: two interleaved,
+independent copies of Golomb's game, so $8t + h$ is P iff
+$\lfloor t/2 \rfloor \in G$.
+\end{proof}
+
+The anomaly ledger now reads as a codebook: $D(2,1)$'s recorded
+fingerprints $3, 11, 23$ are $4t + 3$ over $t = 0, 2, 5$ --- the opening
+P-positions of Golomb's game (OEIS
+\href{https://oeis.org/A030193}{A030193}) --- and $D(4,1)$'s
+$5, 13, 37$ are $8t + 5$ over $t = 0, 1, 4$, half-indices
+$u = 0, 0, 2$: the same openers arriving through the two interleaved
+copies. The instrument had been filing Golomb's sequence under two
+aliases for the entire census --- while re-deriving that very sequence
+as a calibration classic before every session.
+
 \section{Further solved games}\label{sec:examples}
 
 \begin{example}[$D(5,2)$ solved]\label{ex:d52}
