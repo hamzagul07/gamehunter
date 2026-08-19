@@ -1121,29 +1121,51 @@ certificate on that claim; the file said otherwise all along, the claim
 and the certificate are struck, and this line enters the paper as the
 primary-source receipt that replaced them.
 
-\section{Open question}\label{sec:open}
-What is proved about the two diseased moduli is confinement: for $m$ in
-$\{2, 4\}$, no square move from the hard class reaches the window --- every
-move either stays inside class $r$ or lands on the N-rung of a foreign
-chain, and a foreign N-landing can never supply a P-witness --- so the
-class's P/N structure is a self-contained internal recursion, and escape is
-impossible as a theorem, not a reading. What is only observed is
-lawlessness: the instrument finds no period and no modulus up to 200
-fitting the confined classes anywhere in a sweep to 200,000, and a
-finite-range reading, as Section~\ref{sec:method} insists, is not a
-theorem. The problem, posed clean: decide whether the confined classes
-settle into an eventual law, or whether the census's two stubborn columns
-are genuinely aperiodic (aperiodic subtraction games on infinite
-rulesets are known \cite{fox, larsson-fox}). It sits beside Problem A1 of the Games of No
-Chance list \cite{gonc6} --- the relationship between rule structure and
-period structure --- and offers that problem its starkest small instance.
+\section{What is closed, and what was always Golomb's}\label{sec:open}
+The question this section used to pose is answered inside the paper. The
+two columns the census could never fit --- the confined classes of
+$D(2,r)$ and $D(4,r)$ --- are Golomb's subtract-a-square game up to an
+affine change of coordinates (Theorem~\ref{thm:golomb}); they never
+settle into any eventual period (Corollary~\ref{cor:aperiodic}); and
+their P-positions thin toward density zero while never falling below the
+$\sqrt{n}/2$ floor (Corollary~\ref{cor:sparse}). The instrument's old
+verdict --- lawless to $200{,}000$, no modulus up to $200$ --- is
+upgraded from a reading to three theorems. The verdict was also, we can
+now say, slightly modest: the instrument's own density figures were
+carrying the answer all along. $D(2,1)$ reads $0.2586$ at $200{,}000$
+against the limiting $1/4$ of Corollary~\ref{cor:uniform}, and the
+excess, $0.0086$, is precisely the confined class's contribution ---
+alive, thinning on schedule, and held above its $1/(2\sqrt{n})$ speed
+limit by the floor.
 
-Open Problem. Is the set of P-positions of $D(2,1)$ lying in the class
-$n \equiv 3 \pmod 4$ eventually periodic, and likewise for $D(4,1)$ in the
-class $n \equiv 5 \pmod 8$? We leave the reader $D(2,1)$ as a parting gift:
-subtract any square from an odd number, subtract 2 from an even one --- a
-pencil reaches 3, 11, and 23 inside an afternoon, and every theorem in this
-paper falls silent on what comes next.
+What remains open no longer belongs to this paper; it belongs to
+Golomb's game, where it has lived since 1966. The true growth rate of
+Golomb's P-set is wedged between two proven bounds --- the $\sqrt{n}$
+floor (Corollary~\ref{cor:sparse}, second half) and the $o(n)$ ceiling
+that Furstenberg--S\'ark\"ozy places on any square-difference-free set
+(Corollary~\ref{cor:sparse}, first half) --- and our instrument reads a
+count near $n^{0.7}$ across its whole range: a reading, not a theorem,
+and one that must stay instrument-tier forever unless a genuinely new
+bound arrives, since no finite prefix can certify an exponent. The
+Grundy values of the same game (OEIS
+\href{https://oeis.org/A014586}{A014586}) are more mysterious still.
+Problem A1 of the Games of No Chance list \cite{gonc6} asks how the
+structure of a ruleset constrains the structure of its periods; the
+diagonal family now hands that problem a complete worked answer on one
+side of the boundary and an honest pointer across it. One sentence about
+the far side, kept claim-free: the confinement mechanism is not special
+to squares --- Remark~\ref{rem:confined-game} already shows the confined
+class plays the subtraction game $\{\, s/2m : s \in S,\ 2m \mid s \,\}$
+--- and its consequences, including which games can be made to appear
+inside mode-switching hosts, are developed in work in progress.
+
+We still leave the reader $D(2,1)$ as a parting gift. Subtract any
+square from an odd number; subtract $2$ from an even one. A pencil
+reaches $3$, $11$, and $23$ inside an afternoon --- and this paper can
+now tell you what those numbers do forever: they never fall into a
+rhythm, and they grow rarer without ever running out. What it cannot
+tell you is the pace of the thinning. That question is older than this
+paper, and it is still open.
 
 \section*{Acknowledgments and AI disclosure}
 The author thanks Balaji Kadam for the careful reading that streamlined
