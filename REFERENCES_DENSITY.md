@@ -41,15 +41,25 @@ H. Furstenberg, "Ergodic behavior of diagonal measures and a theorem of
 Szemerédi on arithmetic progressions", *Journal d'Analyse Mathématique* **31**
 (1977), 204–256. DOI: 10.1007/BF02813304
 
-- **Source URL:** https://link.springer.com/article/10.1007/BF02813304
+- **Source URL:** https://doi.org/10.1007/BF02813304
+- **Verified** 2026-08-19 against publisher-registered DOI metadata: Harry
+  Furstenberg, *Journal d'Analyse Mathématique* 31, issue 1, pages 204-256,
+  December 1977.
+- **On "the standard citation":** the square-difference (Furstenberg–Sárközy)
+  theorem is attributed to Furstenberg and Sárközy independently, and this
+  1977 ergodic-theory paper is the Furstenberg half that the literature cites
+  for it -- it is the reference A030193's own note points to alongside
+  Sárközy 1978.
 
 ### Sárközy 1978
-A. Sárközy, "On difference sets of sequences of integers I", *Acta Mathematica
-Academiae Scientiarum Hungaricae* **31** (1978), no. 1, 125–149.
+A. Sárközy, "On difference sets of sequences of integers. I", *Acta Mathematica
+Academiae Scientiarum Hungaricae* **31** (1978), no. 1–2, 125–149.
 DOI: 10.1007/BF01896079
 
-- **Source URL:** https://doi.org/10.1007/BF01896079 (recorded in A030193's
-  link list)
+- **Source URL:** https://doi.org/10.1007/BF01896079
+- **Verified** 2026-08-19 against publisher-registered DOI metadata (CSL-JSON
+  via DOI content negotiation), which gives issue "1-2" and pages 125-149.
+  An earlier revision of this file recorded the issue as "no. 1"; corrected.
 - Companion papers listed on the same OEIS page, recorded for completeness:
   "On the difference sets of sequences of integers II", *Ann. Univ. Sci.
   Budapest. Eötvös Sect. Math.* **21** (1978), 45–53; "On difference sets of
@@ -60,8 +70,9 @@ DOI: 10.1007/BF01896079
 I. Z. Ruzsa, "Difference sets without squares", *Periodica Mathematica
 Hungarica* **15** (1984), no. 3, 205–209. DOI: 10.1007/BF02454169
 
-- **Source URL:** https://doi.org/10.1007/BF02454169 (recorded in A030193's
-  link list)
+- **Source URL:** https://doi.org/10.1007/BF02454169
+- **Verified** 2026-08-19 against publisher-registered DOI metadata: volume 15,
+  issue 3, pages 205-209, September 1984. Pages confirmed as 205-209.
 
 ### Eppstein 2018
 D. Eppstein, "Faster Evaluation of Subtraction Games", in *Proceedings of the
@@ -75,12 +86,18 @@ arXiv:1804.06515 [cs.DS], 18 April 2018.
 - **Source URLs:** https://arxiv.org/abs/1804.06515 and
   https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.FUN.2018.20
 
-**Square-difference-free / Furstenberg–Sárközy connection: confirmed stated.**
-The arXiv abstract page for 1804.06515 discusses square-difference-free sets in
-connection with the Furstenberg–Sárközy theorem and treats subtract-a-square as
-a case study whose winning positions form a maximal square-difference-free set.
-The same connection is stated in Eppstein's own OEIS comment on A030193
-(Nov 20 2016), quoted here in full:
+**Square-difference-free / Furstenberg–Sárközy connection: confirmed stated,
+verbatim.** From the abstract of arXiv:1804.06515, retrieved 2026-08-19 from
+the arXiv API (`export.arxiv.org/api/query?id_list=1804.06515`), quoted exactly:
+
+> We apply these results to the game of subtract-a-square, whose set of winning
+> positions is a maximal square-difference-free set of a type studied in number
+> theory in connection with the Furstenberg-Sárközy theorem.
+
+Terminology note, recorded rather than smoothed over: Eppstein's abstract says
+"winning positions", meaning the positions from which the player to move loses
+-- the cold/P-positions. That the sequence he means is A030193 is fixed by his
+own OEIS comment on that entry (Nov 20 2016), quoted here in full:
 
 > This sequence was investigated by Golomb (1966), who proved that it is
 > infinite. More strongly (as Ruzsa 1984 notes) the number of values up to any
