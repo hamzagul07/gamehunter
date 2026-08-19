@@ -625,6 +625,105 @@ index $t$ with subtraction set $\{\, s/2m : s \in S,\ 2m \mid s \,\}$,
 where $S$ is the mode's move set.
 \end{remark}
 
+\begin{corollary}[No eventual period]\label{cor:aperiodic}
+For $m \in \{2, 4\}$ and every $r$, the set of P-positions of $D(m,r)$
+is not eventually periodic.
+\end{corollary}
+\begin{proof}
+Suppose some period $p$ worked for all $n \ge N_1$. Membership would
+still repeat along any arithmetic progression, so restrict to the hard
+class $n = 2mt + h$: adding $\operatorname{lcm}(p, 2m)$ to $n$ preserves
+both the class and, beyond $N_1$, the P/N status, and in the index this
+says the set $\{t : 2mt + h \text{ is P}\}$ is eventually periodic with
+period $q = \operatorname{lcm}(p, 2m)/2m$. At $m = 2$ that set is $G$
+itself, the P-set of Golomb's game, by Theorem~\ref{thm:golomb}. At
+$m = 4$ it is $\{t : \lfloor t/2 \rfloor \in G\}$, and one parity
+suffices: restrict to even $t = 2u$; membership of $u$ in $G$ repeats
+when $t$ moves by $2q$, and $2q$ is a multiple of $q$, so $G$ is
+eventually periodic with period $q$ as well. Either way we are left
+holding: $G$ is eventually periodic with period $q$ beyond some $N_0$.
+Two facts kill this. The argument is folklore for any subtraction set
+containing a multiple of every integer; we include it to keep the paper
+self-contained.
+First, the P-positions of Golomb's game never run out --- one losing
+position per horizon. Suppose no P-position existed at or beyond some
+$M$. Take $v \ge M/2$ and $t = (v+1)^2 - 1$, which lies beyond $M$.
+Every legal square from $t$ is at most $v^2$, because $(v+1)^2$
+overshoots $t$ by exactly $1$; and $v^2 \le t - M$, because
+$t - M = v^2 + 2v - M$ and $2v \ge M$. So every option of $t$ lands at
+$t - k^2 \ge M$, all N by supposition, making $t$ itself a P-position at
+or beyond $M$ --- contradicting the supposition. (The $-1$ in the
+construction does real work: at $t = (v+1)^2$ the square $(v+1)^2$ is
+legal, the move lands on $0$, a P-position, and the position is honestly
+N.)
+Second, the kill. The first fact supplies a P-position $t$ of Golomb's
+game with $t \ge N_0$. Periodicity walks membership up $t$'s own
+progression: $t + q \in G$, then $t + 2q \in G$, and so on, every
+intermediate point lying at or above $N_0$, so every step is licensed.
+After $q k^2$ steps we reach $t + (qk)^2 \in G$. But $(qk)^2$ is two
+things at once: a multiple of $q$, which is what let periodicity carry
+us there, and a perfect square, which makes the single move from
+$t + (qk)^2$ down to $t$ legal. That move joins one P-position to
+another, which the definition of P forbids. No period exists.
+\end{proof}
+
+\begin{corollary}[Sparse but never scarce]\label{cor:sparse}
+For $m \in \{2, 4\}$ and every $r$, the set of P-positions inside the
+confined class contains no two elements differing by a perfect square.
+Consequently it has asymptotic density zero, while its counting function
+up to $n$ stays at least $\sqrt{n}/2 - O(1)$.
+\end{corollary}
+\begin{proof}
+The difference-free property is closure read twice: two P-positions of
+the class are both in squares mode, so if they differed by a square, the
+larger would have a legal move onto the smaller --- a move from P to P,
+which is forbidden. Density zero is then the Furstenberg--S\'ark\"ozy
+theorem \cite{furstenberg, sarkozy}, which says exactly that a set of
+integers avoiding square differences has density zero. We claim no
+novelty at this bridge: for Golomb's game itself the observation and the
+connection are recorded by Eppstein \cite{eppstein}, and through
+Theorem~\ref{thm:golomb} our statement and his are one statement in two
+coordinate systems.
+The floor is Golomb's counting trick \cite{golomb, ruzsa}, run on $G$
+and carried back through the reindexing. Every $u$ in $[0, T]$ is either
+in $G$ or wins by one square move onto some $g \in G$ below it; a fixed
+$g$ can serve at most $\sqrt{T}$ positions this way, one per square,
+plus itself. So $T + 1 \le |G \cap [0, T]| \cdot (\sqrt{T} + 1)$, giving
+$|G \cap [0, T]| \ge \sqrt{T} - 1$. At $m = 2$ the confined positions up
+to $n$ correspond to indices up to $T \approx n/4$, so at least
+$\sqrt{n}/2 - O(1)$ of them are P. At $m = 4$ there are two copies of
+$G$, one per parity of $t$, living on disjoint sets of positions, so
+their floors add: each copy runs at $T \approx n/16$ and contributes
+$\sqrt{n}/4 - O(1)$, together $\sqrt{n}/2 - O(1)$ again. That both
+moduli land on the same constant is the small arithmetic accident
+$2/\sqrt{16} = 1/\sqrt{4}$.
+\end{proof}
+
+\begin{corollary}[One density for the whole family]\label{cor:uniform}
+For every $m \ge 2$ and every $r$, the P-set of $D(m,r)$ has asymptotic
+density $(m-1)/2m$. For $m \ge 3$, $m \ne 4$ the correction to the
+periodic law is a finite set; for $m \in \{2, 4\}$ it is the confined
+class --- infinite, of density zero, and slowly vanishing: by
+Corollary~\ref{cor:sparse} it still holds at least $\sqrt{n}/2 - O(1)$
+members up to $n$.
+\end{corollary}
+\begin{proof}
+For $m \ge 3$, $m \ne 4$, Theorem~\ref{thm:main} lists the P-set as
+exactly $m - 1$ residue classes modulo $2m$ together with finitely many
+named positions, and $m - 1$ classes out of $2m$ carry density
+$(m-1)/2m$. For $m \in \{2, 4\}$ the same $m - 1$ classes arrive from
+the chains alone --- Lemma~\ref{lem:chain} never needed the healthy
+hypothesis --- the free residue contributes nothing, all of its members
+being N, and the confined class contributes density zero by
+Corollary~\ref{cor:sparse}. Written out at $m = 4$, where the accounting
+is least obvious: by Theorem~\ref{thm:golomb} the confined P-set is
+$(16G + h) \cup (16G + h + 8)$, the even and odd parities of $t$; an
+affine map $u \mapsto 16u + b$ scales a counting function by the
+constant $16$, so each image inherits density zero from $G$, and a union
+of two density-zero sets is density zero --- two, not infinitely many,
+is what makes that last step safe.
+\end{proof}
+
 \section{Further solved games}\label{sec:examples}
 
 \begin{example}[$D(5,2)$ solved]\label{ex:d52}
