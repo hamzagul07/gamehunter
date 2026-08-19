@@ -68,8 +68,10 @@ position $n = m + r \in \{13, 14, 15\}$; the law holds for both parities
 of $m$ with no exceptions beyond these named positions. At $m = 2$ and
 $m = 4$ the squares modulo $2m$ lie inside $\{0, 1, m\}$, so no move from
 the affected classes reaches a foreign P-position: those classes are
-confined to self-contained recursions, which a sweep to 200,000 finds
-lawless --- confinement is proved, aperiodicity is open. The same
+confined to self-contained recursions, which are Golomb's
+subtract-a-square game in affine disguise: confinement is proved, and the
+classes are provably never eventually periodic, of density zero within
+their class. The same
 architecture solves Foursquare, an earlier machine-found game with moves
 $\{3, 8, 9\}$ and a square mode at $n \equiv 1 \pmod 4$: its P-positions
 are $n \equiv 0, 2, 4, 6 \pmod{16}$, and enlarging the move set to the
@@ -77,8 +79,8 @@ full residue classes of $3$, $8$, and $9$ modulo $16$ provably leaves the
 P-set unchanged. Every conjecture was machine-proposed from a census of
 roughly 3,000 games; every proof is human-written; twice, theory
 constructed afterwards rederived numbers the instrument had recorded
-before the theory existed. Whether the confined classes of $D(2, 1)$ and
-$D(4, 1)$ ever become periodic remains open.
+before the theory existed. The growth rate of their P-sets --- Golomb's own
+open question since 1966 --- remains open.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -138,9 +140,8 @@ confinement at $m = 2$ and $4$; Section~\ref{sec:examples} puts the
 machinery to work three times --- $D(5, 2)$ solved in full as the worked
 example, Foursquare with its mechanism and Kadam's Extension, and the
 odd-fallback collapse; Section~\ref{sec:method} opens the instrument; and
-Section~\ref{sec:open} closes with the one question the census could not
-settle --- and hands the reader the smallest game we know that keeps it
-open.
+Section~\ref{sec:open} closes the question the census could not settle ---
+and locates the one that remains, older than this paper.
 
 \section{Preliminaries}\label{sec:prelim}
 
