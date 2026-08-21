@@ -963,22 +963,22 @@ looked any other way.
 
 \begin{proposition}[Odd-fallback collapse at $m=2$]\label{prop:collapse}
 % PORT statements of Lemmas A and B from proofs/collapse_theorem.md.
-\emph{(Lemma A.)} For every odd integer $a \ge 1$, the set of
+\emph{(Part (i).)} For every odd integer $a \ge 1$, the set of
 \PP-positions (states $n$ with $G(n) = 0$) consists precisely of all even
 integers. Consequently, the emergent period is $2$ with a residue-set
 size of $1$.
 
-\emph{(Lemma B.)} For all odd fallbacks $a, a' \ge 1$ and all states
+\emph{(Part (ii).)} For all odd fallbacks $a, a' \ge 1$ and all states
 $n \ge 0$, the Grundy values satisfy $G_a(n) = G_{a'}(n)$.
 \end{proposition}
 \begin{proof}
-% PORT: proofs/collapse_theorem.md — Setup, Lemma A, Lemma B.
+% PORT: proofs/collapse_theorem.md — Setup, Part (i), Part (ii).
 \textbf{Setup.} We fix $r = 1$: squares fire on odd $n$, and the fallback
 rule applies on even $n$, making the allowed move from $n$ to $n - a$.
 Let $G(n)$ denote the Grundy value of state $n$, with $G(0) = 0$.
 
 \smallskip
-\noindent\emph{Lemma A (\PP-positions $=$ Even Numbers).} We proceed by
+\noindent\emph{Part (i) (\PP-positions $=$ Even Numbers).} We proceed by
 induction on $n$.
 
 \textbf{Base case ($n = 0$).} Terminal position, $G(0) = 0$, so $0$ is a
@@ -1010,12 +1010,12 @@ so $G(n) \ne 0$.
 Therefore $G(n) = 0 \iff n \equiv 0 \pmod 2$.
 
 \smallskip
-\noindent\emph{Lemma B (Full Sequence Equivalence).}
+\noindent\emph{Part (ii) (Full Sequence Equivalence).}
 \textbf{Even positions.} What is $\mathrm{mex}(\{v\})$ when
 $v \ne 0$, and what does that force $G(n)$ to be for even $n$?
 
 For even $n$, the reachable set is either empty (if $n < a$) or
-$\{G(n - a)\}$. By Lemma A, since $n - a$ is odd, $G(n - a) = v > 0$. Now
+$\{G(n - a)\}$. By Part (i), since $n - a$ is odd, $G(n - a) = v > 0$. Now
 $\mathrm{mex}(\emptyset) = 0$, and $\mathrm{mex}(\{v\}) = 0$ whenever
 $v > 0$. Therefore $G(n) = 0$ for every even $n$, regardless of the
 specific value of $v$, and regardless of whether the move exists at all.
@@ -1026,7 +1026,7 @@ squares $k^2$ by parity: which earlier positions' Grundy values enter the
 mex?
 
 For odd $n$: if $k$ is even, $k^2$ is even, so $n - k^2$ is odd; if $k$
-is odd, $k^2$ is odd, so $n - k^2$ is even. By Lemma A, for every odd $k$
+is odd, $k^2$ is odd, so $n - k^2$ is even. By Part (i), for every odd $k$
 the landing $n - k^2$ is even with $G(n - k^2) = 0$. Thus the reachable
 Grundy values from odd $n$ are $\{0\} \cup \{G(n - k^2) : k$ even,
 $k^2 \le n\}$. The value $0$ is guaranteed by the odd square moves
