@@ -448,16 +448,16 @@ $r = 0$, or $n = m + r$ when $(m,r) \in E$ --- or an ordinary class-$r$
 position, sitting by Definition~\ref{def:window} on either the free or the
 hard residue modulo $2m$; these buckets exhaust all $n$, and we take them in
 order.
-If $n$ lies in a class $c \not\equiv r$, then by Lemma~\ref{lem:chain} (the
+\emph{Case 1 (foreign classes).} If $n$ lies in a class $c \not\equiv r$, then by Lemma~\ref{lem:chain} (the
 Chain Lemma) its chain is self-contained and $n$ is P exactly when
 $n \equiv c \pmod{2m}$ --- precisely the foreign-bottom clause of the
 statement, so every such position carries its verdict.
-If $n$ sits on the free residue, the move $-1^2$ is legal from the smallest
+\emph{Case 2 (free residue).} If $n$ sits on the free residue, the move $-1^2$ is legal from the smallest
 free member onward and lands on the foreign bottom directly beneath ($r-1$,
 or $m-1$ when $r=0$), a P-position \emph{by the chain verdict of the previous
 sentence} (Lemma~\ref{lem:chain}), so every free-residue position is N ---
 and indeed the statement names no free residue among its P-positions.
-If $n$ sits on the hard residue and $(m,r) \notin E$, then
+\emph{Case 3 (hard residue, escaped).} If $n$ sits on the hard residue and $(m,r) \notin E$, then
 Lemma~\ref{lem:square-exists} together with Proposition~\ref{prop:window}
 supplies a square $s \ne m$ in the clearing interval (the hypothesis
 $m \ne 4$ is load-bearing precisely here, since at $m = 4$ and only there
@@ -465,12 +465,12 @@ they offer nothing for any $r$), and Lemma~\ref{lem:clearing} converts that
 one square into the verdict: every hard-residue position is N by the single
 move $-s$, for both parities of $m$, the boundary $n = 0$ having already been
 set aside.
-If $n$ is a class-$r$ position with $(m,r) \in E$,
+\emph{Case 4 (the exceptional games).} If $n$ is a class-$r$ position with $(m,r) \in E$,
 Proposition~\ref{prop:rebels} delivers the exceptional verdict: $n = m + r$
 is P and is the unique off-window P-position, every other hard member being
 N, which combined with the free verdict above is exactly the exception clause
 of the statement.
-Finally, Lemma~\ref{lem:audit} certifies the boundary clauses and their
+\emph{Case 5 (boundaries).} Finally, Lemma~\ref{lem:audit} certifies the boundary clauses and their
 harmlessness: $n = 0$ at $r = 0$ is terminal hence P, and neither its P-ness
 nor a rebel's disturbs any verdict already issued --- every position with a
 move onto them is a class-$r$ position ruled N above, and no fallback chain
