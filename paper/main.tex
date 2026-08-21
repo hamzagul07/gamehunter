@@ -1096,86 +1096,48 @@ collapse to the exact same game.
 \end{proof}
 
 \section{Discovery methodology and retrodictions}\label{sec:method}
-The instrument behind the census is GameHunter, a closed loop of four
-parts: a proposer that mutates game rules, a Grundy engine that computes
-exact values, a battery of deterministic detectors that flag periodicity
-and modular structure, and an OEIS filter that discards anything already
-catalogued. It stands in a short lineage of proposing machines --- Graffiti
-\cite{graffiti}, the Ramanujan Machine \cite{ramanujan-machine}, FunSearch
-\cite{funsearch} --- and inherits their division of labor rather than their
-architectures. The trust ritual is fixed: before and after every session
-the engine re-derives five classical laws, the subtraction game
-$\{1, 2, 3\}$ and subtract-a-square among them, so that drift anywhere in
-the stack would announce itself in the classics before it could touch a
-hunt.
+The conjectures in this paper were proposed by GameHunter, a closed loop
+of four parts: a proposer that varies rulesets, a Grundy engine that
+computes exact values, deterministic detectors that flag periodicity and
+modular structure, and a novelty filter that discards sequences already
+catalogued in the OEIS. Seeded evolutionary hunts surfaced the earliest
+solved games, Foursquare among them; systematic sweeps then enumerated
+the diagonal family, $1{,}120$ games in the first sweep and $1{,}848$ by
+the last, with exact laws read in $842$ of them. Every law survived six
+adversarial verification passes at depths $20{,}000$ and $10^6$ without a
+failure, and a deeper rescan of the $731$ resistant games converted only
+$6$. Before and after every session the engine re-derives five classical
+laws --- the subtraction game $\{1, 2, 3\}$ and Golomb's
+subtract-a-square among them --- so that drift anywhere in the stack
+would announce itself in the classics first.
 
-Seeded evolutionary hunts came first and surfaced the earliest solved
-games, Foursquare among them; systematic sweeps then enumerated the
-diagonal family, 1,120 games in the first sweep and 1,848 by the last, and
-the detectors read exact laws in 842 of them. Every law then survived six
-adversarial verification passes, at depth 20,000 and again at $10^6$, with
-zero failures; and when the 731 games that had resisted the detectors were
-rescanned at deeper range, only 6 converted. Both readings are therefore
-stable --- and neither is a theorem: detector output is a finite-range
-reading, never a proof, which is why Sections~\ref{sec:chain}
-through~\ref{sec:disease} of this paper exist.
+The division of labor is strict and the repository states it in writing:
+the instrument proposes and verifies mechanically and proves nothing,
+every proof here is human-written, and each numerical claim above
+regenerates from the seeded scripts at
+\url{https://github.com/hamzagul07/gamehunter}, where the integrity
+protocol and its full session logs also live. The protocol earns its keep
+rather than asserting itself: one drafting error --- a subtly different
+game verified faithfully across three documents --- was caught only
+because the discipline requires sentences to follow printouts, never
+precede them.
 
-The division of labor is strict: GameHunter proposes and verifies
-mechanically, and proves nothing; every proof in this paper is
-human-written, and the repository's contribution policy states the rule in
-writing. Hunts and sweeps are seeded, and every number in the previous
-paragraph regenerates from the seeded scripts at
-\url{https://github.com/hamzagul07/gamehunter}. The rule earns its keep for
-a reason with a date on it: during drafting, the author spent three
-documents faithfully verifying a subtly different game --- correct
-simulations of the wrong object --- and the error was caught at the door
-only because the workflow requires sentences to follow printouts, never
-precede them. The ritual is not ceremony; it is why that incident is a
-footnote and not a retraction.
+Twice the instrument recorded numbers that no theory then existed to
+explain, and both entries were later derived exactly: the unexplained
+P-positions $3, 11, 23$ in $D(2,1)$ and $5, 13, 37$ in $D(4,1)$ are the
+images of Golomb's opening losing positions under the reindexings of
+Theorem~\ref{thm:golomb}, and the recorded preperiod $14$ for $D(9,4)$ is
+one more than the rebel position $13$ of
+Proposition~\ref{prop:rebels}. Both were readings before they were
+consequences, which is the strongest form of confirmation a proposing
+machine can offer: the prediction was on the record before the mechanism
+that implies it existed.
 
-Twice in this project the theory arrived after the numbers: mechanisms
-built weeks later rederived, digit for digit, entries the instrument had
-logged as unexplained --- coordinates recorded before any theory existed to
-predict them. The two retrodictions follow, and they speak for themselves.
-
-\subsection*{Retrodiction I: the fingerprints}
-% PORT: escape_and_diagonal.md V.3, verbatim.
-During the Chain Lemma verification sweeps --- recorded weeks before any
-escape machinery existed --- the ledger logged unexplained \PP-positions
-$3, 11, 23$ in $D(2,1)$ and $5, 13, 37$ in $D(4,1)$, anomalies with no
-mechanism attached. The Confinement Lemma now computes those games' hard
-residues as $3 \pmod 4$ and $5 \pmod 8$, and all six fingerprints satisfy
-their congruence without exception. The theory did not accommodate old
-data; it specified coordinates for where lawlessness is possible, and
-data recorded before the theory existed turns out to have been sitting on
-those coordinates the entire time.
-
-\subsection*{Retrodiction II: the $D(9,4)$ receipt}
-% PORT: escape_and_diagonal.md V.4, verbatim; ledger line set literally.
-Primary source, quoted verbatim from \texttt{DIAGONAL\_WORKBOOK.md} and
-the raw JSON behind it:
-
-\begin{quote}
-\scriptsize
-\begin{alltt}
-| D(9,4) | mod 18 | P \(\equiv\) 0,1,2,3,5,6,7,8 | preperiod 14 | period 18 | swept 200,000 |
-\{"game":[9,4],"preperiod":14,"period":18,"p_res":[0,1,2,3,5,6,7,8],"pre_P":[0,1,2,3,5,6,7,8,13]\}
-\end{alltt}
-\end{quote}
-
-\noindent This line was recorded before the rebel mechanism existed, and
-the mechanism now derives every number on it with zero freedom. The rebel
-$13$ is the lone off-residue \PP, named in the \texttt{pre\_P} field. Any
-eventually-periodic fit beginning at or before $13$ would propagate
-$13$'s \PP-ness by the period, which the sweep refutes ($31$ is \NN); so
-every correct fit begins at $14$, and the minimal preperiod is exactly
-rebel $+\, 1 = 14$. The period is $2m = 18$, and the \PP-residues are the
-foreign bottoms $\{0, \dots, 8\} \setminus \{4\} = \{0, 1, 2, 3, 5, 6, 7,
-8\}$. Provenance note, owed and recorded: an earlier draft claimed from
-memory that every diagonal cell's preperiod was $\le 1$ and built a
-certificate on that claim; the file said otherwise all along, the claim
-and the certificate are struck, and this line enters the paper as the
-primary-source receipt that replaced them.
+The closest antecedent we know is the work of Holshouser and Reiter on
+subtraction games whose move sets vary with the position
+\cite{holshouser}, which anticipates the position-dependent format
+studied here while leaving the mode-switching family and its
+classification open.
 
 \section{What is closed, and what was always Golomb's}\label{sec:open}
 The question this section used to pose is answered inside the paper. The
