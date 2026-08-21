@@ -1014,85 +1014,47 @@ record; it explains why the object that proof verified could not have
 looked any other way.
 \end{remark}
 
-\begin{proposition}[Odd-fallback collapse at $m=2$]\label{prop:collapse}
-% PORT statements of Lemmas A and B from proofs/collapse_theorem.md.
-\emph{(Part (i).)} For every odd integer $a \ge 1$, the set of
-\PP-positions (states $n$ with $G(n) = 0$) consists precisely of all even
-integers. Consequently, the emergent period is $2$ with a residue-set
-size of $1$.
-
-\emph{(Part (ii).)} For all odd fallbacks $a, a' \ge 1$ and all states
-$n \ge 0$, the Grundy values satisfy $G_a(n) = G_{a'}(n)$.
+\begin{proposition}[Odd fallbacks collapse]\label{prop:collapse}
+Let $a$ be any odd positive integer and consider the mode-switching game
+in which squares are legal from $n \equiv 1 \pmod 2$ and the single
+fallback $a$ is legal from even $n$. Then the P-positions are exactly the
+even integers, and the Grundy sequence is the same for every odd $a$ ---
+the fallback evaporates.
 \end{proposition}
 \begin{proof}
-% PORT: proofs/collapse_theorem.md — Setup, Lemma A, Lemma B.
-\textbf{Setup.} We fix $r = 1$: squares fire on odd $n$, and the fallback
-rule applies on even $n$, making the allowed move from $n$ to $n - a$.
-Let $G(n)$ denote the Grundy value of state $n$, with $G(0) = 0$.
+\emph{Setup.} Write $G(n)$ for the Grundy value. An even position has at
+most one option, $n - a$, which is odd since $a$ is odd and is legal
+exactly when $n \ge a$. An odd position has as options the squares
+$n - k^2$ with $k^2 \le n$; it always has at least the option $n - 1$,
+since odd $n \ge 1$, and $n - 1$ is even.
 
-\smallskip
-\noindent\emph{Part (i) (\PP-positions $=$ Even Numbers).} We proceed by
-induction on $n$.
+\emph{Part (i): every even $n$ has $G(n) = 0$.} Induct on $n$. For even
+$n$ the reachable set of Grundy values is empty when $n < a$, and
+otherwise the single value $\{G(n - a)\}$ with $n - a$ odd and smaller.
+By Part (ii), applied at the smaller odd position $n - a$, that value is
+nonzero. The mex of the empty set is $0$, and the mex of a one-element
+set of nonzero values is likewise $0$, so $G(n) = 0$ in both cases.
 
-\textbf{Base case ($n = 0$).} Terminal position, $G(0) = 0$, so $0$ is a
-\PP-position.
+\emph{Part (ii): every odd $n$ has $G(n) \ne 0$.} Let $n$ be odd. Its
+option $n - 1$ is even and smaller, so $G(n - 1) = 0$ by Part (i), and a
+position with an option of Grundy value $0$ has mex at least $1$. Hence
+$G(n) \ne 0$.
 
-\textbf{Inductive step.} Assume for all $k < n$ that $G(k) = 0 \iff k$ is
-even (equivalently, $G(k) > 0 \iff k$ is odd).
+The two parts induct together on $n$, each invoking the other only at
+strictly smaller positions, so the joint induction is legitimate and the
+P-positions --- the positions of Grundy value $0$ --- are exactly the
+even integers.
 
-\textbf{Case 1: $n$ is even.} The only available move is subtraction of
-the odd fallback $a$: $n \to n - a$. Since $n$ is even and $a$ is odd,
-the destination $n - a$ is strictly odd. By the induction hypothesis,
-$G(n - a) \ne 0$ (if $n - a \ge 0$), or the move set is empty (if
-$a > n$).
-\begin{itemize}[nosep]
-\item If $a > n$: the move set is $\emptyset$, so
-  $\mathrm{mex}(\emptyset) = 0$ and $G(n) = 0$.
-\item If $a \le n$: the set of reachable values is $\{G(n - a)\}$ with
-  $G(n - a) \ne 0$, so $\mathrm{mex}(\{G(n - a)\}) = 0$ and $G(n) = 0$.
-\end{itemize}
-In both cases $G(n) = 0$. Thus all even positions are \PP-positions.
-
-\textbf{Case 2: $n$ is odd.} The move set consists of square
-subtractions $n \to n - k^2$ for all integers $k \ge 1$ with $k^2 \le n$.
-Choosing $k = 1$ gives a legal move to $n - 1$. Since $n$ is odd,
-$n - 1$ is even, so $G(n - 1) = 0$ by the strong induction hypothesis.
-Thus $0 \in \{G(n - k^2) : k^2 \le n\}$, forcing the mex to be positive,
-so $G(n) \ne 0$.
-
-Therefore $G(n) = 0 \iff n \equiv 0 \pmod 2$.
-
-\smallskip
-\noindent\emph{Part (ii) (Full Sequence Equivalence).}
-\textbf{Even positions.} What is $\mathrm{mex}(\{v\})$ when
-$v \ne 0$, and what does that force $G(n)$ to be for even $n$?
-
-For even $n$, the reachable set is either empty (if $n < a$) or
-$\{G(n - a)\}$. By Part (i), since $n - a$ is odd, $G(n - a) = v > 0$. Now
-$\mathrm{mex}(\emptyset) = 0$, and $\mathrm{mex}(\{v\}) = 0$ whenever
-$v > 0$. Therefore $G(n) = 0$ for every even $n$, regardless of the
-specific value of $v$, and regardless of whether the move exists at all.
-The parameter $a$ evaporates at every even step.
-
-\textbf{Odd positions.} At odd $n$, split the available
-squares $k^2$ by parity: which earlier positions' Grundy values enter the
-mex?
-
-For odd $n$: if $k$ is even, $k^2$ is even, so $n - k^2$ is odd; if $k$
-is odd, $k^2$ is odd, so $n - k^2$ is even. By Part (i), for every odd $k$
-the landing $n - k^2$ is even with $G(n - k^2) = 0$. Thus the reachable
-Grundy values from odd $n$ are $\{0\} \cup \{G(n - k^2) : k$ even,
-$k^2 \le n\}$. The value $0$ is guaranteed by the odd square moves
-($k = 1, 3, 5, \dots$), and the non-zero entries depend exclusively on
-$G(n - k^2)$ for even $k$ --- landings on smaller odd numbers. So $G$ at
-odd $n$ is computed purely from earlier odd states, completely bypassing
-all even positions, and thus bypassing $a$ entirely.
-
-By induction on $n$: $G(0) = 0$; every even state yields $G = 0$
-independent of $a$; and every odd state's value is computed from prior
-odd states via even-square subtractions, in which $a$ nowhere appears.
-The parameter $a$ never impacts the Grundy sequence, so all odd fallbacks
-collapse to the exact same game.
+\emph{Independence of $a$.} Part (ii) never mentions $a$, and Part (i)
+uses $a$ only to determine whether the even position has an option at
+all; either way the mex is $0$. More strongly, the full Grundy value of
+an odd $n$ is the mex of $\{G(n - k^2) : k^2 \le n\}$, and by Parts (i)
+and (ii) each such value depends only on the parity of $n - k^2$ and on
+the Grundy values of smaller odd positions --- never on $a$. By induction
+the entire Grundy sequence is therefore identical for every odd fallback
+$a$: the parameter is invisible to the game, because the squares already
+supply, from every odd position, a move to an even one, and the fallback
+can only ever move between residues that Part (i) has already flattened.
 \end{proof}
 
 \section{Discovery methodology and retrodictions}\label{sec:method}
