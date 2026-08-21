@@ -911,6 +911,53 @@ against return, reachable from everywhere outside --- so it is the P-set
 of $F'$, and it coincides with Foursquare's.
 \end{proof}
 
+\begin{proposition}[Which enlargements are harmless]\label{prop:enlarge}
+Let a mode-switching game obey a law with no preperiod and period $p$,
+and enlarge the move set of one mode by an amount $a$. The law survives
+if and only if no P-position has another P-position exactly $a$ below it,
+with both positions in the enlarged mode.
+\end{proposition}
+\begin{proof}
+Adding moves can only affect closure, never escape: every old witness
+remains legal with the same landing, so condition (iii) of
+Lemma~\ref{lem:verify} survives untouched, and condition (i) can only
+shrink the terminal set, which the hypothesis of no preperiod already
+places inside the candidate. So the law survives precisely when closure
+does. Forward: if no P-position of the enlarged mode sits $a$ above
+another P-position, then no new option leaves a P for a P, closure holds,
+and Lemma~\ref{lem:verify} returns the same P-set. Converse: if some
+P-position $n$ of that mode has $n - a$ also P, then $n$ now has an
+option landing on a P-position, so $n$ is N --- the law fails, and it
+fails first at the smallest such $n$.
+\end{proof}
+\begin{remark}[The scoping is not decorative]
+The criterion asks about P-positions of the enlarged mode, not about all
+P-positions. Enlarging $D(5,2)$'s squares-mode set by the amount $2$
+leaves its law completely untouched --- verified to $20{,}000$ --- even
+though $2$ is a difference of two P-positions of the game
+($2 = 2 - 0$ modulo $10$), because class $2$ contains no P-position from
+which the new move could ever fire. An unscoped criterion predicts a
+break here and is simply wrong.
+\end{remark}
+\begin{corollary}[Kadam's Extension, revisited]
+In Foursquare every P-position is standard-mode, so the scoping is
+invisible and the criterion reduces to a residue condition: an added
+amount is harmless exactly when it is not congruent modulo $16$ to a
+difference of two elements of $\{0, 2, 4, 6\}$. Those differences are
+$\{0, 2, 4, 6, 10, 12, 14\}$, so the harmless amounts are exactly the odd
+ones and those $\equiv 8 \pmod{16}$ --- the governor's clones. The
+enlargement of Proposition~\ref{prop:kadam} to the full residue classes
+of $3$, $9$ and $8$ lies inside this set, which is why the P-set cannot
+move. A sweep over every added amount from $1$ to $32$ matches the
+criterion's prediction in every case, and the breaks land where the
+converse says they must, at $n = 2, 4, 6$ and $16$ for the amounts
+$2, 4, 6$ and $16$. One outlier is instructive: adding $10$ breaks first
+at $n = 16$, not $n = 10$, because $10 = 16 - 6$ needs the larger
+P-position to exist before the pair can fire --- the converse promises
+the smallest violating position, not the smallest position congruent to
+anything.
+\end{corollary}
+
 \begin{remark}[The mechanism: why $16$, and why $\{3,8,9\}$]\label{rem:mechanism}
 Foursquare's board splits three ways, because square mode lives only at
 $n \equiv 1 \pmod 4$: the evens, the standard-mode odds
