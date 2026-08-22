@@ -1270,7 +1270,240 @@ not only the two degenerate moduli of Section~\ref{sec:disease}, outside
 the reach of the classical periodicity theory.
 
 \section{The Universal Embedding Theorem}\label{sec:embed}
-% PLACEHOLDER --- filled in later commits
+
+Section~\ref{sec:grundy} applied the Transfer Principle to a family
+already defined, verifying its hypotheses after the fact. This section
+reverses the order: given an arbitrary subtraction game, we build a
+mode-switching host whose hypotheses hold by construction, and read the
+conclusion as an embedding. The consequence is that the diagonal family's
+degenerate moduli were not an accident of squares. Any subtraction game
+whatever --- periodic or aperiodic, of bounded or unbounded
+Nim-dimension --- occurs as a mode class of a mode-switching game, at
+outcome level and, with one further move in the mode set, at Grundy
+level.
+
+\begin{definition}[The host]\label{def:host}
+Let $T \subseteq \mathbb{Z}^+$ be any nonempty set, and let $m \ge 2$ and
+$0 \le r \le m-1$. The \emph{host} $H(T; m, r)$ is the mode-switching
+game on $\mathbb{Z}_{\ge 0}$ in which a position $n \equiv r \pmod m$ may
+have subtracted any amount of the mode set $S$, and every other position
+may have subtracted only $m$; play is normal. We consider two mode sets:
+\[ S_{\mathrm{out}} = \{1\} \cup 2mT, \qquad
+S_{\mathrm{Gr}} = \{1, m+1\} \cup 2mT, \]
+where $2mT = \{2m\tau : \tau \in T\}$. Notation and terminology for the
+host are those of Definition~\ref{def:smin} --- $f$, $h$, $B$, bottoms,
+top rungs --- which depend only on $m$ and $r$ and so apply verbatim;
+Lemma~\ref{lem:chain} and Corollary~\ref{cor:chain-grundy} likewise apply
+verbatim, since the foreign classes of the host are the same step-$m$
+chains.
+\end{definition}
+
+\begin{lemma}[The host's move geometry]\label{lem:host-geometry}
+In $H(T; m, r)$ with either mode set, and for every class-$r$ position
+$n$:
+
+(i) Every amount $2m\tau \in 2mT$ is internal: the landing $n - 2m\tau$
+lies in class $r$ and on the same residue modulo $2m$.
+
+(ii) The amount $1$ lands the free residue on a foreign bottom and the
+hard residue on a top rung.
+
+(iii) The amount $m+1$ lands the hard residue on a foreign bottom and the
+free residue on a top rung.
+
+(iv) The class index $t$ defined by $n = f^* + 2mt$, where $f^*$ is the
+least member of the residue in question, transports the internal moves to
+$t \mapsto t - \tau$, legal exactly when $\tau \le t$.
+\end{lemma}
+\begin{proof}
+(i) $2m\tau \equiv 0 \pmod{2m}$. (ii) $1 \in H(m,r) + m$ by
+Lemma~\ref{lem:hduality}(iv), so Lemma~\ref{lem:hduality}(iii) applies.
+(iii) Since $1 \le f \le m$, the integer $m+1$ lies in $[f+1, f+m]$; and
+$m+1$ is not a multiple of $m$ because $m \ge 2$. Hence
+$m+1 \in H(m,r)$ by Definition~\ref{def:smin}, and
+Lemma~\ref{lem:hduality}(iii) gives the two landings. (iv) The two
+residues $f$ and $h$ of class $r$ each form an arithmetic progression of
+step $2m$, and an internal move subtracts $2m\tau$, so it moves $t$ by
+$\tau$; legality $2m\tau \le f^* + 2mt$ is equivalent to $\tau \le t$
+since $0 \le f^* < 2m$.
+\end{proof}
+
+Note that the two residues of class $r$ do not communicate: by (i) every
+internal move preserves the residue modulo $2m$, so the free half and the
+hard half of the class are separate boards. That is what makes the
+embedding clean; in the diagonal family the same disconnection occurs
+exactly when $d$ is even, since internal moves preserve $t$ modulo $d$
+(Proposition~\ref{prop:internal}(i)) and the parity of $t$ is the
+free--hard alternation (Proposition~\ref{prop:bad}(i)).
+
+\begin{theorem}[Universal embedding, outcome level]\label{thm:embed-out}
+Let $T \subseteq \mathbb{Z}^+$ be nonempty, $m \ge 2$,
+$0 \le r \le m-1$, and consider $H(T; m, r)$ with mode set
+$S_{\mathrm{out}}$. Index the hard residue by $n = h^* + 2mt$, where
+$h^*$ is its least member. Then the P-positions of the host are exactly
+
+the foreign bottoms, together with
+$\{ h^* + 2mt : t \text{ is a P-position of the subtraction game } T \}$.
+
+In particular the free residue contains no P-position, and the host's
+P-set is the set of foreign bottoms together with an affine copy of $T$'s
+P-set.
+\end{theorem}
+\begin{proof}
+The foreign classes are settled by Lemma~\ref{lem:chain}. On the free
+residue, the move $-1$ is legal from the least free member onward
+(indeed always, since $f^* = f \ge 1$) and lands on a foreign bottom by
+Lemma~\ref{lem:host-geometry}(ii), a P-position; so every free member is
+N. On the hard residue, the external options are: the move $-1$, landing
+on a top rung, an N-position by Lemma~\ref{lem:chain}; and nothing else,
+since $S_{\mathrm{out}}$ contains only $1$ and internal amounts. Hence no
+external option of a hard member is a P-position, and no external option
+can be the P-witness of an N-position or an obstruction to a P-position.
+It follows by induction on $n$ that a hard member is P if and only if all
+of its internal options are N, and N if and only if some internal option
+is P --- which is the recursion of the subtraction game $T$ under the
+index of Lemma~\ref{lem:host-geometry}(iv). The least hard member has
+index $t = 0$ with no internal option, matching $T$'s terminal index $0$.
+\end{proof}
+
+\begin{corollary}[Section~\ref{sec:disease} recovered]\label{cor:sec7-recovered}
+Taking $T = \{j^2 : j \ge 1\}$ and $m = 2$ recovers
+Theorem~\ref{thm:golomb}: the confined class of $D(2,r)$ is Golomb's game
+in the index. More generally the confinement of
+Section~\ref{sec:disease} is the special case in which the host's
+internality is forced by a poverty of square residues rather than imposed
+by construction.
+\end{corollary}
+\begin{proof}
+At $m = 2$ the squares have residues in $\{0, 1\}$ modulo $4$, so the
+mode set of $D(2,r)$ acts on class $r$ exactly as $S_{\mathrm{out}}$ does
+with $T$ the squares: the amounts $\equiv 0$ are internal, the amounts
+$\equiv 1$ land as in Lemma~\ref{lem:host-geometry}(ii). The index
+computation is that of Theorem~\ref{thm:golomb}.
+\end{proof}
+
+\begin{theorem}[Universal embedding, Grundy level]\label{thm:embed-grundy}
+Let $T \subseteq \mathbb{Z}^+$ be nonempty, $m \ge 2$,
+$0 \le r \le m-1$, and consider the host $H(T; m, r)$ with mode set
+$S_{\mathrm{Gr}} = \{1, m+1\} \cup 2mT$. Write $G_T$ for the Grundy
+function of the subtraction game $T$. Then:
+
+(i) (Hard residue: exact.) For every $t \ge 0$,
+\[ G(f + m + 2mt) = 2 + G_T(t). \]
+When $r = 0$ the hard residue has one further member, $n = 0$, which is
+terminal and satisfies $G(0) = 0$.
+
+(ii) (Free residue: one-step prefix.) $G(f) = 1$, and for every
+$t \ge 1$,
+\[ G(f + 2mt) = 2 + G_T(t - 1). \]
+
+The embedding is thus exact on the progression
+$f + m + 2m\mathbb{Z}_{\ge 0}$ for every $m$ and $r$, and exact on the
+free residue from its second member onward.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:host-geometry}(i) every internal move preserves the
+residue modulo $2m$, so the free and hard halves of class $r$ are
+separate boards and Theorem~\ref{thm:transfer} may be applied to each;
+the option relation is well-founded since every move subtracts a positive
+amount.
+
+\emph{Free residue.} Take $C = \{f + 2mt : t \ge 0\}$ and
+$\mathrm{Bad} = \{f\}$. At $n = f$ the amounts $m+1$ and $2m\tau$ all
+exceed $f \le m$, so the only option is $f - 1$, a foreign bottom of
+value $0$ by Corollary~\ref{cor:chain-grundy}; hence
+$G(f) = \operatorname{mex}\{0\} = 1 \le 1$, and $f$ has no internal
+option, so (H3) holds. For $t \ge 1$ we have
+$n = f + 2mt \ge 2m + 1 > m + 1$, so both witnesses are legal, and by
+Lemma~\ref{lem:host-geometry}(ii)--(iii) the amount $1$ lands on a bottom
+(value $0$) and $m+1$ on a top rung (value $1$): (H1). (H2) is
+Corollary~\ref{cor:chain-grundy}. Theorem~\ref{thm:transfer} gives
+$h = G - 2$ equal to the Grundy function of the internal game --- the
+subtraction game $T$ on the index $t$, by
+Lemma~\ref{lem:host-geometry}(iv) --- with the index $0$ deleted; moves
+onto index $0$ are excluded from the mex as moves into $\mathrm{Bad}$.
+Deleting the initial segment $\{0\}$ and re-basing at $u = t - 1$ turns
+the legality $t - \tau \ge 1$ into $u - \tau \ge 0$, so
+$h(f + 2mt) = G_T(t - 1)$.
+
+\emph{Hard residue, $r \ge 1$.} Take $C = \{m + r + 2mt : t \ge 0\}$ and
+$\mathrm{Bad} = \emptyset$. The least member $m + r \ge m + 1$ already
+affords both witnesses, so (H1) holds everywhere with the values
+exchanged --- $m+1$ lands on a bottom, $1$ on a top rung --- and (H2) is
+as before. Theorem~\ref{thm:transfer} with no deletion gives
+$G(m + r + 2mt) = 2 + G_T(t)$.
+
+\emph{Hard residue, $r = 0$.} Here the residue is $0$ modulo $2m$ with
+members $2mt$, $t \ge 0$, and $n = 0$ is terminal: $G(0) = 0$. Take
+$\mathrm{Bad} = \{0\}$; it satisfies (H3) vacuously. For $t \ge 1$,
+$n = 2mt \ge 2m \ge m + 1$, both witnesses are legal, and (H1), (H2) hold
+as in the previous case. Theorem~\ref{thm:transfer} gives, after deleting
+the initial index $0$ and re-basing at $t' = t - 1$,
+$G(2mt) = 2 + G_T(t - 1)$ for $t \ge 1$ --- that is, writing
+$n = 2m + 2mt' = f + m + 2mt'$ with $f = m$, exactly the identity of (i).
+\end{proof}
+
+\begin{remark}\label{rem:two-defects}
+The two defects are the same defect: a class member too poor to afford
+its palette. On the free residue it is the least member $f \le m$, which
+cannot afford $m+1$; at $r = 0$ on the hard residue it is $n = 0$, which
+can afford nothing at all and is the host's inheritance of the boundary
+position audited for the diagonal family in Section~\ref{sec:main}. Both
+are absorbed as one-element $\mathrm{Bad}$ sets, and both disappear under
+cosmetic changes we do not make: the theorem's content is the progression
+based at $f + m$, where the embedding is exact with no prefix for every
+$m$ and $r$ --- the formal statement of the prefix-$0$ observation
+recorded by the search instrument, now with its base point made explicit.
+\end{remark}
+
+\begin{corollary}[What mode-switching games can do]\label{cor:can-do}
+For every nonempty $T \subseteq \mathbb{Z}^+$ there is a mode-switching
+subtraction game whose Grundy function, restricted to an arithmetic
+progression and shifted by $2$, is that of $T$. Consequently there exist
+mode-switching subtraction games with aperiodic Grundy sequences of any
+type realised by a subtraction game, with unbounded Nim-dimension if any
+subtraction game has unbounded Nim-dimension, and with P-sets of any
+density realised by a subtraction game.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:embed-grundy} with the host $H(T; m, r)$. For the second
+sentence, a property of the Grundy sequence of $T$ that is invariant
+under an affine reindexing and a shift by $2$ transports to the host's
+class $r$; and outside class $r$ the host's values are $0$ and $1$, which
+cannot restore periodicity to an aperiodic class, by the argument of
+Corollary~\ref{cor:grundy-aperiodic}.
+\end{proof}
+
+\begin{remark}\label{rem:squares-host}
+Taking $T = \{j^2 : j \ge 1\}$ in Theorem~\ref{thm:embed-grundy} gives a
+mode-switching game whose Grundy sequence is $2 + \Gamma$ on the hard
+residue, for \textbf{every} $m \ge 2$ --- including $m = 2$ and $m = 4$,
+where the diagonal family itself achieves only the outcome-level
+embedding of Section~\ref{sec:disease} for want of the second palette
+witness. The move $m+1$ is precisely what the squares fail to supply at
+those moduli, and supplying it by hand converts
+Theorem~\ref{thm:golomb} into a Grundy statement. Taking instead $T$ to
+be the move set of the aperiodic game of Larsson and Fox
+\cite{larsson-fox} produces a mode-switching subtraction game of
+Nim-dimension two, and taking $T$ finite reproduces, inside a
+non-invariant host, the classical periodicity of \cite{golomb} on one
+residue class while the rest of the board obeys the chain law.
+\end{remark}
+
+\begin{remark}[Scope]\label{rem:host-scope}
+The construction uses only three properties of the host: that the foreign
+classes are step-$m$ chains, so that the ceiling of
+Theorem~\ref{thm:transfer} is the alternation of
+Corollary~\ref{cor:chain-grundy}; that the mode set contains two amounts
+whose residues lie on opposite sides of the partition of
+Lemma~\ref{lem:hduality}(ii), so that the palette is available; and that
+the remaining amounts are $\equiv 0 \pmod{2m}$, so that they are
+internal. A host whose fallback mode has a larger move set will fail the
+first of these and present a taller ceiling; by
+Remark~\ref{rem:taller-ceiling} the Transfer Principle survives such a
+change with $2$ replaced by the appropriate $c$, and the corresponding
+embedding theorem is the natural next question. It is not pursued here.
+\end{remark}
 
 \section{Mis\`ere play}\label{sec:misere}
 % PLACEHOLDER --- filled in later commits
