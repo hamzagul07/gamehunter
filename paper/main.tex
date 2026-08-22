@@ -383,8 +383,9 @@ residues differ by $m$: their landings under a common subtraction differ
 by $m$ as well, and Corollary~\ref{cor:chain-grundy} assigns opposite
 values to residues differing by $m$. Nothing in the lemma uses that an
 amount is a square. Finally, since $H$ and $H+m$ are disjoint and
-$1 \in H+m$ by (iv), the residue $1$ does not lie in $H$; as no positive
-square has value $0$, it follows that $s_{\min} \ge 4$ whenever
+$1 \in H+m$ by (iv), the residue $1$ does not lie in $H$; the square
+$1$ therefore never certifies, and as no square lies strictly between
+$1$ and $4$, it follows that $s_{\min} \ge 4$ whenever
 $s_{\min}$ is finite --- and since the residues $0$ and $m$ are outside
 $H$, $s_{\min}$ is never a multiple of $m$.
 \end{remark}
@@ -565,7 +566,7 @@ $n_0 = 0$ hard and $n_1 = m$ free; for $E$, $s_{\min} = 25$ with
 $r \in \{4, 5, 6\}$ gives $2 < (25 - r)/9 < 3$, so $\beta = 3$ with the
 free--hard--free pattern $n_0 = r$, $n_1 = m+r$, $n_2 = 2m+r$.
 
-(iii) Is Lemma~\ref{lem:nodeep}'s consequence, restated for citation.
+(iii) is Lemma~\ref{lem:nodeep}'s consequence, restated for citation.
 
 (ii) Mutual induction along $\mathrm{Bad}$ in increasing order. Let
 $p \in \mathrm{Bad}$ and consider any legal square $k^2 \le p < s_{\min}$.
@@ -851,7 +852,7 @@ affected classes turn inward.
 \begin{lemma}[Confinement Lemma]\label{lem:confine}
 For $m \in \{2,4\}$ and every $r$: $\Q(2m) \subseteq \{0,1,m\}$, while
 $H(m,r)$ excludes $0$, $1$, and $m$ (Definition~\ref{def:smin}). Hence no square move from a
-hard-residue position reaches the window: every move stays inside class
+hard-residue position reaches a foreign bottom: every move stays inside class
 $r$ or lands on an \NN-position of a foreign chain.
 \end{lemma}
 \begin{proof}
@@ -874,14 +875,14 @@ structure is decided by a self-contained internal recursion, and its very
 first member already defies the chain law: $3$ is \PP\ in $D(2,1)$ and
 $5$ is \PP\ in $D(4,1)$, where escape, if it existed, would force \NN.
 Calibration: for $m = 2$ and $m = 4$ we prove
-confinement --- no square door into the window, so the class turns
-inward. We do \textbf{not} prove that these confined classes obey no
+confinement --- no square door onto the foreign bottoms, so the class
+turns inward. We do \textbf{not} prove that these confined classes obey no
 eventual law of their own: ``no period and no modulus up to 200 fits'' is
 a reading from the search instrument, not a theorem, and their
 aperiodicity remains open.
 \end{proof}
 
-\begin{remark}[Double condemnation]
+\begin{remark}[Double condemnation]\label{rem:double-condemnation}
 % PORT: V.2 verbatim.
 The two diseased moduli are exactly the two the parity-free engine cannot
 serve. At $m = 2$ the engine is silent: the always-a-square inequality
@@ -894,12 +895,12 @@ agree because both are reading the same two table rows: $\Q(2m)
 \end{remark}
 
 \begin{theorem}[The confined classes are Golomb's game]\label{thm:golomb}
-Let $m \in \{2, 4\}$ and $0 \le r \le m-1$, and let $h$ be the least
-representative of the hard residue: $h = m + r$ if $r \ge 1$, and $h = 0$
-if $r = 0$. Index the confined class of $D(m,r)$ by $n = 2mt + h$,
+Let $m \in \{2, 4\}$ and $0 \le r \le m-1$, and let $h^*$ be the least
+representative of the hard residue: $h^* = m + r$ if $r \ge 1$, and $h^* = 0$
+if $r = 0$. Index the confined class of $D(m,r)$ by $n = 2mt + h^*$,
 $t \ge 0$, and let $G$ denote the set of P-positions of Golomb's
-subtract-a-square game. Then for $m = 2$ the position $4t + h$ is P in
-$D(2,r)$ if and only if $t \in G$, and for $m = 4$ the position $8t + h$
+subtract-a-square game. Then for $m = 2$ the position $4t + h^*$ is P in
+$D(2,r)$ if and only if $t \in G$, and for $m = 4$ the position $8t + h^*$
 is P in $D(4,r)$ if and only if $\lfloor t/2 \rfloor \in G$ --- the
 confined class consisting of two interleaved copies of Golomb's game, one
 on each parity of $t$.
@@ -907,13 +908,13 @@ on each parity of $t$.
 \begin{proof}
 \emph{(a) The three kinds of square move.} Every $k \ge 1$ is odd,
 $\equiv 2 \pmod 4$, or a multiple of $4$; we dispatch each kind from a
-hard-class position $n = 2mt + h$. If $k$ is odd then $k^2 \equiv 1
-\pmod 8$, hence $\equiv 1 \pmod{2m}$, and the landing $\equiv h - 1
+hard-class position $n = 2mt + h^*$. If $k$ is odd then $k^2 \equiv 1
+\pmod 8$, hence $\equiv 1 \pmod{2m}$, and the landing $\equiv h^* - 1
 \pmod{2m}$ is the odd rung directly above the foreign bottom $r - 1$
 (bottom $m - 1$ when $r = 0$), an N-position by Lemma~\ref{lem:chain}.
 If $k \equiv 2 \pmod 4$ then $k^2 \equiv 4 \pmod 8$: at $m = 2$ this is
 $\equiv 0 \pmod 4$ and the move stays in the class, while at $m = 4$ the
-landing $\equiv h - 4 \pmod 8$ is the free residue ($r$, or $m$ when
+landing $\equiv h^* - 4 \pmod 8$ is the free residue ($r$, or $m$ when
 $r = 0$), every member of which is N because it subtracts $1^2$ onto the
 foreign bottom directly beneath it --- P by Lemma~\ref{lem:chain}, legal
 from the smallest free member. If $4 \mid k$ then $2m \mid k^2$ and the
@@ -921,8 +922,8 @@ move stays in the class. In the index $t$ the internal moves read: at
 $m = 2$, every even $k = 2j$ subtracts $4j^2$, i.e.\ $t \mapsto t - j^2$;
 at $m = 4$, every $k = 4i$ subtracts $16i^2$, i.e.\ $t \mapsto t - 2i^2$.
 Legality transfers exactly: since the amounts and $2mt$ are multiples of
-$2m$ while $0 \le h < 2m$, we have $4j^2 \le 4t + h \iff j^2 \le t$ and
-$16i^2 \le 8t + h \iff 2i^2 \le t$. So the internal option sets at index
+$2m$ while $0 \le h^* < 2m$, we have $4j^2 \le 4t + h^* \iff j^2 \le t$ and
+$16i^2 \le 8t + h^* \iff 2i^2 \le t$. So the internal option sets at index
 $t$ are $\{\, t - j^2 : j^2 \le t \,\}$ at $m = 2$ and
 $\{\, t - 2i^2 : 2i^2 \le t \,\}$ at $m = 4$ --- verbatim the option sets
 of subtract-a-square and of subtract-$\{2i^2\}$. The three-way sort is
@@ -936,13 +937,13 @@ internal-terminal $t = 0$; at $m = 4$ it has $t = 0$ and $t = 1$ (the
 smallest internal move needs $2 \le t$) --- matching the terminal sets of
 subtract-a-square and subtract-$\{2i^2\}$ exactly. For $r \ge 1$ these
 positions have real moves, but by (a) every one of them exits onto an
-N-position; for $r = 0$ the alignment is literal: $h = 0$, so $t = 0$ is
+N-position; for $r = 0$ the alignment is literal: $h^* = 0$, so $t = 0$ is
 $n = 0$, a moveless position --- Golomb's own terminal in the flesh.
 \emph{(c) The transfer.} The status of a position is determined by its
 options alone, and by (a) every exiting option is N; so a hard-class
 position is P iff all of its internal options are N, and N iff some
 internal option is P --- exits can neither supply a P-witness nor block
-one. By induction on $t$, the map $t \mapsto \operatorname{status}(2mt+h)$
+one. By induction on $t$, the map $t \mapsto \operatorname{status}(2mt+h^*)$
 therefore satisfies exactly the recursion of the subtraction game with
 the option sets of (a). At $m = 2$ that recursion is Golomb's, proving
 the first claim.
@@ -951,7 +952,7 @@ so the parity of $t$ is invariant, and on each parity class the move
 $t \mapsto t - 2i^2$ reads $u \mapsto u - i^2$ in the half-index
 $u = \lfloor t/2 \rfloor$ (legality $2i^2 \le t \iff i^2 \le u$ on both
 parities), with terminal $u = 0$ on each side: two interleaved,
-independent copies of Golomb's game, so $8t + h$ is P iff
+independent copies of Golomb's game, so $8t + h^*$ is P iff
 $\lfloor t/2 \rfloor \in G$.
 \end{proof}
 
@@ -979,9 +980,9 @@ is not eventually periodic.
 \begin{proof}
 Suppose some period $p$ worked for all $n \ge N_1$. Membership would
 still repeat along any arithmetic progression, so restrict to the hard
-class $n = 2mt + h$: adding $\operatorname{lcm}(p, 2m)$ to $n$ preserves
+class $n = 2mt + h^*$: adding $\operatorname{lcm}(p, 2m)$ to $n$ preserves
 both the class and, beyond $N_1$, the P/N status, and in the index this
-says the set $\{t : 2mt + h \text{ is P}\}$ is eventually periodic with
+says the set $\{t : 2mt + h^* \text{ is P}\}$ is eventually periodic with
 period $q = \operatorname{lcm}(p, 2m)/2m$. At $m = 2$ that set is $G$
 itself, the P-set of Golomb's game, by Theorem~\ref{thm:golomb}. At
 $m = 4$ it is $\{t : \lfloor t/2 \rfloor \in G\}$, and one parity
@@ -1064,7 +1065,7 @@ hypothesis --- the free residue contributes nothing, all of its members
 being N, and the confined class contributes density zero by
 Corollary~\ref{cor:sparse}. Written out at $m = 4$, where the accounting
 is least obvious: by Theorem~\ref{thm:golomb} the confined P-set is
-$(16G + h) \cup (16G + h + 8)$, the even and odd parities of $t$; an
+$(16G + h^*) \cup (16G + h^* + 8)$, the even and odd parities of $t$; an
 affine map $u \mapsto 16u + b$ scales a counting function by the
 constant $16$, so each image inherits density zero from $G$, and a union
 of two density-zero sets is density zero --- two, not infinitely many,
@@ -1434,7 +1435,8 @@ $G(m + r + 2mt) = 2 + G_T(t)$.
 
 \emph{Hard residue, $r = 0$.} Here the residue is $0$ modulo $2m$ with
 members $2mt$, $t \ge 0$, and $n = 0$ is terminal: $G(0) = 0$. Take
-$\mathrm{Bad} = \{0\}$; it satisfies (H3) vacuously. For $t \ge 1$,
+$\mathrm{Bad} = \{0\}$: the first clause of (H3) is $G(0) = 0$, and the
+second is vacuous, since $0$ has no options at all. For $t \ge 1$,
 $n = 2mt \ge 2m \ge m + 1$, both witnesses are legal, and (H1), (H2) hold
 as in the previous case. Theorem~\ref{thm:transfer} gives, after deleting
 the initial index $0$ and re-basing at $t' = t - 1$,
@@ -1958,7 +1960,7 @@ of $F'$, and it coincides with Foursquare's.
 \end{proof}
 
 \begin{proposition}[Which enlargements are harmless]\label{prop:enlarge}
-Let a mode-switching game obey a law with no preperiod and period $p$,
+Let a mode-switching game obey a law with no preperiod,
 and enlarge the move set of one mode by an amount $a$. The law survives
 if and only if no P-position has another P-position exactly $a$ below it,
 with both positions in the enlarged mode.
@@ -1987,7 +1989,7 @@ option $n_0 - a$ lies below $n_0$ and in $S$, hence is a P-position of
 the enlarged game, so $n_0$ is an N-position: the law fails, and it fails
 first at $n_0$.
 \end{proof}
-\begin{remark}[The scoping is not decorative]
+\begin{remark}[The scoping is not decorative]\label{rem:scoping}
 The criterion asks about P-positions of the enlarged mode, not about all
 P-positions. Enlarging $D(5,2)$'s squares-mode set by the amount $2$
 leaves its law completely untouched --- verified to $20{,}000$ --- even
@@ -1996,7 +1998,7 @@ though $2$ is a difference of two P-positions of the game
 which the new move could ever fire. An unscoped criterion predicts a
 break here and is simply wrong.
 \end{remark}
-\begin{corollary}[Kadam's Extension, revisited]
+\begin{corollary}[Kadam's Extension, revisited]\label{cor:kadam-revisited}
 In Foursquare every P-position is standard-mode, so the scoping is
 invisible and the criterion reduces to a residue condition: an added
 amount is harmless exactly when it is not congruent modulo $16$ to a
@@ -2216,8 +2218,8 @@ Proposition~\ref{prop:kadam}, and for the ``why 16'' question that
 produced Remark~\ref{rem:mechanism} --- a reviewer who improves,
 contributes, and asks in a single correspondence is rare. The author
 thanks Urban Larsson for the introduction and for the encouragement to
-continue. AI systems built the search instrument described in Section 8
-and served as referee and operations agents under a written protocol
+continue. AI systems built the search instrument described in
+Section~\ref{sec:method} and served as referee and operations agents under a written protocol
 stored in the repository; every proof in this paper is human-authored.
 The examination transcripts, verification scripts, and full logs are
 public in the project repository,
