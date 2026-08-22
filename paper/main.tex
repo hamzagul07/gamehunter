@@ -502,7 +502,7 @@ and write $\mathrm{Bad}_f$ and $\mathrm{Bad}_h$ for the sets of free and
 hard members of $\mathrm{Bad}$ --- those on the residues $f$ and $h$
 modulo $2m$ respectively. When $s_{\min} = \infty$ (regime (c)),
 $\mathrm{Bad}$ is the whole of class $r$ and $\beta = \infty$; the finite
-case is the one in use everywhere except Section 10.2.
+case is the one in use everywhere except Section~\ref{sec:misere-degenerate}.
 \end{definition}
 
 \begin{lemma}[No deep square below $s_{\min}$]\label{lem:nodeep}
@@ -1506,7 +1506,273 @@ embedding theorem is the natural next question. It is not pursued here.
 \end{remark}
 
 \section{Mis\`ere play}\label{sec:misere}
-% PLACEHOLDER --- filled in later commits
+
+Under the mis\`ere convention the player unable to move wins. A terminal
+position is therefore an N-position, and every other position is P if and
+only if all of its options are N. We write $\PP^-$ and $\NN^-$ for
+mis\`ere outcomes. No Grundy theory is available here --- mis\`ere
+outcomes of a disjunctive sum are not determined by the summands'
+outcomes, and the mis\`ere quotient of even a simple subtraction game may
+be large \cite{lessons} --- so this section classifies outcomes only.
+That is enough: the classification is complete, and the comparison with
+Theorem~\ref{thm:main} is exact.
+
+\begin{lemma}[Chain Lemma, mis\`ere form]\label{lem:chain-misere}
+Let $c \ne r$ with $0 \le c \le m-1$. In $D(m,r)$ under mis\`ere play, a
+position $n \equiv c \pmod m$ is $\PP^-$ if and only if
+$n \equiv c + m \pmod{2m}$. That is, the top rungs are $\PP^-$ and the
+bottoms are $\NN^-$ --- the normal-play verdicts of
+Lemma~\ref{lem:chain}, inverted.
+\end{lemma}
+\begin{proof}
+By the Closure and Independence steps of Lemma~\ref{lem:chain}, class $c$
+is a path under the single move $-m$. Rung $0$ is terminal, hence
+$\NN^-$. Rung $j \ge 1$ has the single option rung $j-1$, so it is
+$\PP^-$ exactly when rung $j-1$ is $\NN^-$; by induction rung $j$ is
+$\PP^-$ exactly when $j$ is odd, which is to say
+$n \equiv c + m \pmod{2m}$.
+\end{proof}
+
+The whole of the section follows from this one inversion, because it
+exchanges the values of the two witnesses of
+Corollary~\ref{cor:palette}. In normal play the useful landing is a
+bottom, supplied to the hard residue by $s_{\min}$ and to the free
+residue by the always-legal $1$; in mis\`ere the useful landing is a top
+rung, supplied to the \emph{hard} residue by $1$ and to the \emph{free}
+residue by $s_{\min}$. The roles of the two witnesses are exchanged, and
+with them the roles of the two residues.
+
+\begin{lemma}[Mis\`ere Transfer Principle]\label{lem:misere-transfer}
+Let a well-founded impartial game be played under mis\`ere, let $C$ be a
+set of its positions, and call an option of $p \in C$ internal if it lies
+in $C$ and external otherwise. Suppose:
+
+(M1) no $p \in C$ is terminal;
+
+(M2) every external option of every $p \in C$ is $\NN^-$.
+
+Then for $p \in C$, $p$ is $\PP^-$ if and only if every internal option
+of $p$ is $\NN^-$ --- that is, the mis\`ere outcomes on $C$ are the
+\emph{normal-play} outcomes of the game played on $C$ by internal moves
+alone.
+\end{lemma}
+\begin{proof}
+Let $p \in C$. By (M1) the terminal clause does not apply to $p$, so $p$
+is $\PP^-$ exactly when all of its options are $\NN^-$; by (M2) the
+external ones are $\NN^-$ unconditionally, so this holds exactly when all
+internal options are $\NN^-$. Reading ``$\PP^-$'' as the label of the
+internal game, the recursion is: a position of $C$ is labelled P when
+every internal option is labelled N, and an internal-terminal position of
+$C$ --- one with no internal option --- is labelled P vacuously. That is
+the normal-play recursion of the internal game.
+\end{proof}
+
+The last sentence is the point on which the section turns, and it is
+worth isolating: a position of $C$ with no internal options is not
+terminal in the host, so the mis\`ere convention never reaches it, and it
+is labelled P by the vacuous clause exactly as in normal play. The
+mis\`ere host contains the \emph{normal-play} internal game, not its
+mis\`ere counterpart.
+
+\subsection{The healthy and exceptional games}\label{sec:misere-healthy}
+
+Throughout this subsection $m \ge 3$, $m \ne 4$, so that
+$s_{\min} < \infty$; the notation $f$, $h$, $\mathrm{Bad}(m,r)$,
+$\mathrm{Bad}_f$, $\mathrm{Bad}_h$ and $\beta$ is that of
+Definitions~\ref{def:smin} and~\ref{def:bad}.
+
+\begin{theorem}[Mis\`ere Diagonal Law]\label{thm:misere-main}
+Let $m \ge 3$, $m \ne 4$, and $0 \le r \le m-1$. Under mis\`ere play the
+P-positions of $D(m,r)$ are exactly
+
+the top rungs of the foreign chains --- the positions
+$n \equiv c + m \pmod{2m}$ for $c \in B$ --- together with the free
+members of $\mathrm{Bad}(m,r)$.
+
+In particular class $r$ contributes $\lceil \beta/2 \rceil$ positions
+when $r \ge 1$ and $\lfloor \beta/2 \rfloor$ when $r = 0$; for a healthy
+game this is the single position $n = r$ when $r \ge 1$, and $n = m$ when
+$r = 0$, and for $(m,r) \in E$ it is the pair $n = r$ and $n = 2m + r$.
+\end{theorem}
+\begin{proof}
+Foreign classes are settled by Lemma~\ref{lem:chain-misere}. For class
+$r$ we take the four cases in turn.
+
+\emph{Hard members.} Let $n$ lie on the hard residue. If $n = 0$ ---
+possible only when $r = 0$ --- then $n$ is terminal, hence $\NN^-$.
+Otherwise $n \ge 1$, the amount $1$ is legal, and by
+Lemma~\ref{lem:hduality}(iii) it lands on a top rung, which is $\PP^-$ by
+Lemma~\ref{lem:chain-misere}; so $n$ is $\NN^-$. Every hard member is
+therefore $\NN^-$, with no size condition and no exception.
+
+\emph{Free members at or above $s_{\min}$.} The amount $s_{\min}$ is
+legal and, having residue in $H$, carries the free residue onto a top
+rung, again $\PP^-$. So such $n$ is $\NN^-$.
+
+\emph{Free members of $\mathrm{Bad}$.} We induct on $n$ within
+$\mathrm{Bad}$. Let $n$ be free with $n < s_{\min}$. By the definition of
+$s_{\min}$ no legal square of $n$ has residue in $H$, so by
+Lemma~\ref{lem:hduality}(ii)--(iii) every legal square is either internal
+or of residue in $H + m$; the latter carries the free residue onto a
+bottom, which is $\NN^-$ by Lemma~\ref{lem:chain-misere}. The internal
+options of $n$ lie in class $r$ below $n$, hence in $\mathrm{Bad}$, and
+by Proposition~\ref{prop:bad}(iii) they lie on the opposite residue; so
+they are hard members of $\mathrm{Bad}$, $\NN^-$ by the first case. Every
+option of $n$ is therefore $\NN^-$, and $n$ is $\PP^-$.
+
+\emph{Hard members of $\mathrm{Bad}$.} Already covered by the first case;
+we note only that their $\NN^-$ status was established without reference
+to $\mathrm{Bad}$, so no circularity arises.
+
+These cases exhaust class $r$, and the count follows from
+Proposition~\ref{prop:bad}(i): $\mathrm{Bad}$ occupies the class indices
+$t = 0, \dots, \beta-1$, and the free indices are the even ones when
+$r \ge 1$ and the odd ones when $r = 0$.
+\end{proof}
+
+\begin{corollary}[One exception set, two conventions]\label{cor:two-conventions}
+For $m \ge 3$, $m \ne 4$, the P-positions of $D(m,r)$ outside the
+periodic law are, in normal play, exactly the hard members of
+$\mathrm{Bad}(m,r)$, and in mis\`ere play exactly the free members of
+$\mathrm{Bad}(m,r)$. The exception set is the same set under both
+conventions; the convention selects which half of it is exceptional.
+\end{corollary}
+\begin{proof}
+The mis\`ere half is Theorem~\ref{thm:misere-main}. For normal play,
+Proposition~\ref{prop:bad}(ii) assigns Grundy value $0$ to the hard
+members of $\mathrm{Bad}$ and $1$ to the free members, so the former are
+P-positions and the latter are not; and by
+Theorem~\ref{thm:grundy-transfer} every class-$r$ position at or above
+$s_{\min}$ has Grundy value at least $2$.
+\end{proof}
+
+This is the strongest form of the observation that the rebels do not
+vanish under mis\`ere but move. In a healthy game with $r \ge 1$,
+$\mathrm{Bad}$ is the single free position $n = r$, so normal play has no
+exceptional P-position at all and mis\`ere has exactly one. At $r = 0$,
+$\mathrm{Bad}$ is $\{0, m\}$ with $0$ hard and $m$ free, so normal play
+has the boundary position $n = 0$ and mis\`ere has $n = m$. In the
+exceptional games $\mathrm{Bad}$ is $\{r, m+r, 2m+r\}$, of which $m+r$ is
+hard and the other two free: normal play keeps the rebel $m + r$,
+mis\`ere discards it and gains the pair $r$ and $2m + r$. The receipts,
+at $(9,4)$: the rebel $13$ dissolves because its option $12$ is a top
+rung and hence $\PP^-$, while $22$ is $\PP^-$ because its four options
+$21$, $18$, $13$ and $6$ are respectively a bottom, a bottom, a hard
+member of $\mathrm{Bad}$, and a bottom --- all $\NN^-$.
+
+\subsection{The degenerate moduli}\label{sec:misere-degenerate}
+
+At $m \in \{2, 4\}$ we have $s_{\min} = \infty$ and $\mathrm{Bad}$ is the
+whole of class $r$, so Theorem~\ref{thm:misere-main} does not apply and
+the analysis must be redone. It comes out as a mirror of
+Section~\ref{sec:disease}, with the confined residue exchanged.
+
+\begin{proposition}[Mis\`ere confinement swaps residues]\label{prop:misere-swap}
+Let $m \in \{2,4\}$ and $0 \le r \le m-1$. Let $f^* = f$ and let $h^*$ be
+the least member of the hard residue, so that $h^* = f + m$ when
+$r \ge 1$ and $h^* = 0$ when $r = 0$. Let $\mathcal{G}$ denote the
+normal-play P-set of Golomb's subtract-a-square game, and set
+$I = \mathcal{G}$ when $m = 2$ and
+$I = \{u : \lfloor u/2 \rfloor \in \mathcal{G}\}$ when $m = 4$. Under
+mis\`ere play:
+
+(i) every hard member of class $r$ is $\NN^-$;
+
+(ii) the free members are confined, and $f^* + 2mu$ is $\PP^-$ if and
+only if $u \in I$;
+
+(iii) the mis\`ere and normal-play P-sets of class $r$ are one index set
+read from two base points:
+\[ \PP^- \cap (\text{class } r) = \{ f^* + 2mu : u \in I \}, \qquad
+\PP \cap (\text{class } r) = \{ h^* + 2mu : u \in I \}, \]
+so that
+$\PP^- \cap (\text{class } r) = (\PP \cap (\text{class } r)) + (f^* - h^*)$,
+a translation by $-m$ when $r \ge 1$ and by $+m$ when $r = 0$.
+\end{proposition}
+\begin{proof}
+(i) By Table~\ref{tab:Q} the squares have residues in $\{0, 1, m\}$
+modulo $2m$ at both moduli. An odd square has residue $1$, which lies in
+$H + m$ by Lemma~\ref{lem:hduality}(iv), so it carries the hard residue
+onto a top rung, $\PP^-$ by Lemma~\ref{lem:chain-misere}; and an odd
+square is legal at every $n \ge 1$. The only hard member with $n = 0$
+occurs at $r = 0$ and is terminal, hence $\NN^-$.
+
+(ii) We verify (M1) and (M2) of Lemma~\ref{lem:misere-transfer} for the
+set $C$ of free members. (M1): a free member satisfies $n \ge f \ge 1$
+and so has the legal move $1$; none is terminal. (M2): the options of a
+free member are of three kinds. A square of residue $1$ lands on a
+bottom, $\NN^-$ by Lemma~\ref{lem:chain-misere}. A square of residue $m$
+--- occurring only at $m = 4$, where $4 \in \Q(8)$ --- is internal but
+exchanges the two residues, so it lands on a hard member, $\NN^-$ by (i).
+A square of residue $0$ is internal and preserves the residue, so it is
+an internal option. Hence every external option of a member of $C$, and
+every option leaving $C$, is $\NN^-$, and
+Lemma~\ref{lem:misere-transfer} applies: the mis\`ere outcomes on $C$ are
+the normal-play outcomes of the internal game on $C$.
+
+That game is computed as in Theorem~\ref{thm:golomb}. At $m = 2$ a square
+divisible by $4$ is $(2i)^2 = 4i^2$, so on the index $u$ the internal
+moves read $u \mapsto u - i^2$, with legality $4i^2 \le f + 4u$
+equivalent to $i^2 \le u$; this is subtract-a-square, whose normal-play
+P-set is $\mathcal{G}$. At $m = 4$ a square divisible by $8$ is divisible
+by $16$, hence of the form $(4i)^2 = 16i^2$, so the internal moves read
+$u \mapsto u - 2i^2$, with legality $16i^2 \le f + 8u$ equivalent to
+$2i^2 \le u$; this is subtract-$\{2i^2\}$, which preserves the parity of
+$u$ and splits into two interleaved copies of subtract-a-square in the
+half-index $\lfloor u/2 \rfloor$, exactly as in
+Theorem~\ref{thm:golomb}(d).
+
+(iii) Theorem~\ref{thm:golomb} states that the normal-play P-positions of
+class $r$ are exactly $h^* + 2mt$ for $t \in I$. By (ii) the mis\`ere
+$\PP^-$-positions are exactly $f^* + 2mu$ for $u \in I$. The index sets
+coincide because the two internal games are identical ---
+subtract-a-square at $m = 2$, subtract-$\{2i^2\}$ at $m = 4$ --- with
+index origin in each case at a position too small to afford any internal
+move, since $\max(f^*, h^*) < \sigma(m)$; and both are evaluated by the
+\emph{normal-play} recursion: the hard side because play there is normal,
+the free side by Lemma~\ref{lem:misere-transfer}, whose conclusion is
+precisely that the mis\`ere outcomes of the confined class are the
+normal-play outcomes of its internal game. Two sets built from one index
+set on two arithmetic progressions of the same step are translates of one
+another by the difference of base points, and
+$f^* - h^* = r - (m+r) = -m$ for $r \ge 1$, while $f^* - h^* = m - 0 = +m$
+for $r = 0$.
+\end{proof}
+
+The sign is not a case split in the mechanism but in the geography: for
+$r \ge 1$ the free residue sits below the hard one, at $r = 0$ above it,
+and the index set never moves.
+
+\begin{corollary}\label{cor:misere-density}
+For $m \in \{2,4\}$ and every $r$, the mis\`ere P-set of $D(m,r)$ is not
+eventually periodic; the confined free class contains no two elements
+differing by a perfect square, hence has asymptotic density zero, while
+retaining at least $\sqrt{n}/2 - O(1)$ members up to $n$; and the
+mis\`ere P-set has asymptotic density $(m-1)/2m$.
+\end{corollary}
+\begin{proof}
+Each statement is the corresponding statement of
+Corollaries~\ref{cor:aperiodic}, \ref{cor:sparse} and~\ref{cor:uniform}
+read through the reindexing of
+Proposition~\ref{prop:misere-swap}(ii), which differs from that of
+Theorem~\ref{thm:golomb} only by the translation $f^* - h^* = \mp m$. The
+square-difference-free property transfers because two $\PP^-$ positions
+of the confined class are both in squares mode and their difference, were
+it a square, would be a legal move from one to the other --- a move
+between two P-positions of the mis\`ere internal game, which the
+normal-play recursion of Lemma~\ref{lem:misere-transfer} forbids.
+\end{proof}
+
+\begin{remark}\label{rem:misere-complete}
+The mis\`ere picture is therefore complete for the whole family and
+follows the normal-play picture clause for clause: chains classified with
+values inverted, class $r$ settled by a single parameter, exceptional
+positions confined to $\mathrm{Bad}$, and the two degenerate moduli
+confined and equivalent to Golomb's game. What is not claimed is any
+statement about sums, for the reason given at the head of the section;
+the mis\`ere quotient of $D(m,r)$ is not computed here and appears to be
+a genuine question.
+\end{remark}
 
 \section{Further solved games}\label{sec:examples}
 
