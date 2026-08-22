@@ -281,7 +281,8 @@ class except $r$. This section builds the apparatus for class $r$
 itself: the two residues the class occupies modulo $2m$, the hard set of
 useful residues, and a single parameter, $s_{\min}$, from which the
 classification of Section~\ref{sec:main}, its exception sets, and the
-Grundy and mis\`ere laws of Sections 8 and 10 are all read.
+Grundy and mis\`ere laws of Sections~\ref{sec:grundy}
+and~\ref{sec:misere} are all read.
 
 \begin{definition}[The two residues, the hard set, and $s_{\min}$]
 \label{def:smin}
@@ -408,7 +409,8 @@ $1$.
 One square, two jobs: the witness that lands the hard residue on a bottom
 --- the escape that Section~\ref{sec:main} converts into the
 classification --- is at the same time the Grundy-$0$ half of the
-palette, which Section 8 converts into a transfer of Grundy values. The
+palette, which Section~\ref{sec:grundy} converts into a transfer of
+Grundy values. The
 two developments consume the same hypothesis, the finiteness of
 $s_{\min}$, at the same threshold.
 
@@ -701,6 +703,145 @@ threshold. The identity remains the cleanest line in this development and the
 historical door to everything above.
 \end{remark}
 
+\section{The Transfer Principle}\label{sec:transfer}
+
+The classification of Section~\ref{sec:main} is an outcome statement, and
+the argument that produced it --- one witness landing on a P-position ---
+is the standard one. This section isolates the mechanism in a form that
+computes Grundy values rather than outcomes, and does so for an arbitrary
+impartial game. Two consequences follow in later sections: the Grundy
+values of every solved member of the diagonal family are a shift of
+Golomb's nim-sequence, and an arbitrary subtraction game can be embedded
+as a mode class of a mode-switching host.
+
+\begin{lemma}[Absorption]\label{lem:absorption}
+Let $O \subseteq \mathbb{Z}_{\ge 0}$ with $\{0, 1\} \subseteq O$, and set
+$V = O \cap [2, \infty)$. Then
+\[ \operatorname{mex}(O) = 2 + \operatorname{mex}(V - 2). \]
+\end{lemma}
+\begin{proof}
+Since $0$ and $1$ belong to $O$,
+$\operatorname{mex}(O) = \min\{y \ge 2 : y \notin O\}$. Writing
+$y = 2 + x$ with $x \ge 0$, the condition $y \notin O$ is equivalent to
+$x \notin V - 2$, and the minimum transports accordingly.
+\end{proof}
+
+The lemma is elementary; its force lies in what the hypothesis
+$\{0,1\} \subseteq O$ buys. It buys two things at once. It raises the
+floor, so that a position meeting the hypothesis has value at least $2$
+and the values of such positions occupy a band disjoint from
+$\{0, 1\}$. And it saturates the low band, so that any option carrying
+value $0$ or $1$ is a duplicate, and mex is blind to duplicates. Together
+these make a finite set of irregular positions of low value not merely
+distinguishable but invisible, and it is this invisibility that the next
+theorem converts into a clean recursion.
+
+\begin{theorem}[Transfer Principle]\label{thm:transfer}
+Let a well-founded impartial game under normal play be given, with Grundy
+function $G$. Let $C$ be a set of its positions; for $p \in C$, call an
+option of $p$ \emph{internal} if it lies in $C$ and \emph{external}
+otherwise. Let $\mathrm{Bad} \subseteq C$, and assume:
+
+(H1) (palette) every $p \in C \setminus \mathrm{Bad}$ has an external
+option of Grundy value $0$ and an external option of Grundy value $1$;
+
+(H2) (ceiling) every external option of every $p \in C$ has Grundy value
+$0$ or $1$;
+
+(H3) (prefix) every $p \in \mathrm{Bad}$ has $G(p) \le 1$, and every
+internal option of a member of $\mathrm{Bad}$ lies in $\mathrm{Bad}$.
+
+Then $G(p) \ge 2$ for every $p \in C \setminus \mathrm{Bad}$, and the
+function $h = G - 2$ on $C \setminus \mathrm{Bad}$ satisfies
+\[ h(p) = \operatorname{mex}\{\, h(q) : q \text{ an internal option of }
+p \text{ with } q \notin \mathrm{Bad} \,\}. \]
+That is, $h$ is the Grundy function of the game played on
+$C \setminus \mathrm{Bad}$ using internal moves only: the external
+options and the whole of $\mathrm{Bad}$ are invisible to it.
+\end{theorem}
+\begin{proof}
+The option relation is well-founded, so we may induct along it. Let
+$p \in C \setminus \mathrm{Bad}$ and assume the conclusion at every member
+of $C \setminus \mathrm{Bad}$ below $p$. Write $O$ for the set of Grundy
+values of the options of $p$ and $V = O \cap [2, \infty)$.
+
+By (H1), $p$ has external options of values $0$ and $1$, so
+$\{0, 1\} \subseteq O$. By (H2), every external option of $p$ contributes
+a value in $\{0, 1\}$ and hence nothing to $V$. By the first clause of
+(H3), an internal option lying in $\mathrm{Bad}$ has value at most $1$
+and likewise contributes nothing to $V$. An internal option $q$ with
+$q \notin \mathrm{Bad}$ lies in $C \setminus \mathrm{Bad}$ and is below
+$p$, so by the induction hypothesis $G(q) = 2 + h(q) \ge 2$, and it
+contributes exactly that value. Hence
+\[ V = \{\, 2 + h(q) : q \text{ an internal option of } p \text{ with }
+q \notin \mathrm{Bad} \,\}, \]
+so $V - 2 = \{ h(q) : q \text{ internal}, q \notin \mathrm{Bad} \}$.
+Lemma~\ref{lem:absorption} applies to $O$ and gives
+\[ G(p) = \operatorname{mex}(O) = 2 + \operatorname{mex}(V - 2)
+= 2 + \operatorname{mex}\{ h(q) : q \text{ internal},
+q \notin \mathrm{Bad} \}, \]
+which is at least $2$ and is the asserted recursion.
+\end{proof}
+
+\begin{remark}\label{rem:transfer-twice}
+The theorem is stated for an arbitrary impartial game rather than for
+$D(m,r)$ because it is used twice under opposite logical circumstances.
+In Section~\ref{sec:grundy} the hypotheses are \emph{verified} for a family already
+defined: $C$ is the class $r$, $\mathrm{Bad}$ is the set of class-$r$
+positions below $s_{\min}$, and (H1), (H2), (H3) are supplied
+respectively by Corollary~\ref{cor:palette},
+Corollary~\ref{cor:chain-grundy}, and Proposition~\ref{prop:bad}. In
+Section~\ref{sec:embed} they are \emph{arranged}: the host game is constructed so that
+its mode class satisfies them by design, and the conclusion is then read
+as an embedding of a prescribed subtraction game. A statement tied to the
+diagonal family would serve the first use and not the second, and the
+mechanism is in any case indifferent to squares, to the fallback amount,
+and to the modulus --- nothing in the proof mentions them. The failure of
+(H1) is what distinguishes the degenerate moduli: at $m \in \{2, 4\}$ the
+palette available to the hard residue is the single value $1$, and the
+conclusion weakens from a Grundy transfer to the outcome transfer of
+Section~\ref{sec:disease}.
+\end{remark}
+
+\begin{remark}\label{rem:h3-clauses}
+The two clauses of (H3) do different work, and only the first is consumed
+by the proof. The first prevents a member of $\mathrm{Bad}$ from
+masquerading as a good position: a single $p_0 \in \mathrm{Bad}$ with
+$G(p_0) = 2$ would inject a phantom value into $V$ at every good position
+having $p_0$ as an option, and the identification of $h$ with the
+internal Grundy function would fail there and everywhere above it. The
+second clause is not needed for Theorem~\ref{thm:transfer} itself but for
+the step that follows every application of it --- the identification of
+the internal game on $C \setminus \mathrm{Bad}$ with a translate of the
+internal game on $C$. Deleting a downward-closed set from a subtraction
+game and re-basing yields an isomorphic copy of the same game, shifted;
+deleting a set with holes yields a genuinely different game, since a
+surviving position may have lost some options and not others. We
+therefore record both clauses in the statement, so that the hypotheses
+are checked once and the conclusion is available in both forms. When
+$\mathrm{Bad} = \emptyset$ the hypothesis (H3) is vacuous, no shift
+arises, and $h$ is the internal Grundy function on the whole of $C$ ---
+this is the situation of the embedding of Section~\ref{sec:embed} on its hard
+progression, where the host is built so that the palette is available
+from the base point onward.
+\end{remark}
+
+\begin{remark}\label{rem:taller-ceiling}
+Neither Lemma~\ref{lem:absorption} nor Theorem~\ref{thm:transfer} is
+special to the value $2$. If $\{0, 1, \dots, c-1\} \subseteq O$ and
+$V = O \cap [c, \infty)$, the same two lines give
+$\operatorname{mex}(O) = c + \operatorname{mex}(V - c)$; and if (H1) and
+(H2) are replaced by the requirement that the external options of a good
+position realise exactly the values $0, 1, \dots, c-1$ and never exceed
+them, and (H3) by $G \le c-1$ on $\mathrm{Bad}$, then the conclusion
+becomes $G \ge c$ on $C \setminus \mathrm{Bad}$ with $h = G - c$
+satisfying the same internal recursion. We use only the case $c = 2$, in
+which the ceiling is the alternation of
+Corollary~\ref{cor:chain-grundy}; the general form is recorded because a
+host whose fallback modes are not single-step chains will present a
+taller ceiling, and the transfer survives verbatim.
+\end{remark}
+
 \section{The diseased (degenerate) moduli}\label{sec:disease}
 
 Theorem~\ref{thm:main} excludes exactly two moduli, and this section
@@ -930,6 +1071,15 @@ constant $16$, so each image inherits density zero from $G$, and a union
 of two density-zero sets is density zero --- two, not infinitely many,
 is what makes that last step safe.
 \end{proof}
+
+\section{The Grundy Transfer Theorem}\label{sec:grundy}
+% PLACEHOLDER --- filled in later commits
+
+\section{The Universal Embedding Theorem}\label{sec:embed}
+% PLACEHOLDER --- filled in later commits
+
+\section{Mis\`ere play}\label{sec:misere}
+% PLACEHOLDER --- filled in later commits
 
 \section{Further solved games}\label{sec:examples}
 
