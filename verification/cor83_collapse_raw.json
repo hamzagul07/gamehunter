@@ -1,0 +1,153 @@
+{
+  "spec": {
+    "moduli": [
+      3,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      12
+    ],
+    "depth_t": 5000,
+    "exceptional_r_at_9": [
+      4,
+      5,
+      6
+    ],
+    "engine": "game_hunter.grundy_sequence",
+    "rule": "[\"ifmod\", m, r, [\"squares\"], [\"const\", [m]]]"
+  },
+  "healthy": [
+    {
+      "m": 3,
+      "healthy_r": [
+        1,
+        2
+      ],
+      "games": 2,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 5,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "games": 4,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 6,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "games": 5,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 7,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "games": 6,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 9,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        7,
+        8
+      ],
+      "games": 5,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 10,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "games": 9,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 11,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "games": 10,
+      "depth_t": 5000,
+      "pass": true
+    },
+    {
+      "m": 12,
+      "healthy_r": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "games": 11,
+      "depth_t": 5000,
+      "pass": true
+    }
+  ],
+  "exceptional_trio": {
+    "m": 9,
+    "exceptional_r": [
+      4,
+      5,
+      6
+    ],
+    "games": 3,
+    "depth_t": 5000,
+    "pass": true
+  },
+  "all_pass": true,
+  "note": "Finite check over the stated class-index range; not a proof."
+}
