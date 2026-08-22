@@ -57,29 +57,40 @@ Pakistan}
 
 \begin{abstract}
 Mode-switching subtraction games are non-invariant subtraction games
-whose legal moves depend on the pile size $n$ modulo a fixed $m$. The
-diagonal family $D(m, r)$ has two ingredients: from positions
-$n \equiv r \pmod m$ a player subtracts any positive square at most $n$,
-and from every other position exactly $m$. For every $m \ge 3$ except
-$m = 4$ and every $r$, the P-positions of $D(m, r)$ are precisely the
-$m - 1$ residue classes modulo $2m$ of the chain bottoms, together with
-$n = 0$ and, for $(m, r) \in \{(9, 4), (9, 5), (9, 6)\}$, a single rebel
-position $n = m + r \in \{13, 14, 15\}$; there are no exceptions beyond these named positions. At $m = 2$ and
-$m = 4$ the squares modulo $2m$ lie inside $\{0, 1, m\}$, so no move from
-the affected classes reaches a foreign P-position: those classes are
-confined to self-contained recursions, which are Golomb's
-subtract-a-square game in affine disguise: confinement is proved, and the
-classes are provably never eventually periodic, of density zero within
-their class. The same
-architecture solves Foursquare, an earlier machine-found game with moves
-$\{3, 8, 9\}$ and a square mode at $n \equiv 1 \pmod 4$: its P-positions
-are $n \equiv 0, 2, 4, 6 \pmod{16}$, and enlarging the move set to the
-full residue classes of $3$, $8$, and $9$ modulo $16$ provably leaves the
-P-set unchanged. Every conjecture was machine-proposed from a census of
-roughly 3,000 games; every proof is human-written; twice, theory
-constructed afterwards rederived numbers the instrument had recorded
-before the theory existed. The growth rate of their P-sets --- Golomb's own
-open question since 1966 --- remains open.
+whose legal moves depend on the pile size $n$ modulo a fixed $m$. In the
+diagonal family $D(m, r)$, a position $n \equiv r \pmod m$ permits the
+subtraction of any positive square at most $n$; every other position
+permits only $m$. We solve the family completely: outcomes and Grundy
+values under normal play, and outcomes under mis\`ere. For every
+$m \ge 3$ except $m = 4$ and every $r$, the P-positions are the $m - 1$
+residue classes modulo $2m$ of the fallback chains' bottoms, together
+with the hard half of a finite set $\mathrm{Bad}(m, r)$ read off a single
+parameter $s_{\min}$ --- the boundary position $n = 0$ when $r = 0$, and
+a single rebel $n = m + r \in \{13, 14, 15\}$ at
+$(m, r) \in \{(9,4), (9,5), (9,6)\}$. Under mis\`ere play the chains
+invert and the exceptional positions are exactly the free half of the
+same set: one exception set, two conventions. The Grundy function on the
+square-mode class is, beyond the finite prefix, an explicit shift of the
+nim-sequence of Golomb's subtract-a-square game; consequently no member
+of the family is eventually periodic at the level of Grundy values, and
+each has bounded Grundy values if and only if Golomb's game does --- a
+question that is open. At $m = 2$ and $m = 4$ the squares modulo $2m$ lie
+inside $\{0, 1, m\}$, the affected classes are confined, and they are
+Golomb's game in affine disguise, never eventually periodic, of density
+zero within their class. The mechanism is isolated as a Transfer
+Principle for arbitrary impartial games, and it runs backward: a host
+construction embeds any subtraction game whatever as a mode class of a
+mode-switching game, at outcome level and, with one added move, at
+Grundy level --- so a classification theorem for mode-switching
+subtraction games with arbitrary mode sets would classify all
+subtraction games. The same architecture solves Foursquare, an earlier
+machine-found game with moves $\{3, 8, 9\}$ and a square mode at
+$n \equiv 1 \pmod 4$, and yields an exact criterion for which move-set
+enlargements preserve a law. Every conjecture was machine-proposed from a
+census of roughly 3,000 games; every proof is human-written; twice,
+theory constructed afterwards rederived numbers the instrument had
+recorded before the theory existed. The growth rate of Golomb's P-set ---
+his own open question since 1966 --- remains open.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -88,59 +99,116 @@ amounts a player may remove, the players alternate, and under normal play
 whoever cannot move loses. For a fixed finite ruleset the classical
 theory ends in one word, periodicity: the sequence of previous-player
 wins is eventually periodic, and the game solves itself by a finite
-computation \cite{golomb}; see \cite{survey} for a recent survey.
-The live frontier is rulesets in which the set of legal moves
-varies with the position being moved from --- position-dependent, or
-non-invariant, move sets \cite{duchene-rigo}. This paper studies a structured family at that
-frontier, in which the entire mode of play --- which amounts are legal,
-and why --- switches with the residue of $n$.
+computation \cite{golomb}; see \cite{survey} for a recent survey. The
+live frontier is rulesets in which the set of legal moves varies with the
+position being moved from --- position-dependent, or non-invariant, move
+sets \cite{duchene-rigo}. This paper studies a structured family at that
+frontier and solves it completely --- outcomes and Grundy values under
+normal play, outcomes under mis\`ere --- and then shows that the
+structure making the family solvable sits one construction away from
+universality: the same mode-switching format can host any subtraction
+game whatever.
 
 The protagonist is the two-parameter family $D(m, r)$: from a position
 $n \equiv r \pmod m$ a player may subtract any positive square not
 exceeding $n$; from every other position the only move is to subtract
 $m$. The family is called diagonal because its members first surfaced
-along a diagonal of the census's parameter grid, one game per modulus.
-The main result can be tasted before any machinery arrives: for every
+along a diagonal of a census's parameter grid, one game per modulus. The
+main outcome law can be tasted before any machinery arrives: for every
 $m \ge 3$ except $m = 4$ and every $r$, the P-positions of $D(m, r)$ are
 exactly $m - 1$ residue classes modulo $2m$ --- the bottoms of the game's
-fallback chains --- together with a completely determined finite
-exception set, for both parities of $m$ and with no unverified
-thresholds.
+fallback chains --- together with a finite exception set read off a
+single parameter, with no thresholds and no unverified zones.
 
-The contributions come in the paper's own order. The Chain Lemma
+The classification rests on two lemmas and one number. The Chain Lemma
 decomposes every fallback class into an independent chain whose
-P-positions alternate upward from a stuck bottom, reading the law's
-residues directly off those bottoms. The Clearing Lemma turns one small
-square per class into a complete escape argument, and with it comes the
-Diagonal Theorem: every $m \ge 3$ except $m = 4$, both parities, the
-exception set pinned to exactly three rebel positions and one boundary.
-Confinement explains the excluded moduli: at $m = 2$ and $m = 4$ the
-squares modulo $2m$ collapse into $\{0, 1, m\}$, no move reaches a
-foreign P-position, and the affected classes turn inward into
-self-contained recursions --- the census's two lawless columns,
-identified. Section 7 carries the architecture to Foursquare, the
-machine's first find: its law $n \equiv 0, 2, 4, 6 \pmod{16}$ proved in
-half a page, its mechanism of one governor and paired rescuers exposed,
-and Kadam's Extension established. Section 8 opens the instrument itself
---- proposer, engine, detectors, filter --- and records the two
-retrodictions in which theory built afterwards rederived numbers recorded
-before the theory existed.
+P-positions alternate upward from a stuck bottom --- Grundy values $0$
+and $1$, nothing else, uniformly across the board's foreign territory.
+The $H$-duality lemma matches amounts to landings: an amount is useful
+from the square-mode class exactly when its residue modulo $2m$ avoids
+$0$ and $m$, and the useful residues split into a hard set $H$ and its
+shift, serving the class's two residues in complementary pairs. The
+number is $s_{\min}(m, r)$, the least square whose residue lies in $H$.
+Its trichotomy is the paper's map: $s_{\min} \le f + m$ for every healthy
+pair --- all $m \ge 3$, $m \ne 4$ outside three exceptions --- while
+$s_{\min} = 25$ at $(m, r) \in \{(9,4), (9,5), (9,6)\}$ and
+$s_{\min} = \infty$ at $m \in \{2, 4\}$. The class members below
+$s_{\min}$ form the bad set $\mathrm{Bad}(m, r)$, of size one, two, or
+three, and the Diagonal Law is then a single sentence: the P-positions
+are the bottom classes together with the hard half of $\mathrm{Bad}$. The
+boundary position $n = 0$ and the three rebels were never two kinds of
+exception; they are the hard members of $\mathrm{Bad}$ in their regimes.
+
+Behind the outcome argument sits a mechanism worth isolating, and
+Section~\ref{sec:transfer} states it for an arbitrary impartial game: if
+a set of positions has, off a finite bad prefix, external options
+realising exactly the Grundy values $0$ and $1$, then its Grundy values
+are the internal game's values shifted by $2$, the periphery and the
+prefix invisible. Run forward on the diagonal family, the principle
+yields the complete Grundy solution (Section~\ref{sec:grundy}): on the
+square-mode class, beyond $\mathrm{Bad}$, $G = 2 + \Gamma$ along an
+explicit reindexing, where $\Gamma$ is the nim-sequence of Golomb's
+subtract-a-square game and the offset is read from
+$\beta = |\mathrm{Bad}|$ and the squarefree part of $m$. Two corollaries
+calibrate how far outside the classical theory the family lives: no
+member is eventually periodic at the level of Grundy values, and each has
+bounded values if and only if $\Gamma$ is bounded --- Golomb's
+Nim-dimension question, reproduced at every modulus.
+
+The excluded moduli are not casualties but the first instance of a
+phenomenon. At $m = 2$ and $m = 4$ the squares modulo $2m$ collapse into
+$\{0, 1, m\}$, no move from the affected classes reaches a foreign
+P-position, and the classes turn inward: they are Golomb's game in affine
+disguise (Section~\ref{sec:disease}), provably never eventually periodic,
+of density zero within their class. Section~\ref{sec:embed} shows the
+phenomenon is universal: for any subtraction game $T$, a mode-switching
+host with fallback $m$ and mode set $\{1\} \cup 2mT$ reproduces $T$'s
+P-set on an arithmetic progression, and adding the single move $m + 1$
+upgrades the embedding to Grundy values, exact from the base point
+$f + m$. The consequence closes a door: a classification theorem for
+mode-switching subtraction games with arbitrary mode sets would classify
+all subtraction games, so no such theorem exists to be proved --- one
+construction away from the solved family lies a class exactly as wild as
+subtraction games themselves.
+
+Mis\`ere play, which usually wrecks structure, here confirms it
+(Section~\ref{sec:misere}). The chains invert, the two witnesses exchange
+jobs, and the mis\`ere P-positions are the top rungs together with the
+free half of the same set $\mathrm{Bad}$ --- one exception set, two
+conventions, the convention selecting the half. At the degenerate moduli
+mis\`ere swaps which residue is confined, and the mis\`ere P-set of the
+class is the normal-play P-set translated by $\mp m$, the index set never
+moving.
+
+Section~\ref{sec:examples} puts the machinery to work three times:
+$D(5, 2)$ solved in full as the worked example; Foursquare --- the
+machine's first find, moves $\{3, 8, 9\}$ with a square mode at
+$n \equiv 1 \pmod 4$ --- solved with its mechanism exposed and Kadam's
+Extension established; and a criterion determining exactly which
+enlargements of a mode's move set preserve a law.
+Section~\ref{sec:method} opens the instrument itself --- proposer,
+engine, detectors, filter --- and records the retrodictions in which
+theory built afterwards rederived numbers recorded before the theory
+existed.
 
 The method deserves a plain statement on page one. Every conjecture in
 this paper was machine-proposed, drawn from a census of roughly three
-thousand games; every proof is human-written. Section 8 documents the
-pipeline, the verification regime, and the written integrity protocol
-that kept the two roles separate.
+thousand games; every proof is human-written. Section~\ref{sec:method}
+documents the pipeline, the verification regime, and the written
+integrity protocol that kept the two roles separate.
 
 Section~\ref{sec:prelim} fixes notation and the verification lemma;
-Sections~\ref{sec:chain} through~\ref{sec:main} build chains, clearings,
-and rebels into the Diagonal Theorem; Section~\ref{sec:disease} proves
-confinement at $m = 2$ and $4$; Section~\ref{sec:examples} puts the
-machinery to work three times --- $D(5, 2)$ solved in full as the worked
-example, Foursquare with its mechanism and Kadam's Extension, and the
-odd-fallback collapse; Section~\ref{sec:method} opens the instrument; and
-Section~\ref{sec:open} closes the question the census could not settle ---
-and locates the one that remains, older than this paper.
+Sections~\ref{sec:chain} through~\ref{sec:main} build chains, the
+$s_{\min}$ apparatus, and the Diagonal Law;
+Section~\ref{sec:transfer} isolates the Transfer Principle;
+Section~\ref{sec:disease} proves confinement at $m = 2$ and $4$;
+Sections~\ref{sec:grundy} and~\ref{sec:embed} carry the principle forward
+to the Grundy solution and backward to the universal embedding;
+Section~\ref{sec:misere} settles mis\`ere play;
+Section~\ref{sec:examples} solves further games;
+Section~\ref{sec:method} opens the instrument; and
+Section~\ref{sec:open} closes what the census could not settle --- and
+locates the question that remains, older than this paper.
 
 \section{Preliminaries}\label{sec:prelim}
 
@@ -208,10 +276,10 @@ $22$ & $\{0, 1, 3, 4, 5, 9, 11, 12, 14, 15, 16, 20\}$ & $\{2, 6, 7, 8, 10, 13, 1
 
 % PORT: escape_and_diagonal.md, Part III closing paragraph (line 83),
 % verbatim except the internal cross-reference.
-The mod-$4$ and mod-$8$ rows are the indictment written out: $\Q(4) =
+The mod-$4$ and mod-$8$ rows are the diagnosis written out: $\Q(4) =
 \{0, 1\}$ and $\Q(8) = \{0, 1, 4\}$ both sit entirely inside the triple
 $\{0, 1, m\}$, so their complements swallow every value any hard set will
-ever contain (Section~\ref{sec:clearing}) --- the disease of $m = 2$ and
+ever contain (Section~\ref{sec:clearing}) --- the degeneracy of $m = 2$ and
 $m = 4$ is visible in these two rows before any game logic starts. One
 eyebrow kept raised on purpose: the thinnest \emph{odd} table is mod
 $18$, thinned because $9$ is itself a square and the rows $k = 3$ and
@@ -842,7 +910,7 @@ host whose fallback modes are not single-step chains will present a
 taller ceiling, and the transfer survives verbatim.
 \end{remark}
 
-\section{The diseased (degenerate) moduli}\label{sec:disease}
+\section{The degenerate moduli}\label{sec:disease}
 
 Theorem~\ref{thm:main} excludes exactly two moduli, and this section
 proves the exclusion is not a limitation of the method but a fact about
@@ -884,7 +952,7 @@ aperiodicity remains open.
 
 \begin{remark}[Double condemnation]\label{rem:double-condemnation}
 % PORT: V.2 verbatim.
-The two diseased moduli are exactly the two the parity-free engine cannot
+The two degenerate moduli are exactly the two the parity-free engine cannot
 serve. At $m = 2$ the engine is silent: the always-a-square inequality
 degenerates ($(m - 2)^2 = 0$) and the clearing interval $(1, 3]$ is
 genuinely square-free. At $m = 4$ the engine convicts every class from
@@ -970,7 +1038,9 @@ as a calibration classic before every session.
 Nothing here is special to squares: whenever a mode class of step $2m$
 is confined, its internal game is the plain subtraction game on the
 index $t$ with subtraction set $\{\, s/2m : s \in S,\ 2m \mid s \,\}$,
-where $S$ is the mode's move set.
+where $S$ is the mode's move set. This observation is developed in full
+in Section~\ref{sec:embed}, where the internal game is prescribed rather
+than inherited.
 \end{remark}
 
 \begin{corollary}[No eventual period]\label{cor:aperiodic}
@@ -1513,8 +1583,8 @@ position is therefore an N-position, and every other position is P if and
 only if all of its options are N. We write $\PP^-$ and $\NN^-$ for
 mis\`ere outcomes. No Grundy theory is available here --- mis\`ere
 outcomes of a disjunctive sum are not determined by the summands'
-outcomes, and the mis\`ere quotient of even a simple subtraction game may
-be large \cite{lessons} --- so this section classifies outcomes only.
+outcomes \cite{lessons}, and the mis\`ere quotient of even a simple
+subtraction game may be large \cite{plambeck-siegel} --- so this section classifies outcomes only.
 That is enough: the classification is complete, and the comparison with
 Theorem~\ref{thm:main} is exact.
 
@@ -1991,12 +2061,14 @@ first at $n_0$.
 \end{proof}
 \begin{remark}[The scoping is not decorative]\label{rem:scoping}
 The criterion asks about P-positions of the enlarged mode, not about all
-P-positions. Enlarging $D(5,2)$'s squares-mode set by the amount $2$
-leaves its law completely untouched --- verified to $20{,}000$ --- even
-though $2$ is a difference of two P-positions of the game
-($2 = 2 - 0$ modulo $10$), because class $2$ contains no P-position from
-which the new move could ever fire. An unscoped criterion predicts a
-break here and is simply wrong.
+P-positions. Enlarging $D(5, 2)$'s squares-mode set by the amount $2$
+leaves its law untouched --- and provably so, no longer by sweep: by
+Corollary~\ref{cor:explicit} the class $2$ of $D(5, 2)$ contains no
+P-position at all, so the criterion's condition holds vacuously and
+Proposition~\ref{prop:enlarge} returns the law unchanged --- even though
+$2$ is a difference of two P-positions of the game
+($2 = 2 - 0$ modulo $10$). An unscoped criterion predicts a break here
+and is simply wrong.
 \end{remark}
 \begin{corollary}[Kadam's Extension, revisited]\label{cor:kadam-revisited}
 In Foursquare every P-position is standard-mode, so the scoping is
@@ -2275,6 +2347,9 @@ undergone formal peer review.
   \emph{Period. Math. Hungar.} 15 (1984), 205--209.
 \bibitem{eppstein} D.~Eppstein, Faster evaluation of subtraction
   games, in \emph{FUN 2018}, LIPIcs 100, Art.~20, pp.~20:1--20:12.
+\bibitem{plambeck-siegel} T.~E.~Plambeck and A.~N.~Siegel, Mis\`ere
+  quotients for impartial games, \emph{J.~Combin.\ Theory Ser.~A} 115
+  (2008), 593--622.
 \end{thebibliography}
 
 \end{document}
