@@ -966,10 +966,10 @@ agree because both are reading the same two table rows: $\Q(2m)
 Let $m \in \{2, 4\}$ and $0 \le r \le m-1$, and let $h^*$ be the least
 representative of the hard residue: $h^* = m + r$ if $r \ge 1$, and $h^* = 0$
 if $r = 0$. Index the confined class of $D(m,r)$ by $n = 2mt + h^*$,
-$t \ge 0$, and let $G$ denote the set of P-positions of Golomb's
+$t \ge 0$, and let $\mathcal{G}$ denote the set of P-positions of Golomb's
 subtract-a-square game. Then for $m = 2$ the position $4t + h^*$ is P in
-$D(2,r)$ if and only if $t \in G$, and for $m = 4$ the position $8t + h^*$
-is P in $D(4,r)$ if and only if $\lfloor t/2 \rfloor \in G$ --- the
+$D(2,r)$ if and only if $t \in \mathcal{G}$, and for $m = 4$ the position $8t + h^*$
+is P in $D(4,r)$ if and only if $\lfloor t/2 \rfloor \in \mathcal{G}$ --- the
 confined class consisting of two interleaved copies of Golomb's game, one
 on each parity of $t$.
 \end{theorem}
@@ -1021,7 +1021,7 @@ $t \mapsto t - 2i^2$ reads $u \mapsto u - i^2$ in the half-index
 $u = \lfloor t/2 \rfloor$ (legality $2i^2 \le t \iff i^2 \le u$ on both
 parities), with terminal $u = 0$ on each side: two interleaved,
 independent copies of Golomb's game, so $8t + h^*$ is P iff
-$\lfloor t/2 \rfloor \in G$.
+$\lfloor t/2 \rfloor \in \mathcal{G}$.
 \end{proof}
 
 The anomaly ledger now reads as a codebook: $D(2,1)$'s recorded
@@ -1053,13 +1053,13 @@ still repeat along any arithmetic progression, so restrict to the hard
 class $n = 2mt + h^*$: adding $\operatorname{lcm}(p, 2m)$ to $n$ preserves
 both the class and, beyond $N_1$, the P/N status, and in the index this
 says the set $\{t : 2mt + h^* \text{ is P}\}$ is eventually periodic with
-period $q = \operatorname{lcm}(p, 2m)/2m$. At $m = 2$ that set is $G$
+period $q = \operatorname{lcm}(p, 2m)/2m$. At $m = 2$ that set is $\mathcal{G}$
 itself, the P-set of Golomb's game, by Theorem~\ref{thm:golomb}. At
-$m = 4$ it is $\{t : \lfloor t/2 \rfloor \in G\}$, and one parity
-suffices: restrict to even $t = 2u$; membership of $u$ in $G$ repeats
-when $t$ moves by $2q$, and $2q$ is a multiple of $q$, so $G$ is
+$m = 4$ it is $\{t : \lfloor t/2 \rfloor \in \mathcal{G}\}$, and one parity
+suffices: restrict to even $t = 2u$; membership of $u$ in $\mathcal{G}$ repeats
+when $t$ moves by $2q$, and $2q$ is a multiple of $q$, so $\mathcal{G}$ is
 eventually periodic with period $q$ as well. Either way we are left
-holding: $G$ is eventually periodic with period $q$ beyond some $N_0$.
+holding: $\mathcal{G}$ is eventually periodic with period $q$ beyond some $N_0$.
 Two facts kill this. The argument is folklore for any subtraction set
 containing a multiple of every integer; we include it to keep the paper
 self-contained.
@@ -1076,9 +1076,9 @@ legal, the move lands on $0$, a P-position, and the position is honestly
 N.)
 Second, the kill. The first fact supplies a P-position $t$ of Golomb's
 game with $t \ge N_0$. Periodicity walks membership up $t$'s own
-progression: $t + q \in G$, then $t + 2q \in G$, and so on, every
+progression: $t + q \in \mathcal{G}$, then $t + 2q \in \mathcal{G}$, and so on, every
 intermediate point lying at or above $N_0$, so every step is licensed.
-After $q k^2$ steps we reach $t + (qk)^2 \in G$. But $(qk)^2$ is two
+After $q k^2$ steps we reach $t + (qk)^2 \in \mathcal{G}$. But $(qk)^2$ is two
 things at once: a multiple of $q$, which is what let periodicity carry
 us there, and a perfect square, which makes the single move from
 $t + (qk)^2$ down to $t$ legal. That move joins one P-position to
@@ -1102,15 +1102,15 @@ novelty at this bridge: for Golomb's game itself the observation and the
 connection are recorded by Eppstein \cite{eppstein}, and through
 Theorem~\ref{thm:golomb} our statement and his are one statement in two
 coordinate systems.
-The floor is Golomb's counting trick \cite{golomb, ruzsa}, run on $G$
+The floor is Golomb's counting trick \cite{golomb, ruzsa}, run on $\mathcal{G}$
 and carried back through the reindexing. Every $u$ in $[0, T]$ is either
-in $G$ or wins by one square move onto some $g \in G$ below it; a fixed
+in $\mathcal{G}$ or wins by one square move onto some $g \in \mathcal{G}$ below it; a fixed
 $g$ can serve at most $\sqrt{T}$ positions this way, one per square,
-plus itself. So $T + 1 \le |G \cap [0, T]| \cdot (\sqrt{T} + 1)$, giving
-$|G \cap [0, T]| \ge \sqrt{T} - 1$. At $m = 2$ the confined positions up
+plus itself. So $T + 1 \le |\mathcal{G} \cap [0, T]| \cdot (\sqrt{T} + 1)$, giving
+$|\mathcal{G} \cap [0, T]| \ge \sqrt{T} - 1$. At $m = 2$ the confined positions up
 to $n$ correspond to indices up to $T \approx n/4$, so at least
 $\sqrt{n}/2 - O(1)$ of them are P. At $m = 4$ there are two copies of
-$G$, one per parity of $t$, living on disjoint sets of positions, so
+$\mathcal{G}$, one per parity of $t$, living on disjoint sets of positions, so
 their floors add: each copy runs at $T \approx n/16$ and contributes
 $\sqrt{n}/4 - O(1)$, together $\sqrt{n}/2 - O(1)$ again. That both
 moduli land on the same constant is the small arithmetic accident
@@ -1135,9 +1135,9 @@ hypothesis --- the free residue contributes nothing, all of its members
 being N, and the confined class contributes density zero by
 Corollary~\ref{cor:sparse}. Written out at $m = 4$, where the accounting
 is least obvious: by Theorem~\ref{thm:golomb} the confined P-set is
-$(16G + h^*) \cup (16G + h^* + 8)$, the even and odd parities of $t$; an
+$(16\mathcal{G} + h^*) \cup (16\mathcal{G} + h^* + 8)$, the even and odd parities of $t$; an
 affine map $u \mapsto 16u + b$ scales a counting function by the
-constant $16$, so each image inherits density zero from $G$, and a union
+constant $16$, so each image inherits density zero from $\mathcal{G}$, and a union
 of two density-zero sets is density zero --- two, not infinitely many,
 is what makes that last step safe.
 \end{proof}
@@ -1224,13 +1224,15 @@ regime & $d$ & $\beta$ & $\mathrm{Bad}$ & $a_0$ & $a_1$ & $a_\rho$ ($\rho \ge 2$
 \hline
 healthy, $r \ge 1$ & any & $1$ & $\{r\}$ & $1$ & $0$ & $0$ \\
 healthy, $r = 0$, $m$ not a square & $\ge 2$ & $2$ & $\{0, m\}$ & $1$ & $1$ & $0$ \\
-$m$ a perfect square ($d = 1$), healthy & $1$ & $\beta$ & --- & $\beta$ & n/a (single copy) & n/a (single copy) \\
---- of which $m = 9$, $r = 0$ & $1$ & $2$ & $\{0, 9\}$ & $2$ & n/a (single copy) & n/a (single copy) \\
-exceptional, $(m,r) \in E$ & $1$ & $3$ & $\{r, m+r, 2m+r\}$ & $3$ & n/a (single copy) & n/a (single copy) \\
+$m$ a perfect square ($d = 1$), healthy & $1$ & $\beta$ & --- & $\beta$ & n/a & n/a \\
+--- of which $m = 9$, $r = 0$ & $1$ & $2$ & $\{0, 9\}$ & $2$ & n/a & n/a \\
+exceptional, $(m,r) \in E$ & $1$ & $3$ & $\{r, m+r, 2m+r\}$ & $3$ & n/a & n/a \\
 \hline
 \end{tabular}
 \caption{The three regimes, with the offsets of
-Proposition~\ref{prop:internal}(iii) evaluated.}
+Proposition~\ref{prop:internal}(iii) evaluated. Here n/a marks the
+single-copy case $d = 1$, where no offset $a_\rho$ with $\rho \ge 1$
+exists.}
 \label{tab:regimes}
 \end{table}
 
