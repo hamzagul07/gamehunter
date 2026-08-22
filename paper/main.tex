@@ -1073,7 +1073,201 @@ is what makes that last step safe.
 \end{proof}
 
 \section{The Grundy Transfer Theorem}\label{sec:grundy}
-% PLACEHOLDER --- filled in later commits
+
+Throughout this section $m \ge 3$, $m \ne 4$, and $0 \le r \le m-1$, so
+that $s_{\min}(m,r)$ is finite by Proposition~\ref{prop:trichotomy} (the
+degenerate moduli, where $s_{\min} = \infty$, were treated in
+Section~\ref{sec:disease}). We write $\Gamma$ for the Grundy function of
+Golomb's subtract-a-square game,
+$\Gamma(u) = \operatorname{mex}\{\Gamma(u - j^2) : j \ge 1, j^2 \le u\}$,
+so that $\Gamma(0) = 0$ and $\mathcal{G} = \Gamma^{-1}(0)$. The class
+index $t$ of Definition~\ref{def:bad}, with $n_t = r + tm$, remains in
+force.
+
+\begin{definition}\label{def:d}
+For $m = \prod p^{e_p}$ put $m_0 = \prod p^{\lceil e_p/2 \rceil}$ and
+$d = m_0^2/m$.
+\end{definition}
+
+\begin{proposition}[The internal game and the offsets]\label{prop:internal}
+With the notation above:
+
+(i) (Internal moves.) A square $k^2$ is a move from class $r$ into class
+$r$ if and only if $m_0 \mid k$. Writing $k = m_0 j$, the amount is
+$m_0^2 j^2 = m \cdot d j^2$, so in the class index the internal moves
+read $t \mapsto t - d j^2$, legal exactly when $d j^2 \le t$. The
+internal game is therefore the subtraction game with move set
+$\{d j^2 : j \ge 1\}$; it preserves $t$ modulo $d$, and on the copy
+$\rho = t \bmod d$, in the half-index $u = \lfloor t/d \rfloor$, it reads
+$u \mapsto u - j^2$ --- Golomb's game, $d$ interleaved times.
+
+(ii) ($d$ is the squarefree part.) $d = \prod_{e_p \text{ odd}} p$, the
+squarefree part of $m$; in particular $d = 1$ if and only if $m$ is a
+perfect square, and $d = m$ if and only if $m$ is squarefree.
+
+(iii) (Offsets.) By Proposition~\ref{prop:bad}(i), $\mathrm{Bad}$
+occupies the class indices $0, \dots, \beta-1$. Deleting $\mathrm{Bad}$
+from the internal game and re-basing each copy, the copy
+$\rho \in \{0, \dots, d-1\}$ loses an initial run of exactly
+$a_\rho = \lceil (\beta - \rho)/d \rceil$ half-indices when
+$\rho < \beta$, and none when $\rho \ge \beta$.
+\end{proposition}
+\begin{proof}
+(i) Write $k = \prod p^{f_p}$. Then $m \mid k^2$ if and only if
+$e_p \le 2 f_p$ for every $p$, if and only if
+$f_p \ge \lceil e_p/2 \rceil$ for every $p$, if and only if
+$m_0 \mid k$. A square with $m \mid k^2$ satisfies
+$k^2 \equiv 0 \pmod m$, so subtracting it preserves the residue class $r$
+modulo $m$; conversely a square move that stays in class $r$ must be
+$\equiv 0 \pmod m$. With $k = m_0 j$ the amount is
+$m_0^2 j^2 = (m_0^2/m) \cdot m j^2 = m \cdot d j^2$, and the landing is
+$r + (t - d j^2)m$. Legality: the move requires
+$m \cdot d j^2 \le r + tm$, and since $0 \le r < m$ and both
+$m \cdot d j^2$ and $tm$ are multiples of $m$, this holds if and only if
+$d j^2 \le t$. The move set $\{d j^2\}$ is invariant under translation,
+so $t$ modulo $d$ is preserved, and setting $u = \lfloor t/d \rfloor$ on
+a fixed copy turns $t \mapsto t - d j^2$ into $u \mapsto u - j^2$, with
+legality $d j^2 \le t$ equivalent to $j^2 \le u$ on that copy.
+
+(ii) $m_0^2/m = \prod p^{2 \lceil e_p/2 \rceil - e_p}$, and the exponent
+$2 \lceil e_p/2 \rceil - e_p$ equals $0$ when $e_p$ is even and $1$ when
+$e_p$ is odd. Hence $d$ is the product of the primes occurring to an odd
+power, which is squarefree, and $m = d \cdot (m/d)$ with $m/d$ a perfect
+square. $d = 1$ says every exponent is even, i.e.\ $m$ is a square;
+$d = m$ says every exponent is odd and the product of the odd-exponent
+primes is $m$, which forces every exponent to be $1$.
+
+(iii) The copy $\rho$ consists of the class indices
+$t = \rho, \rho + d, \rho + 2d, \dots$, whose half-indices are
+$u = 0, 1, 2, \dots$. Such a $t$ lies in $\mathrm{Bad}$ exactly when
+$\rho + ud < \beta$, that is $u < (\beta - \rho)/d$, that is
+$u \in \{0, 1, \dots, \lceil (\beta - \rho)/d \rceil - 1\}$. This is an
+initial run of the copy, of length $\lceil (\beta - \rho)/d \rceil$ when
+$\rho < \beta$ and empty when $\rho \ge \beta$.
+\end{proof}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l c c l c c c}
+\hline
+regime & $d$ & $\beta$ & $\mathrm{Bad}$ & $a_0$ & $a_1$ & $a_\rho$ ($\rho \ge 2$) \\
+\hline
+healthy, $r \ge 1$ & any & $1$ & $\{r\}$ & $1$ & $0$ & $0$ \\
+healthy, $r = 0$, $m$ not a square & $\ge 2$ & $2$ & $\{0, m\}$ & $1$ & $1$ & $0$ \\
+$m$ a perfect square ($d = 1$), healthy & $1$ & $\beta$ & --- & $\beta$ & n/a (single copy) & n/a (single copy) \\
+--- of which $m = 9$, $r = 0$ & $1$ & $2$ & $\{0, 9\}$ & $2$ & n/a (single copy) & n/a (single copy) \\
+exceptional, $(m,r) \in E$ & $1$ & $3$ & $\{r, m+r, 2m+r\}$ & $3$ & n/a (single copy) & n/a (single copy) \\
+\hline
+\end{tabular}
+\caption{The three regimes, with the offsets of
+Proposition~\ref{prop:internal}(iii) evaluated.}
+\label{tab:regimes}
+\end{table}
+
+The single copy at $d = 1$ absorbs the whole of $\mathrm{Bad}$, which is
+why a perfect-square modulus shows a larger offset with no change of
+mechanism; the apparent anomaly at $m = 9$, $r = 0$ is this collapse and
+nothing more. The exceptional row is not a fit: $\beta = 3$ is forced by
+$s_{\min} = 25$, itself forced by the mod-$18$ square table in
+Proposition~\ref{prop:trichotomy}, and $a_0 = 3$ follows.
+
+\begin{corollary}[$r$ enters only through $\beta$]\label{cor:r-beta}
+For fixed $m$, the class-index Grundy sequence of $D(m,r)$ depends on $r$
+only through $\beta(m,r)$. Consequently all $m-1$ healthy games with
+$r \ge 1$ at a given modulus share one and the same class-index sequence,
+and the three exceptional games at $m = 9$ share one and the same
+class-index sequence.
+\end{corollary}
+\begin{proof}
+The recursion of Theorem~\ref{thm:grundy-transfer} below is determined by
+$d$, which depends only on $m$, and by the deleted initial segment, whose
+length is $\beta$; the external landings enter only through their Grundy
+values, which are $0$ or $1$ by Corollary~\ref{cor:chain-grundy}
+irrespective of which foreign chain they lie on. For the second claim,
+$\beta = 1$ for every healthy $r \ge 1$ by
+Proposition~\ref{prop:bad}(i), and $\beta = 3$ for each member of $E$.
+\end{proof}
+
+\begin{theorem}[Grundy Transfer]\label{thm:grundy-transfer}
+Let $m \ge 3$, $m \ne 4$, and $0 \le r \le m-1$; let $d$ be as in
+Definition~\ref{def:d}, $\beta$ as in Definition~\ref{def:bad}, and
+$a_\rho$ as in Proposition~\ref{prop:internal}(iii). Then for every
+class-$r$ position $n = r + tm$ with $n \ge s_{\min}(m,r)$,
+\[ G(n) = 2 + \Gamma\!\left( \lfloor t/d \rfloor - a_\rho \right),
+\qquad \rho = t \bmod d. \]
+In particular $G(n) \ge 2$ there, and by
+Proposition~\ref{prop:bad}(ii) the finitely many class-$r$ positions
+below $s_{\min}$ carry the values $1$ (free) and $0$ (hard).
+\end{theorem}
+\begin{proof}
+Apply Theorem~\ref{thm:transfer} with $C$ the class $r$ and
+$\mathrm{Bad} = \mathrm{Bad}(m,r)$ of Definition~\ref{def:bad}. The
+induction of Theorem~\ref{thm:transfer} requires the option relation on
+$C$ to be well-founded, which it is: every move of $D(m,r)$ subtracts a
+positive amount, so options are positions of strictly smaller value in a
+set of non-negative integers.
+
+(H1) holds off $\mathrm{Bad}$: a class-$r$ position with
+$n \ge s_{\min}$ has, by Corollary~\ref{cor:palette}, external options of
+Grundy values $0$ and $1$, realised by the pair $\{1, s_{\min}\}$. (H2)
+holds: by Lemma~\ref{lem:hduality}(iii) an external option of a class-$r$
+position lies on a foreign bottom or a top rung, whose values are $0$ and
+$1$ by Corollary~\ref{cor:chain-grundy}. (H3) holds by
+Proposition~\ref{prop:bad}(ii)--(iii), whose two clauses are exactly the
+two clauses of the hypothesis.
+
+Theorem~\ref{thm:transfer} therefore gives $G \ge 2$ on
+$C \setminus \mathrm{Bad}$ and $h = G - 2$ equal to the Grundy function
+of the internal game restricted to $C \setminus \mathrm{Bad}$. By
+Proposition~\ref{prop:internal}(i) the internal game on the class index
+is subtract-$\{d j^2\}$, which splits into $d$ copies indexed by
+$\rho = t \bmod d$, each reading as Golomb's game in the half-index
+$u = \lfloor t/d \rfloor$. By Proposition~\ref{prop:bad}(i) the deleted
+set is an initial segment of the class index, hence by
+Proposition~\ref{prop:internal}(iii) an initial run of length $a_\rho$
+within each copy; since the move set $\{j^2\}$ is translation-invariant,
+deleting an initial run and re-basing yields Golomb's game itself,
+shifted, so on copy $\rho$ the function $h$ at half-index $u$ equals
+$\Gamma(u - a_\rho)$. Substituting $h = G - 2$ gives the statement.
+\end{proof}
+
+\begin{corollary}[Never eventually periodic]\label{cor:grundy-aperiodic}
+For every $m \ge 3$, $m \ne 4$, and every $r$, the Grundy sequence of
+$D(m,r)$ is not eventually periodic.
+\end{corollary}
+\begin{proof}
+Suppose it were, with period $q$ beyond some $N$. Restrict to the
+class-$r$ positions on a single copy $\rho$: adding
+$\operatorname{lcm}(q, dm)$ to $n$ preserves the class and the copy ---
+$dm$ is the period of the copy structure in $n$, so any multiple of it
+does --- and, beyond $N$, the Grundy value, so by
+Theorem~\ref{thm:grundy-transfer} the sequence $\Gamma$ is eventually
+periodic with period $\operatorname{lcm}(q, dm)/(dm)$. Its zero set
+$\mathcal{G}$ would then be eventually periodic, contradicting
+Corollary~\ref{cor:aperiodic}.
+\end{proof}
+
+\begin{corollary}[Boundedness equivalence]\label{cor:bounded}
+For every $m \ge 3$, $m \ne 4$, and every $r$, the Grundy sequence of
+$D(m,r)$ is bounded if and only if $\Gamma$ is bounded; and if bounded,
+$\sup G = 2 + \sup \Gamma$.
+\end{corollary}
+\begin{proof}
+Outside class $r$ the values are $0$ and $1$ by
+Corollary~\ref{cor:chain-grundy}; inside class $r$ they are
+$2 + \Gamma(\cdot)$ beyond a finite set by
+Theorem~\ref{thm:grundy-transfer}, and the argument of $\Gamma$ ranges
+over all sufficiently large integers on the copy $\rho = 0$, which is
+nonempty for every $d \ge 1$ since it contains $t = 0$.
+\end{proof}
+
+Whether $\Gamma$ is bounded --- equivalently, whether Golomb's game has
+bounded Nim-dimension --- is open \cite{fox, larsson-fox}.
+Corollary~\ref{cor:bounded} supplies an infinite family of
+mode-switching games each of which is equivalent to that question, and
+Corollary~\ref{cor:grundy-aperiodic} places the whole solved family, and
+not only the two degenerate moduli of Section~\ref{sec:disease}, outside
+the reach of the classical periodicity theory.
 
 \section{The Universal Embedding Theorem}\label{sec:embed}
 % PLACEHOLDER --- filled in later commits
