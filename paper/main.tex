@@ -248,245 +248,445 @@ odd, rung $j-1$ is P and rung $j$ is N.
 so the P-positions of class $c$ are precisely the $n \equiv c \pmod{2m}$.
 \end{proof}
 
-\section{Escape: the Clearing Lemma and its exceptions}\label{sec:clearing}
-
-% PORT: chain_lemma.md, Scope paragraph — per the skeleton's instruction
-% that it becomes the first sentence of this section.
-Lemma~\ref{lem:chain} classifies all positions outside the square-mode
-class $r \pmod m$, but it is silent about positions satisfying
-$n \equiv r \pmod m$; the purpose of this section is to determine their
-outcomes. Since this class splits into the two residue classes $r$ and
-$r + m \pmod{2m}$, we treat them separately. The first, which we call the
-free residue, has an immediate move to a P-position from
-Lemma~\ref{lem:chain}, while the second, the hard residue, requires a
-suitable square move to reach such a P-position. The Clearing Lemma
-identifies when such a move exists, and the exceptional cases arise
-precisely when this clearing mechanism fails.
-
-\begin{definition}[Window; free and hard residues; hard set]\label{def:window}
-% PORT: escape_and_diagonal.md IV.1 — window T(m,r) = foreign bottoms
-% mod 2m; class r splits into free residue (r, else m) and hard residue
-% (r+m, else 0); H(m,r) as displayed; the free escape by 1^2.
-By Lemma~\ref{lem:chain}, each class $c \ne r$ is a self-contained chain
-whose \PP-positions are exactly $n \equiv c \pmod{2m}$.
-The window $T(m, r)$ is the set of foreign bottoms
-mod $2m$. Class $r$ splits mod $2m$ into the \textbf{free residue} ($r$
-when $r \ge 1$, else $m$) and the \textbf{hard residue} ($r + m$ when
-$r \ge 1$, else $0$). The free escape is immediate: $1^2$ lands the free
-residue on the bottom directly beneath it ($r - 1$, or $m - 1$ when
-$r = 0$), and is legal from the smallest free member. For the hard
-residue, a square value $s$ (mod $2m$) lands in the window iff
+\begin{corollary}[Chain Lemma, Grundy form]\label{cor:chain-grundy}
+Let $c \ne r$ with $0 \le c \le m-1$. In $D(m,r)$, a position
+$n \equiv c \pmod m$ has Grundy value
 \[
-\begin{aligned}
-s \in H(m, r) = {}&\{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}
-\ \text{for } r \ge 1,\\
-&\quad\text{or}\quad \{m+1, \dots, 2m-1\}
-\ \text{for } r = 0.
-\end{aligned}
+G(n) = 0 \ \text{if } n \equiv c \pmod{2m}, \quad\text{and}\quad
+G(n) = 1 \ \text{if } n \equiv c + m \pmod{2m}.
 \]
+In particular every position outside class $r$ has Grundy value $0$ or
+$1$.
+\end{corollary}
+\begin{proof}
+By the Closure and Independence steps of Lemma~\ref{lem:chain}, class $c$
+is a path under the single move $-m$, and rung $j$ has exactly one
+option, rung $j-1$, for $j \ge 1$, and none for $j = 0$. Hence
+$G(\text{rung } 0) = 0$ and
+$G(\text{rung } j) = \operatorname{mex}\{G(\text{rung } j-1)\}$
+alternates between $0$ and $1$, so $G(\text{rung } j) = j \bmod 2$.
+Translating as in Lemma~\ref{lem:chain}, $j$ is even exactly when
+$n \equiv c \pmod{2m}$.
+\end{proof}
+
+We call a position of a foreign class a \emph{bottom} if it is an even
+rung and a \emph{top rung} if it is an odd rung;
+Corollary~\ref{cor:chain-grundy} says bottoms carry Grundy value $0$ and
+top rungs carry Grundy value $1$, uniformly across all foreign classes.
+
+\section{Escape: the parameter $s_{\min}$}\label{sec:clearing}
+
+Lemma~\ref{lem:chain} and Corollary~\ref{cor:chain-grundy} settle every
+class except $r$. This section builds the apparatus for class $r$
+itself: the two residues the class occupies modulo $2m$, the hard set of
+useful residues, and a single parameter, $s_{\min}$, from which the
+classification of Section~\ref{sec:main}, its exception sets, and the
+Grundy and mis\`ere laws of Sections 8 and 10 are all read.
+
+\begin{definition}[The two residues, the hard set, and $s_{\min}$]
+\label{def:smin}
+Fix $m \ge 2$ and $0 \le r \le m-1$. Let $f$ denote the representative of
+$r$ modulo $m$ lying in the interval $[1, m]$, so that $f = r$ when
+$r \ge 1$ and $f = m$ when $r = 0$, and set $h = f + m$. The class $r$
+splits modulo $2m$ into exactly the two residues $f$ and $h$, which we
+call the \emph{free} and \emph{hard} residues; when $r = 0$ these are $m$
+and $0$. Write
+\[ B = \{0, 1, \dots, m-1\} \setminus \{r\} \]
+for the set of \emph{foreign bottoms} --- the bottoms of the $m-1$ chains
+classified by Lemma~\ref{lem:chain} --- and define the \emph{hard set}
+\[ H(m,r) = ([f+1,\, f+m] \setminus m\mathbb{Z}) \bmod 2m. \]
+For $r \ge 1$ this is $\{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}$, and
+for $r = 0$ it is $\{m+1, \dots, 2m-1\}$. Finally, let
+\[ s_{\min}(m,r) = \min\{\, k^2 : k \ge 1 \text{ and } k^2 \bmod 2m \in H(m,r) \,\}, \]
+with $s_{\min} = \infty$ when no such square exists.
 \end{definition}
 
-\begin{remark}[Constitutional uselessness]\label{lem:useless}
-For every $m$ and $r$: $0, 1, m \notin H(m,r)$; a square
-$\equiv 0$ or $m \pmod{2m}$ is $\equiv 0 \pmod m$ and keeps a class-$r$
-position inside class $r$; and subtracting a square $\equiv 1 \pmod{2m}$
-from the hard residue lands one below it in the top half, an
-\NN-position.
+The point of taking $f$ in $[1, m]$ rather than in $[0, m-1]$ is that the
+free residue is not the smaller of the two representatives but the one
+from which the move $-1$ reaches the bottom layer: from residue $x$ the
+move $-1$ lands on $x - 1$, which lies in $[0, m-1]$ precisely when
+$x \in [1, m]$. At $r = 0$ the representative $0$ fails this and the
+representative $m$ satisfies it, which is why the free residue there is
+$m$ and the hard residue is $0$. With this convention every statement
+below is uniform in $r$.
+
+\begin{lemma}[$H$-duality]\label{lem:hduality}
+With the notation of Definition~\ref{def:smin}:
+
+(i) The map $b \mapsto h - b$ is a bijection from $B$ onto $H(m,r)$
+modulo $2m$, and $b \mapsto f - b$ is a bijection from $B$ onto
+$H(m,r) + m$.
+
+(ii) $\mathbb{Z}/2m\mathbb{Z}$ is the disjoint union of $\{0, m\}$,
+$H(m,r)$, and $H(m,r) + m$.
+
+(iii) Let $n$ be a class-$r$ position and $a$ a positive integer with
+$a \le n$. If $a \equiv 0$ or $m \pmod{2m}$, the landing $n - a$ again
+lies in class $r$. Otherwise, if $a \bmod 2m \in H(m,r)$, then $a$
+carries the hard residue onto a foreign bottom and the free residue onto
+a top rung; and if $a \bmod 2m \in H(m,r) + m$, it carries the free
+residue onto a foreign bottom and the hard residue onto a top rung.
+
+(iv) $1 \in H(m,r) + m$ for every $m \ge 2$ and every $r$.
+\end{lemma}
+\begin{proof}
+(i) The map is visibly injective modulo $2m$, so only its image is at
+issue. Take the integer representative $h^* = f + m \in [m+1, 2m]$. If
+$b$ ranged over all of $[0, m-1]$, then $h^* - b$ would range over the
+$m$ consecutive integers $[f+1, f+m]$. Any $m$ consecutive integers
+contain exactly one multiple of $m$, never none and never two. The single
+element of $[0, m-1]$ omitted from $B$ is $r$ itself, and its image is
+$h^* - r = f + m - r$, which equals $m$ when $r \ge 1$ and $2m$ when
+$r = 0$ --- in both cases the unique multiple of $m$ in the window. Hence
+the image of $B$ is $[f+1, f+m] \setminus m\mathbb{Z}$, which is
+$H(m,r)$. Since $f \equiv h - m$, the second map is the first shifted by
+$-m \equiv m$, so its image is $H(m,r) + m$.
+
+(ii) The windows $[f+1, f+m]$ and $[f+m+1, f+2m]$ are disjoint and their
+union consists of $2m$ consecutive integers, hence a complete residue
+system modulo $2m$. Each window contains exactly one multiple of $m$, and
+two multiples of $m$ that are distinct modulo $2m$ are congruent to $0$
+and to $m$ in some order. Deleting them leaves the images computed in
+(i).
+
+(iii) If $a \equiv 0$ or $m \pmod{2m}$, then $a \equiv 0 \pmod m$ and the
+landing is again $\equiv r \pmod m$, so it lies in class $r$; note that
+$a \equiv m$ interchanges the free and hard residues while remaining
+internal to the class. Otherwise (ii) places $a \bmod 2m$ in $H$ or in
+$H + m$. Suppose $a \equiv h - b$ with $b \in B$. From the hard residue
+the landing is $h - a \equiv b$, a foreign bottom; from the free residue
+it is $f - a \equiv h - m - a \equiv b + m$, the top rung of the same
+chain. The case $a \equiv f - b$ is the same computation with the roles
+of $f$ and $h$ exchanged. The Grundy values are those of
+Corollary~\ref{cor:chain-grundy}.
+
+(iv) Since $m \ge 2$, $1$ is not a multiple of $m$. Moreover
+$1 \equiv 2m + 1 \pmod{2m}$, and $2m + 1$ lies in the window
+$[f+m+1, f+2m]$ precisely because $1 \le f \le m$: the left inequality
+requires $f \le m$ and the right requires $f \ge 1$. Hence $1 \in H + m$
+by (i). Concretely, $1 = f - (f-1)$ with $f - 1 \in [0, m-1]$ and
+$f - 1 \not\equiv f \equiv r \pmod m$, so $f - 1$ is a foreign bottom.
+\end{proof}
+
+\begin{remark}\label{rem:hduality-readings}
+Three readings of Lemma~\ref{lem:hduality}, recorded once. First, the
+partition (ii) says an amount can leave class $r$ exactly when its
+residue modulo $2m$ is neither $0$ nor $m$: the exclusions formerly
+listed one by one are the two-element complement of $H \cup (H+m)$.
+Second, the hole in $H$ sits at the residue $\equiv 0 \pmod m$ and is the
+image, under the bijection of (i), of the omitted bottom $r$ --- the
+bottom that class $r$ would have if its members were in fallback mode;
+the gap in the hard set and the uselessness of the amounts $\equiv 0, m$
+are one fact seen from two sides. Third, the two jobs of an amount in
+(iii) are complementary rather than independent because the free and hard
+residues differ by $m$: their landings under a common subtraction differ
+by $m$ as well, and Corollary~\ref{cor:chain-grundy} assigns opposite
+values to residues differing by $m$. Nothing in the lemma uses that an
+amount is a square. Finally, since $H$ and $H+m$ are disjoint and
+$1 \in H+m$ by (iv), the residue $1$ does not lie in $H$; as no positive
+square has value $0$, it follows that $s_{\min} \ge 4$ whenever
+$s_{\min}$ is finite --- and since the residues $0$ and $m$ are outside
+$H$, $s_{\min}$ is never a multiple of $m$.
 \end{remark}
+
+\begin{corollary}[Palette]\label{cor:palette}
+Suppose $s_{\min}(m,r) < \infty$, and let $n$ be a class-$r$ position
+with $n \ge s_{\min}$. Then among the options of $n$ there is one of
+Grundy value $0$ and one of Grundy value $1$, both leaving class $r$.
+\end{corollary}
 \begin{proof}
-The exclusions $0, 1, m \notin H(m,r)$ are read directly off the
-displayed form of $H$. A square $\equiv 0$ or $m \pmod{2m}$ is
-$\equiv 0 \pmod m$, so subtracting it keeps a class-$r$ position inside
-class $r$; and subtracting a square $\equiv 1 \pmod{2m}$ from the hard
-residue lands one below it in the top half --- the odd rung directly
-above a bottom --- an N-position.
+Both $1$ and $s_{\min}$ are squares not exceeding $n$, hence legal moves
+from $n$, and neither is $\equiv 0$ or $m$ modulo $2m$ --- the first by
+Lemma~\ref{lem:hduality}(iv), the second by definition of $s_{\min}$. If
+$n$ sits on the hard residue then, by Lemma~\ref{lem:hduality}(iii), the
+move $-s_{\min}$ lands on a foreign bottom and the move $-1$ on a top
+rung; if $n$ sits on the free residue the two witnesses exchange roles.
+In either case the pair $\{1, s_{\min}\}$ realises both values $0$ and
+$1$.
 \end{proof}
 
-\begin{lemma}[Clearing Lemma]\label{lem:clearing}
-% PORT statement exactly from IV.2 (both the r >= 1 and r = 0 branches).
-Suppose some square $s \ne m$ lies in the integer interval $(r,\, m+r]$
-when $r \ge 1$, or in $(m,\,2m)$ when $r = 0$. Then the entire hard class
-is \NN\ by the single move $-s$.
+One square, two jobs: the witness that lands the hard residue on a bottom
+--- the escape that Section~\ref{sec:main} converts into the
+classification --- is at the same time the Grundy-$0$ half of the
+palette, which Section 8 converts into a transfer of Grundy values. The
+two developments consume the same hypothesis, the finiteness of
+$s_{\min}$, at the same threshold.
+
+\begin{lemma}[A square in the window]\label{lem:window-square}
+For every $m \ge 3$ and every $0 \le r \le m-1$, the interval
+$(f,\, f+m]$ contains a perfect square, with a single exception: at
+$(m, r) = (4, 0)$ the interval $(4, 8]$ contains none.
 \end{lemma}
 \begin{proof}
-% PORT: IV.2 — the IV.2 heading parenthetical, legality, and the landing
-% arithmetic in both sub-cases.
-Legality: $s \le m + r$, the smallest hard member (for $r = 0$: $s < 2m$,
-and the smallest positive hard member is $2m$), so the move is affordable
-to every member from the first. Landing: $n - s \equiv m + r - s
-\pmod{2m}$ is a foreign bottom --- in $(r, m)$ when $r < s < m$, in
-$[0, r)$ when $m < s \le m + r$; for $r = 0$, the landing $2m - s$ lies
-in $(0, m)$. Combined with the free escape, class $r$ is all \NN\ ---
-except possibly $n = 0$, handled in Lemma~\ref{lem:audit}.
+Suppose $(f, f+m]$ contains no square, and let $c$ be the largest integer
+with $c^2 \le f$. Then $(c+1)^2 > f + m$, and subtracting $c^2 \le f$
+gives $2c + 1 > m$, so $c \ge m/2$ and $c^2 \ge m^2/4$. Hence
+$m^2/4 \le f$. If $r \ge 1$ then $f = r \le m-1$, and $m^2/4 \le m-1$
+rearranges to $(m-2)^2 \le 0$, impossible for $m \ge 3$. If $r = 0$ then
+$f = m$, and $m^2/4 \le m$ forces $m \le 4$, leaving $m \in \{3, 4\}$:
+the window $(3, 6]$ contains $4$, so no failure occurs at $m = 3$, while
+$(4, 8]$ contains no square, the named exception.
 \end{proof}
 
-\begin{lemma}[The interval contains a square]\label{lem:square-exists}
-For $m \ge 3$ and $1 \le r \le m-1$, the interval $(r,\, m+r]$ contains
-a square. For $r = 0$, the interval $(m,\,2m)$ contains a square for
-every $m \ge 3$ except $m = 4$.
-\end{lemma}
-\begin{proof}
-% PORT: IV.3, the repaired parity-free squeeze c >= m/2,
-% c^2 >= m^2/4 > m-1 via (m-2)^2/4, degenerate only at m = 2; and the
-% r = 0 erratum with m = 4 as the lone counterexample.
-For $r \ge 1$: if $(r, m + r]$ contained no square, consecutive squares
-would straddle it, $c^2 \le r$ and $(c + 1)^2 > m + r$, so $2c + 1 > m$,
-hence $c \ge m/2$ for any $m$, hence $c^2 \ge m^2/4 > m - 1 \ge r$, since
-$m^2/4 - (m - 1) = (m - 2)^2/4 > 0$ for $m \ge 3$ --- contradicting
-$c^2 \le r$. The inequality degenerates at exactly one modulus, $m = 2$,
-where $(m - 2)^2 = 0$ and the interval can indeed be empty ($(1, 3]$ in
-$D(2, 1)$ contains no square). Suppose the interval $(m, 2m)$ contained no square. Let $c$ be the largest
-integer with $c^2 \le m$; then $(c+1)^2 \ge 2m$, and subtracting gives
-$2c + 1 \ge 2m - m = m$, so $c \ge (m-1)/2$. Squaring against $c^2 \le m$
-yields $(m-1)^2/4 \le m$, i.e.\ $m^2 - 6m + 1 \le 0$, so $m < 6$. The
-remaining cases are checked by hand: $(3, 6)$ contains $4$ and $(5, 10)$
-contains $9$, while $(2, 4)$ and $(4, 8)$ contain no square. Hence the
-interval is nonempty for every $m \ge 3$ except $m = 4$, and the two
-exceptions are exactly the degenerate moduli of
-Section~\ref{sec:disease}.
-\end{proof}
+\begin{proposition}[The $s_{\min}$ trichotomy]\label{prop:trichotomy}
+Let $m \ge 2$ and $0 \le r \le m-1$, and let
+$E = \{(9,4), (9,5), (9,6)\}$. Exactly one of the following holds:
 
-\begin{proposition}[The failure window]\label{prop:window}
-The hypothesis of Lemma~\ref{lem:clearing} fails for $r \ge 1$ only if
-$m = b^2$ with $(b-1)^2 \le r \le 2b$, which is possible only for
-$b \le 3$: among $m \ge 3$, exactly $m = 4$ ($r \in \{1,2,3\}$) and
-$m = 9$ ($r \in \{4,5,6\}$).
+(a) (healthy) $s_{\min} \le f + m$ --- the case for every $m \ge 3$ with
+$m \ne 4$ and $(m,r) \notin E$; moreover $s_{\min} > f$, so the
+certifying square lies in the window $(f, f+m]$;
+
+(b) (exceptional) $f + m < s_{\min} < \infty$ --- exactly the pairs
+$(m,r) \in E$, where $s_{\min} = 25$ against $f + m \in \{13, 14, 15\}$;
+
+(c) (degenerate) $s_{\min} = \infty$ --- exactly the moduli
+$m \in \{2, 4\}$, for every $r$.
 \end{proposition}
 \begin{proof}
-% PORT: IV.4, including the m = 25 discussion as a closing remark
-% (square m is harmless once b >= 4).
-With a square always present, the Clearing Lemma's hypothesis can fail
-for $r \ge 1$ only if the \emph{unique} square in $(r, m + r]$ is $m$
-itself: $m = b^2$ with $(b - 1)^2 \le r$ (no smaller square intrudes) and
-$(b + 1)^2 > m + r$, i.e.\ $r \le 2b$. The window $(b - 1)^2 \le r \le
-2b$ is nonempty iff $(b - 1)^2 \le 2b$ iff $b \le 3$. Among $m \ge 3$
-that leaves exactly $m = 4$ ($b = 2$, $r \in \{1, 2, 3\}$) and $m = 9$
-($b = 3$, $r \in \{4, 5, 6\}$). With the $r = 0$ erratum, every class of
-$m = 4$ is condemned from the outside --- no clearing square exists for
-any $r$ --- while $m = 9$ is healthy at every $r$ except $4, 5, 6$.
-Squarehood of $m$ alone is harmless: at $m = 25$ ($b = 5$) the
-neighboring square $36$ sits only $2b + 1 = 11$ above $m$, deep inside a
-$25$-wide window, so it invades $(r, m + r]$ for every $r$; a square $m$
-isolates itself only when the modulus is small enough ($b \le 3$) for
-square-gaps to outrun $m$.
+The proof turns on one equivalence: $s_{\min} \le f + m$ if and only if
+the window $(f, f+m]$ contains a square other than $m$ and $2m$. Indeed,
+a square $s \le f$ has residue $s$ (as $s < 2m$), and every residue in
+$H$ exceeds $r$ when read in $[0, 2m)$ --- its elements are
+$\{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}$ for $r \ge 1$ and
+$\{m+1, \dots, 2m-1\}$ for $r = 0$ --- so $s \notin H$ and squares up to
+$f$ never certify. A square $s \in (f, f+m]$ with $s < 2m$ has residue
+$s$, which lies in $H$ exactly when $s$ is not a multiple of $m$; the
+window contains exactly one multiple of $m$ (any $m$ consecutive integers
+do), namely $m$ itself when $r \ge 1$ and $2m$ when $r = 0$, and if
+$s = 2m$ its residue is $0 \notin H$. The equivalence follows in both
+directions.
+
+(c) At $m \in \{2, 4\}$, Table~\ref{tab:Q} gives
+$\Q(2m) \subseteq \{0, 1, m\}$. The residues $0$ and $m$ lie outside $H$
+by Lemma~\ref{lem:hduality}(ii), and $1$ lies outside $H$ by
+Remark~\ref{rem:hduality-readings}; hence no square has residue in $H$
+and $s_{\min} = \infty$.
+
+Now let $m \ge 3$, $m \ne 4$. By Lemma~\ref{lem:window-square} the window
+contains a square, so by the equivalence, (a) can fail only if every
+square in the window is the multiple $\mu \in \{m, 2m\}$. If $\mu = 2m$,
+then $r = 0$ and the open interval $(m, 2m)$ is square-free; the argument
+of Lemma~\ref{lem:window-square}'s $r = 0$ case (with $c$ the largest
+integer satisfying $c^2 \le m$) forces $m \le 5$, and the direct checks
+at $m = 3$ and $m = 5$ --- the squares $4 \in (3, 6)$ and
+$9 \in (5, 10)$ --- rule both out. If $\mu = m$, then $m = b^2$ is a
+perfect square and the window's only square is $m$: no smaller square
+intrudes, $(b-1)^2 \le f$, and no larger one, $(b+1)^2 > f + m$, i.e.\
+$f \le 2b$. The window $(b-1)^2 \le f \le 2b$ is nonempty exactly when
+$(b-1)^2 \le 2b$, i.e.\ $b \le 3$; $b = 2$ gives $m = 4$, excluded, and
+$b = 3$ gives $m = 9$ with $f = r \in \{4, 5, 6\}$ --- the set $E$. So
+(a) holds for every $m \ge 3$, $m \ne 4$ with $(m,r) \notin E$.
+
+Finally, on $E$: the squares below $25$ have residues $1, 4, 9, 16$
+modulo $18$. For each $r \in \{4, 5, 6\}$, the set $H(9,r)$ contains
+$\{7, 10, 13\}$ and none of $1, 4, 16$ (which lie in $H + 9$) nor $9$
+(the residue $m$); while $25 \equiv 7 \in H$. Hence $s_{\min} = 25$
+there, which exceeds $f + m = r + 9$ and is finite: regime (b), and
+nothing else.
 \end{proof}
 
-\begin{proposition}[The rebels (exceptional positions)]\label{prop:rebels}
-For $(m,r) \in \{(9,4),(9,5),(9,6)\}$ the position $n = m + r$ is a
-\PP-position, and it is the unique \PP-position of $D(m,r)$ outside the
-window.
-\end{proposition}
-\begin{proof}
-% PORT: IV.5 — the option analysis at n0 = m+r, the three in-game
-% receipts, and the strata sealing (25 == 7, 49 == 13, then 64 == m+1
-% resumes).
-At $(9, r)$ with $r \in \{4, 5, 6\}$, the smallest hard member $n_0 =
-m + r \in \{13, 14, 15\}$ can afford only the squares $k^2 \le r$ and
-$9$. A square $k^2 \le r$ lands on $m + (r - k^2)$, the odd rung directly
-above bottom $r - k^2$ --- \NN. The square $9$ lands on $r$ itself, the
-smallest free member --- \NN, since it escapes by $1^2$. Every move lands
-on \NN, so \textbf{$n_0$ is \PP.} In-game receipts: in $D(9,4)$,
-$13 \to 12, 9, 4$, all \NN; in $D(9,5)$, $14 \to 13, 10, 5$, all \NN; in
-$D(9,6)$, $15 \to 14, 11, 6$, all \NN. Above the rebel the class closes
-uniformly: the members $27 + r$ ($31, 32, 33$) are cleared by $25 \equiv
-7 \pmod{18}$, which lies in all three hard sets, landing on bottoms
-$6, 7, 8$; the members $45 + r$ ($49, 50, 51$) by $49 \equiv 13$, landing
-on bottoms $0, 1, 2$; and from $63 + r \ge 64 = (m - 1)^2$ onward, the
-witness $64 \equiv 10 = m + 1$ lands on bottom $r - 1$ forever. So each
-exceptional game carries exactly one extra \PP-position, and the
-exception set is precisely the set $E$ of Theorem~\ref{thm:main}.
-\end{proof}
+Regime (a) is the former Clearing Lemma in its final form: the escape
+square is affordable from the least hard member $f + m$ onward. Regime
+(b) delays that escape to the fourth class member, and regime (c) removes
+it --- the three regimes are the paper's trichotomy of healthy,
+exceptional and degenerate, now read off a single parameter.
 
-\begin{lemma}[Boundary positions corrupt nothing]\label{lem:audit}
-In $D(m,r)$: (i) if $r = 0$ then $n = 0$ is a \PP-position, and its
-status alters no other position's; (ii) for $(m,r) \in E$, the
-\PP-position $n = m + r$ alters no other position's status.
+\begin{definition}[The bad set]\label{def:bad}
+For $0 \le r \le m-1$ write $n_t = r + tm$, $t \ge 0$, for the members of
+class $r$ in increasing order; we call $t$ the \emph{class index}. Define
+\[ \mathrm{Bad}(m,r) = \{\, n \in \text{class } r : n < s_{\min}(m,r) \,\},
+\qquad \beta = |\mathrm{Bad}(m,r)|, \]
+and write $\mathrm{Bad}_f$ and $\mathrm{Bad}_h$ for the sets of free and
+hard members of $\mathrm{Bad}$ --- those on the residues $f$ and $h$
+modulo $2m$ respectively. When $s_{\min} = \infty$ (regime (c)),
+$\mathrm{Bad}$ is the whole of class $r$ and $\beta = \infty$; the finite
+case is the one in use everywhere except Section 10.2.
+\end{definition}
+
+\begin{lemma}[No deep square below $s_{\min}$]\label{lem:nodeep}
+Let $\sigma(m)$ denote the least perfect square divisible by $2m$. If
+$s_{\min}(m,r) < \infty$, then $\sigma(m) > s_{\min}(m,r)$. Consequently
+no member of $\mathrm{Bad}(m,r)$ has a legal square move divisible by
+$2m$, and every internal option of a member of $\mathrm{Bad}$ lies in
+$\mathrm{Bad}$ and on the opposite residue modulo $2m$.
 \end{lemma}
 \begin{proof}
-% PORT: IV.6 — the n = 0 clause at r = 0 (terminal, hence P;
-% unreachable-from-chains audit; spot receipts) and the rebel audit
-% (moves onto m+r force 3 | k; those positions are already N).
-\textbf{Corruption audits.} The $n = 0$ clause: when $r = 0$, zero is
-claimed by squares mode and is the unique squares-mode position that can
-afford no square ($k \ge 1$ forces $k^2 \ge 1 > 0$), so it is terminal,
-hence \PP\ --- while the unamended law would file residue $0$ as \NN. It
-corrupts nobody: fallback chains never visit class $0$; the positions
-that can drop to $0$ are $n = k^2 \equiv 0 \pmod m$, class-$0$ members
-the theorem already declares \NN; and the classes above escape without it
---- spot receipts: $10 - 9 = 1$ (\PP) in $D(5,0)$, $14 - 9 = 5$ (\PP) in
-$D(7,0)$. For $r \ge 1$ the clause is absorbed, since $0$ is itself a
-foreign bottom; it earns its keep exactly at $r = 0$. The rebels, one
-sentence in the same mirror: a rebel corrupts nobody either --- fallback
-chains never enter class $r$, and the only positions with a move onto
-$m + r$ are class-$r$ members above it (a square step back into class $r$
-forces $k^2 \equiv 0 \bmod 9$, i.e.\ $3 \mid k$), which the theorem
-already declares \NN, so the rebel's \PP-ness merely hands them one more
-witness for what they already were.
+In regime (a), $s_{\min} \le f + m \le 2m$, and $s_{\min} \ne 2m$ since
+its residue lies in $H$ while $2m$ has residue $0$; so
+$s_{\min} < 2m \le \sigma(m)$. In regime (b), $s_{\min} = 25$ while
+$\sigma(9) = 36$, the squares $1, 4, 9, 16, 25$ being indivisible by
+$18$. Regime (c) is excluded by hypothesis. For the consequence: a square
+divisible by $2m$ has size at least $\sigma(m) > s_{\min}$, hence exceeds
+every member of $\mathrm{Bad}$ and is illegal from all of them. An
+internal move --- a square $\equiv 0 \pmod m$ --- has residue $0$ or $m$
+modulo $2m$; the residue-$0$ case is exactly divisibility by $2m$, just
+excluded, so within $\mathrm{Bad}$ every internal move has residue $m$,
+and by Lemma~\ref{lem:hduality}(iii) it exchanges the two residues of the
+class while landing on a smaller class member, which lies in
+$\mathrm{Bad}$ since $\mathrm{Bad}$ is an initial segment of the class.
+\end{proof}
+
+\begin{proposition}[$\mathrm{Bad}$: size, pattern, and values]\label{prop:bad}
+Let $s_{\min}(m,r) < \infty$. Then:
+
+(i) $\mathrm{Bad}(m,r)$ consists of the class members $n_t$ with
+$0 \le t < \beta$, where $\beta = \lceil (s_{\min} - r)/m \rceil \ge 1$;
+the members alternate between the two residues, beginning on the free
+residue when $r \ge 1$ and on the hard residue when $r = 0$. In the three
+finite regimes: $\beta = 1$ with $\mathrm{Bad} = \{r\} = \mathrm{Bad}_f$
+for healthy pairs with $r \ge 1$; $\beta = 2$ with
+$\mathrm{Bad} = \{0, m\}$, $\mathrm{Bad}_h = \{0\}$,
+$\mathrm{Bad}_f = \{m\}$ for healthy pairs with $r = 0$; and $\beta = 3$
+with $\mathrm{Bad} = \{r, m+r, 2m+r\}$, $\mathrm{Bad}_h = \{m+r\}$,
+$\mathrm{Bad}_f = \{r, 2m+r\}$ for $(m,r) \in E$.
+
+(ii) Every member of $\mathrm{Bad}_f$ has Grundy value $1$, and every
+member of $\mathrm{Bad}_h$ has Grundy value $0$.
+
+(iii) Every internal option of a member of $\mathrm{Bad}$ lies in
+$\mathrm{Bad}$, on the opposite residue modulo $2m$.
+\end{proposition}
+\begin{proof}
+(i) The class members increase with $t$, so those below $s_{\min}$ form
+an initial segment, of length $\beta = \lceil (s_{\min} - r)/m \rceil$,
+the count of $t \ge 0$ with $r + tm < s_{\min}$. That $\beta \ge 1$: for
+$r \ge 1$ the least member is $r$, and $s_{\min} > f = r$ by
+Proposition~\ref{prop:trichotomy}(a)--(b); for $r = 0$ the least member
+is $0 < 4 \le s_{\min}$ by Remark~\ref{rem:hduality-readings}. Adding $m$
+flips the residue modulo $2m$ between $f$ and $h$, and $n_0 = r$ is the
+free residue when $r \ge 1$ and the hard residue ($\equiv 0 \equiv h$)
+when $r = 0$, giving the alternation as stated. The regime values: for
+healthy $r \ge 1$, $r < s_{\min} \le r + m$ gives $\beta = 1$; for
+healthy $r = 0$, every square up to $m$ has residue at most $m$, outside
+$H(m, 0) \subseteq [m+1, 2m-1]$, so $s_{\min} > m$, while
+$s_{\min} < 2m$ as in Lemma~\ref{lem:nodeep} --- hence $\beta = 2$, with
+$n_0 = 0$ hard and $n_1 = m$ free; for $E$, $s_{\min} = 25$ with
+$r \in \{4, 5, 6\}$ gives $2 < (25 - r)/9 < 3$, so $\beta = 3$ with the
+free--hard--free pattern $n_0 = r$, $n_1 = m+r$, $n_2 = 2m+r$.
+
+(iii) Is Lemma~\ref{lem:nodeep}'s consequence, restated for citation.
+
+(ii) Mutual induction along $\mathrm{Bad}$ in increasing order. Let
+$p \in \mathrm{Bad}$ and consider any legal square $k^2 \le p < s_{\min}$.
+By minimality of $s_{\min}$ its residue is not in $H$, so by the
+partition of Lemma~\ref{lem:hduality}(ii) it is $0$, $m$, or lies in
+$H + m$. Residue $0$ is impossible from $\mathrm{Bad}$ by
+Lemma~\ref{lem:nodeep}. Residue $m$ is internal: by (iii) it lands in
+$\mathrm{Bad}$ on the opposite residue. Residue in $H + m$ is external:
+by Lemma~\ref{lem:hduality}(iii) it lands a free position on a foreign
+bottom, of Grundy value $0$ by Corollary~\ref{cor:chain-grundy}, and a
+hard position on a top rung, of value $1$ --- and the move $-1$ is of
+this kind (Lemma~\ref{lem:hduality}(iv)), legal whenever $p \ge 1$.
+
+If $p \in \mathrm{Bad}_f$, then $p \ge f \ge 1$, so the option set is
+nonempty; every external option is a bottom of value $0$, and every
+internal option is a member of $\mathrm{Bad}_h$, of value $0$ by
+induction. Hence $G(p) = \operatorname{mex}\{0\} = 1$. If
+$p \in \mathrm{Bad}_h$ with $p \ge 1$, every external option is a top
+rung of value $1$, and every internal option is a member of
+$\mathrm{Bad}_f$, of value $1$ by induction; hence
+$G(p) = \operatorname{mex}\{1\} = 0$. If $p = 0$ --- occurring only at
+$r = 0$ --- then $p$ is terminal and $G(p) = 0$.
 \end{proof}
 
 \section{The Diagonal Theorem}\label{sec:main}
 
-The pieces are now on the table --- chains classifying every class except
-$r$, clearings settling class $r$ wherever a suitable square exists, the
-failures catalogued down to three rebels and one boundary --- and
-Theorem~\ref{thm:main} assembles them into the classification.
+The pieces are now on the table, and they assemble into the
+classification in a single verification.
 
 \begin{theorem}[Diagonal Law]\label{thm:main}
-Let $m \ge 3$ with $m \ne 4$, and let $0 \le r \le m-1$. Define
-$E = \{(9,4),(9,5),(9,6)\}$. In $D(m,r)$, a position $n$ is a
-\PP-position if and only if
-\[
-\begin{aligned}
-&n \equiv b \pmod{2m} \text{ for some foreign bottom }
-b \in \{0,1,\dots,m-1\}\setminus\{r\},\\
-&\quad\text{or}\quad n = 0,
-\quad\text{or}\quad (m,r) \in E \text{ and } n = m+r.
-\end{aligned}
-\]
-The law holds for both parities of $m$, with no thresholds and no
-unverified zones.
+Let $m \ge 3$ with $m \ne 4$, and let $0 \le r \le m-1$. Write
+$\mathrm{Bad}_h(m,r)$ for the set of hard members of
+$\mathrm{Bad}(m,r)$. The P-positions of $D(m,r)$ are exactly the elements
+of
+\[ S = \{\, n \ge 0 : n \equiv b \pmod{2m} \text{ for some } b \in B \,\}
+\cup \mathrm{Bad}_h(m,r). \]
+The law holds for every $n \ge 0$, with no preperiod and no unverified
+zones. The hypothesis on $m$ enters exactly once, through the finiteness
+of $s_{\min}$ (Lemma~\ref{lem:window-square} and
+Proposition~\ref{prop:trichotomy}).
 \end{theorem}
 \begin{proof}
-Fix a position $n$ of $D(m,r)$ with $m \ge 3$, $m \ne 4$: either $n$ lies in a
-class $c \not\equiv r \pmod{m}$, or $n$ lies in class $r$, and in the latter
-case $n$ is either a boundary position named in the statement --- $n = 0$ when
-$r = 0$, or $n = m + r$ when $(m,r) \in E$ --- or an ordinary class-$r$
-position, sitting by Definition~\ref{def:window} on either the free or the
-hard residue modulo $2m$; these buckets exhaust all $n$, and we take them in
-order.
-\emph{Case 1 (foreign classes).} If $n$ lies in a class $c \not\equiv r$, then by Lemma~\ref{lem:chain} (the
-Chain Lemma) its chain is self-contained and $n$ is P exactly when
-$n \equiv c \pmod{2m}$ --- precisely the foreign-bottom clause of the
-statement, so every such position carries its verdict.
-\emph{Case 2 (free residue).} If $n$ sits on the free residue, the move $-1^2$ is legal from the smallest
-free member onward and lands on the foreign bottom directly beneath ($r-1$,
-or $m-1$ when $r=0$), a P-position \emph{by the chain verdict of the previous
-sentence} (Lemma~\ref{lem:chain}), so every free-residue position is N ---
-and indeed the statement names no free residue among its P-positions.
-\emph{Case 3 (hard residue, escaped).} If $n$ sits on the hard residue and $(m,r) \notin E$, then
-Lemma~\ref{lem:square-exists} together with Proposition~\ref{prop:window}
-supplies a square $s \ne m$ in the clearing interval (the hypothesis
-$m \ne 4$ is load-bearing precisely here, since at $m = 4$ and only there
-they offer nothing for any $r$), and Lemma~\ref{lem:clearing} converts that
-one square into the verdict: every hard-residue position is N by the single
-move $-s$, for both parities of $m$, the boundary $n = 0$ having already been
-set aside.
-\emph{Case 4 (the exceptional games).} If $n$ is a class-$r$ position with $(m,r) \in E$,
-Proposition~\ref{prop:rebels} delivers the exceptional verdict: $n = m + r$
-is P and is the unique off-window P-position, every other hard member being
-N, which combined with the free verdict above is exactly the exception clause
-of the statement.
-\emph{Case 5 (boundaries).} Finally, Lemma~\ref{lem:audit} certifies the boundary clauses and their
-harmlessness: $n = 0$ at $r = 0$ is terminal hence P, and neither its P-ness
-nor a rebel's disturbs any verdict already issued --- every position with a
-move onto them is a class-$r$ position ruled N above, and no fallback chain
-ever enters class $r$ --- so the classifications of the four preceding
-sentences stand undisturbed, and the P-positions of $D(m,r)$ are exactly
-those of the statement: the foreign bottoms modulo $2m$, together with
-$n = 0$, together with $n = m + r$ when $(m,r) \in E$.
+We verify the three conditions of Lemma~\ref{lem:verify} for $S$.
+
+(i) \emph{Terminals.} A position outside class $r$ is terminal exactly
+when it is the bottom rung of its chain, that is, one of the positions
+$b \in B$ themselves: these satisfy $b < m$, so the fallback is illegal,
+and they are not in squares mode. Each lies in $S$. A class-$r$ position
+$n \ge 1$ has the legal square $1$, so the only class-$r$ terminal is
+$n = 0$, which is in class $r$ exactly when $r = 0$; there it is the
+least member of the hard residue and, since $s_{\min} \ge 4$
+(Remark~\ref{rem:hduality-readings}), lies in
+$\mathrm{Bad}_h \subseteq S$. Every terminal position therefore lies in
+$S$.
+
+(ii) \emph{Closure.} From a foreign member of $S$ the only move is the
+fallback $-m$, which by the Closure step of Lemma~\ref{lem:chain} stays
+in its own chain and lands on the top rung $\equiv b + m \pmod{2m}$,
+outside $S$. From a member $p$ of $\mathrm{Bad}_h$: every square legal at
+$p$ is smaller than $s_{\min}$, hence has residue outside $H$ by the
+minimality in Definition~\ref{def:smin}, hence, by the partition of
+Lemma~\ref{lem:hduality}(ii), has residue $0$, $m$, or in $H + m$.
+Residue $0$ is impossible: such a square is divisible by $2m$ and so of
+size at least $\sigma(m) > s_{\min} > p$, by Lemma~\ref{lem:nodeep}. A
+square of residue $m$ stays in class $r$ and exchanges the two residues
+(Lemma~\ref{lem:hduality}(iii)), landing on a free position below $p$ ---
+a free member of $\mathrm{Bad}$, outside $S$. A square of residue in
+$H + m$ carries the hard residue onto a top rung
+(Lemma~\ref{lem:hduality}(iii)), outside $S$. Hence no move from $S$
+lands in $S$.
+
+(iii) \emph{Escape.} A foreign top rung $n \equiv b + m \pmod{2m}$
+satisfies $n \ge b + m \ge m$, so the fallback is legal and lands on the
+bottom residue $b$ --- an element of $S$. A free class-$r$ position
+satisfies $n \ge f \ge 1$, and the move $-1$ lands on the foreign bottom
+$f - 1$ (Lemma~\ref{lem:hduality}(iv)), an element of $S$. A hard
+class-$r$ position outside $S$ is precisely one with $n \ge s_{\min}$;
+the move $-s_{\min}$ is legal for that very reason and, its residue lying
+in $H$, lands on a foreign bottom (Lemma~\ref{lem:hduality}(iii)) --- an
+element of $S$. Every position outside $S$ has a move into $S$.
+
+By Lemma~\ref{lem:verify}, $S$ is exactly the set of P-positions of
+$D(m,r)$.
 \end{proof}
 
-\begin{remark}[The historical witness]
+\begin{corollary}[Explicit form]\label{cor:explicit}
+By Proposition~\ref{prop:bad}, $\mathrm{Bad}$ occupies the class indices
+$t = 0, \dots, \beta-1$, with the free residue at even $t$ when
+$r \ge 1$ and at odd $t$ when $r = 0$. Hence:
+
+for healthy $(m,r)$ with $r \ge 1$: $\beta = 1$ and
+$\mathrm{Bad} = \{r\}$ is free, so $\mathrm{Bad}_h = \emptyset$ and the
+P-set is the $m-1$ bottom classes alone;
+
+for healthy $(m,r)$ with $r = 0$: $\beta = 2$ and
+$\mathrm{Bad} = \{0, m\}$ with $0$ hard and $m$ free, so
+$\mathrm{Bad}_h = \{0\}$;
+
+for $(m,r) \in E$: $\beta = 3$ and
+$\mathrm{Bad} = \{r, m+r, 2m+r\}$ with $m+r$ hard and the other two free,
+so $\mathrm{Bad}_h = \{m + r\}$.
+
+The statement of Theorem~\ref{thm:main} therefore coincides with the
+earlier three-clause law: the boundary position and the rebels were never
+two kinds of exception, but the hard members of $\mathrm{Bad}$ in their
+respective regimes.
+\end{corollary}
+
+\begin{remark}[Receipts]\label{rem:receipts}
+The closure argument, instantiated at the rebel $13$ of $D(9,4)$: the
+legal squares are $1, 4, 9$, of residues $1, 4, 9$ modulo $18$; the first
+two lie in $H + 9 = \{1,\dots,4\} \cup \{14,\dots,17\}$ and land on the
+top rungs $12$ and $9$; the third has residue $m$ and lands on the free
+$\mathrm{Bad}$ member $4$. The escape argument at the first cleared
+member: $31 - 25 = 6$, a bottom. The boundary at $r = 0$: $n = 0$ is
+terminal, and the positions with a move onto it are the class-$0$ members
+$n = k^2$, all of which the theorem already declares N --- via the escape
+$-s_{\min}$ for $n \ge s_{\min}$, and via membership of $\mathrm{Bad}$'s
+free part otherwise.
+\end{remark}
+
+\begin{remark}[The historical witness]\label{rem:historical}
 % PORT: IV.7(1) — (m-1)^2 == m+1 (mod 2m) for odd m; superseded by the
 % Clearing Lemma; kept as the original route.
 \emph{The odd-$m$ witness identity, the original route.} For odd $m$,
@@ -495,8 +695,8 @@ $(m - 1)^2 = m^2 - 2m + 1 \equiv m^2 + 1 \equiv \mathbf{m + 1}
 every hard set, landing the hard residue exactly on bottom $r - 1$
 ($m - 1$ when $r = 0$). So the pair $(1^2, (m - 1)^2)$ is a universal
 witness pair for all odd $m$ at once --- at the price of the threshold
-$n \ge (m - 1)^2$. The Clearing Lemma supersedes it: a square below
-$m + r$ does the same job with legality free, for both parities, with no
+$n \ge (m - 1)^2$. Proposition~\ref{prop:trichotomy}(a) supersedes it: a square in the
+window $(f, f+m]$ does the same job with legality free, for both parities, with no
 threshold. The identity remains the cleanest line in this development and the
 historical door to everything above.
 \end{remark}
@@ -510,7 +710,7 @@ affected classes turn inward.
 
 \begin{lemma}[Confinement Lemma]\label{lem:confine}
 For $m \in \{2,4\}$ and every $r$: $\Q(2m) \subseteq \{0,1,m\}$, while
-$H(m,r)$ excludes $0$, $1$, and $m$ (Remark~\ref{lem:useless}). Hence no square move from a
+$H(m,r)$ excludes $0$, $1$, and $m$ (Definition~\ref{def:smin}). Hence no square move from a
 hard-residue position reaches the window: every move stays inside class
 $r$ or lands on an \NN-position of a foreign chain.
 \end{lemma}
@@ -521,7 +721,7 @@ $r$ or lands on an \NN-position of a foreign chain.
 For $m \in \{2, 4\}$ and every $r$: $\Q(2m) \subseteq \{0, 1, m\}$ ---
 read directly off the mod-$4$ and mod-$8$ rows of Table~\ref{tab:Q} ---
 while every hard set $H(m, r)$ excludes $0$, $1$, and $m$
-(Definition~\ref{def:window}). Hence from any hard-residue position,
+(Definition~\ref{def:smin}). Hence from any hard-residue position,
 every legal square move either stays inside class $r$ (a square $\equiv
 0$ or $m$ mod $2m$ is $\equiv 0$ mod $m$) or lands one below on the odd
 rung above a bottom (a square $\equiv 1$), an \NN-position --- never on a
@@ -765,9 +965,8 @@ the smallest member $7$. Every position outside $S$ has a move into $S$
 and $2^2 \equiv 4 \pmod{10}$; no general fact about squares is invoked.
 By Lemma~\ref{lem:verify}, $S$ is exactly the set of P-positions of
 $D(5,2)$: the law holds for every $n \ge 0$, with no preperiod ---
-and the P-set coincides with the window of
-Definition~\ref{def:window} for the reason recorded in
-Remark~\ref{rem:coincidence}.
+and the P-set consists of the bottom classes alone, for the reason
+recorded in Remark~\ref{rem:coincidence}.
 \end{proof}
 
 \begin{remark}[Verification against the workbook]\label{rem:workbook}
@@ -801,12 +1000,14 @@ mechanical sweep stands as the bulk consistency evidence behind it.
 \end{remark}
 
 \begin{remark}[The $D(5,2)$ coincidence, resolved]\label{rem:coincidence}
-% PORT: escape_and_diagonal.md IV.7(2).
-For any escaped game the \PP-set equals its window by construction:
-\PP-set $=$ (chain \PP's) $\cup$ (class-$r$ \PP's) $= T \cup \emptyset =
-T$. The equality fails exactly where escape does --- the three
-exceptional games have \PP-set $= T \cup \{m + r\}$, and the diseased
-games' \PP-sets properly contain their windows.
+For every game with finite $s_{\min}$ the P-set is, by
+Theorem~\ref{thm:main}, the union of the bottom classes and
+$\mathrm{Bad}_h$. When $\mathrm{Bad}_h$ is empty --- every healthy game
+with $r \ge 1$ --- the P-set is the bottom classes alone, which is the
+coincidence observed above for $D(5,2)$; at $r = 0$ and on $E$ the set
+$\mathrm{Bad}_h$ contributes its single position; and at the degenerate
+moduli, where $s_{\min} = \infty$, the class-$r$ contribution is the
+infinite confined set of Section~\ref{sec:disease}.
 \end{remark}
 
 \begin{theorem}[Foursquare]\label{thm:foursquare}
@@ -1094,7 +1295,7 @@ P-positions $3, 11, 23$ in $D(2,1)$ and $5, 13, 37$ in $D(4,1)$ are the
 images of Golomb's opening losing positions under the reindexings of
 Theorem~\ref{thm:golomb}, and the recorded preperiod $14$ for $D(9,4)$ is
 one more than the rebel position $13$ of
-Proposition~\ref{prop:rebels}. Both were readings before they were
+Corollary~\ref{cor:explicit}. Both were readings before they were
 consequences, which is the strongest form of confirmation a proposing
 machine can offer: the prediction was on the record before the mechanism
 that implies it existed.
