@@ -64,8 +64,7 @@ and from every other position exactly $m$. For every $m \ge 3$ except
 $m = 4$ and every $r$, the P-positions of $D(m, r)$ are precisely the
 $m - 1$ residue classes modulo $2m$ of the chain bottoms, together with
 $n = 0$ and, for $(m, r) \in \{(9, 4), (9, 5), (9, 6)\}$, a single rebel
-position $n = m + r \in \{13, 14, 15\}$; the law holds for both parities
-of $m$ with no exceptions beyond these named positions. At $m = 2$ and
+position $n = m + r \in \{13, 14, 15\}$; there are no exceptions beyond these named positions. At $m = 2$ and
 $m = 4$ the squares modulo $2m$ lie inside $\{0, 1, m\}$, so no move from
 the affected classes reaches a foreign P-position: those classes are
 confined to self-contained recursions, which are Golomb's
@@ -1972,10 +1971,21 @@ shrink the terminal set, which the hypothesis of no preperiod already
 places inside the candidate. So the law survives precisely when closure
 does. Forward: if no P-position of the enlarged mode sits $a$ above
 another P-position, then no new option leaves a P for a P, closure holds,
-and Lemma~\ref{lem:verify} returns the same P-set. Converse: if some
-P-position $n$ of that mode has $n - a$ also P, then $n$ now has an
-option landing on a P-position, so $n$ is N --- the law fails, and it
-fails first at the smallest such $n$.
+and Lemma~\ref{lem:verify} returns the same P-set. Converse: let $S$ be
+the P-set of the original game, suppose some position of the enlarged
+mode lies in $S$ with its option $a$ below also in $S$, and let $n_0$ be
+the smallest such position. We claim every position below $n_0$ keeps its
+original status in the enlarged game, by strong induction. A position
+$n < n_0$ with $n \in S$ has all of its old options outside $S$, hence
+N-positions by the induction hypothesis; its possible new option
+$n - a$ --- present only when $n$ is in the enlarged mode --- cannot lie
+in $S$, since that would contradict the minimality of $n_0$; so every
+option of $n$ is an N-position and $n$ remains a P-position. A position
+$n < n_0$ outside $S$ keeps its old witness into $S$, still a P-position
+by the induction hypothesis, so $n$ remains N. At $n_0$ itself the new
+option $n_0 - a$ lies below $n_0$ and in $S$, hence is a P-position of
+the enlarged game, so $n_0$ is an N-position: the law fails, and it fails
+first at $n_0$.
 \end{proof}
 \begin{remark}[The scoping is not decorative]
 The criterion asks about P-positions of the enlarged mode, not about all
@@ -2179,13 +2189,17 @@ Grundy values of the same game (OEIS
 \href{https://oeis.org/A014586}{A014586}) are more mysterious still \cite{fox, larsson-fox}.
 Problem A1 of the Games of No Chance list \cite{gonc6} asks how the
 structure of a ruleset constrains the structure of its periods; the
-diagonal family now hands that problem a complete worked answer on one
-side of the boundary and an honest pointer across it. One sentence about
-the far side, kept claim-free: the confinement mechanism is not special
-to squares --- Remark~\ref{rem:confined-game} already shows the confined
-class plays the subtraction game $\{\, s/2m : s \in S,\ 2m \mid s \,\}$
---- and its consequences, including which games can be made to appear
-inside mode-switching hosts, are developed in work in progress.
+diagonal family now answers on both sides of its own boundary. Where the
+palette exists, the law is complete and threshold-free, and
+Corollary~\ref{cor:grundy-aperiodic} shows that even there the constraint
+is an outcome-level phenomenon only: every solved member of the family
+escapes the classical periodicity theory at the level of Grundy values.
+And the boundary itself is not a limitation of method: by
+Corollary~\ref{cor:can-do}, a classification theorem for mode-switching
+subtraction games with arbitrary mode sets would classify all subtraction
+games, so no such theorem exists to be proved. One construction away from
+the solved family lies a class exactly as wild as subtraction games
+themselves.
 
 We still leave the reader $D(2,1)$ as a parting gift. Subtract any
 square from an odd number; subtract $2$ from an even one. A pencil
