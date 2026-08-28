@@ -88,7 +88,7 @@ subtraction games. The same architecture solves Foursquare, an earlier
 machine-found game with moves $\{3, 8, 9\}$ and a square mode at
 $n \equiv 1 \pmod 4$, and yields an exact criterion for which move-set
 enlargements preserve a law. Every conjecture was machine-proposed from a
-census of roughly 3,000 games; every proof is human-written; twice,
+census of roughly 3,000 games; twice,
 theory constructed afterwards rederived numbers the instrument had
 recorded before the theory existed. The growth rate of Golomb's P-set ---
 his own open question since 1966 --- remains open.
@@ -205,9 +205,11 @@ existed.
 
 The method deserves a plain statement on page one. Every conjecture in
 this paper was machine-proposed, drawn from a census of roughly three
-thousand games; every proof is human-written. Section~\ref{sec:method}
-documents the pipeline, the verification regime, and the written
-integrity protocol that kept the two roles separate.
+thousand games; the instrument that proposed them constructs no proofs,
+and Section~\ref{sec:method} documents the pipeline, the verification
+regime, and the written protocol governing its use. The acknowledgments
+state in full the part that automated systems played in the mathematics
+and in the writing.
 
 Section~\ref{sec:prelim} fixes notation and the verification lemma;
 Sections~\ref{sec:chain} through~\ref{sec:main} build chains, the
@@ -2219,12 +2221,14 @@ Ramanujan Machine \cite{ramanujan-machine}, FunSearch \cite{funsearch}
 --- and inherits their division of labor rather than their
 architectures.
 
-The division of labor is strict and the repository states it in writing:
-the instrument proposes and verifies mechanically and proves nothing,
-every proof here is human-written, and each numerical claim above
-regenerates from the seeded scripts at
+The division of labor between the instrument and the mathematics is
+strict, and the repository states it in writing: the instrument proposes
+and verifies mechanically and constructs no proofs, and each numerical
+claim above regenerates from the seeded scripts at
 \url{https://github.com/hamzagul07/gamehunter}, where the integrity
-protocol and its full session logs also live. The protocol earns its keep
+protocol and its full session logs also live. How the proofs themselves
+were drafted is a separate question, and it is answered in the
+acknowledgments. The protocol earns its keep
 rather than asserting itself: one drafting error --- a subtly different
 game verified faithfully across three documents --- was caught only
 because the discipline requires sentences to follow printouts, never
@@ -2321,9 +2325,19 @@ Proposition~\ref{prop:kadam}, and for the ``why 16'' question that
 produced Remark~\ref{rem:mechanism} --- a reviewer who improves,
 contributes, and asks in a single correspondence is rare. The author
 thanks Urban Larsson for the introduction and for the encouragement to
-continue. AI systems built the search instrument described in
-Section~\ref{sec:method} and served as referee and operations agents under a written protocol
-stored in the repository; every proof in this paper is human-authored.
+continue. The search instrument described in Section~\ref{sec:method} was built
+with AI assistance; it proposes conjectures and verifies them
+mechanically, and it constructs no proofs. Separately, much of the
+theory in this paper --- the $s_{\min}$ apparatus of
+Sections~\ref{sec:clearing} and~\ref{sec:main}, and the transfer,
+Grundy, embedding and mis\`ere results of Sections~\ref{sec:transfer}
+and~\ref{sec:grundy} through~\ref{sec:misere}, together with
+the abstract and introduction --- was developed in extended dialogue
+with Claude (Anthropic), which drafted statements and proofs. The author
+directed that work, refereed and corrected every draft, verified every
+claim against independent computation, and takes sole responsibility for
+the correctness of what is stated here; the remaining sections, the
+search instrument, and all verification are the author's own.
 The examination transcripts, verification scripts, and full logs are
 public in the project repository,
 \url{https://github.com/hamzagul07/gamehunter}. This work has not yet
