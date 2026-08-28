@@ -1,5 +1,15 @@
 # GameHunter — project memory for Claude Code
 
+**Scope note (added August 2026).** The rules in this file govern automated
+agents operating in this repository: they propose, compute, verify and referee,
+and they never write mathematics into `proofs/`. That constraint has held and
+still holds. These rules are not, and never were, a claim about how the paper's
+mathematics was drafted. A substantial part of the theory added during the
+August 2026 extension was drafted in dialogue with an AI system under the
+author's direction and refereeing; this is disclosed in the paper's
+acknowledgments and recorded in full in the August 2026 addendum to
+`PROJECT_REPORT.md`.
+
 GameHunter is an automated conjecture-hunting engine for impartial combinatorial
 games (single Python file, `game_hunter.py`). It proposes invented games, computes
 Sprague-Grundy values, detects structure, and outputs CONJECTURES. The human owner

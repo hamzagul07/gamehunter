@@ -63,6 +63,16 @@ this is your research log; never delete it.
 
 ## 4. The honest protocol (non-negotiable)
 
+**Scope note (added August 2026).** The rules in this file govern automated
+agents operating in this repository: they propose, compute, verify and
+referee, and they never write mathematics into `proofs/`. That constraint
+has held and still holds. These rules are not, and never were, a claim
+about how the paper's mathematics was drafted. A substantial part of the
+theory added during the August 2026 extension was drafted in dialogue with
+an AI system under the author's direction and refereeing; this is disclosed
+in the paper's acknowledgments and recorded in full in the August 2026
+addendum to `PROJECT_REPORT.md`.
+
 1. The machine outputs candidates. **You** own conjectures only after
    verifying by hand at small n, and theorems only after writing a proof.
 2. Re-verify every finalist at a much larger range (`--N 20000` or more)
@@ -75,9 +85,14 @@ this is your research log; never delete it.
    a handful of curated, high-quality entries, never bulk machine output.
    Read their contribution guidelines first. Spamming OEIS would burn your
    reputation and disrespect a resource mathematicians depend on.
-5. In any paper or application, describe the methodology exactly as it is:
-   "I built an automated search system; it proposed candidates; I proved
-   these theorems." That sentence is strong *because* it is true.
+5. In any paper or application, describe the methodology exactly as it is,
+   including where an AI system drafted mathematics, if it did. As of
+   August 2026 the accurate description is: "I built an automated search
+   system; it proposed the candidates and verified them mechanically; some
+   proofs are mine, and much of the later theory was drafted in dialogue
+   with an AI system, refereed, corrected and verified by me." That
+   sentence is strong only for as long as it is true. When the facts
+   change, change the sentence first.
 
 ## 5. Wiring your LLM as a second proposer
 

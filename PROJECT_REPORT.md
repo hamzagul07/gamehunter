@@ -1,5 +1,11 @@
 # GameHunter: Machine-Guided Discovery in Mode-Switching Subtraction Games
 
+**Note (added August 2026).** This report describes the project through 30
+July 2026, and its statements about the division of labor were accurate on
+that date. The division changed during the August 2026 extension of the paper;
+see the August 2026 addendum at the end of this file. Nothing below has been
+rewritten — a record edited to match a later conclusion is not a record.
+
 **Project report — July 29, 2026.**
 Compiled by the project's AI collaborator (Claude) at the student's request.
 Status: active research. Nothing in this report has yet received external
@@ -227,3 +233,66 @@ machine-checked to n = 30{,}000 in
 verification/kadam_extension_check.py) and it will appear as a credited
 remark. The Foursquare result and proof were also posted publicly on the
 Art of Problem Solving forum for independent checking.
+
+## August 2026 addendum: a change in the division of labor
+
+Everything above describes the project through 30 July 2026, when the division
+was as stated: the instrument proposed and verified, and the author wrote
+every proof. In August 2026 the paper was substantially extended — from
+nineteen pages to thirty-two, with six new or rebuilt sections — and during
+that work the division changed. This addendum records the change. The sections
+above are left as originally written.
+
+### What changed
+
+The theory added in August was developed in extended dialogue with Claude
+(Anthropic), which drafted the statements and the proof texts. The author set
+the direction and the architecture, refereed every draft, corrected what was
+wrong, verified every numerical claim against the instrument, and takes sole
+responsibility for the correctness of the paper. No mathematics was accepted
+on an AI's assertion; every claim that entered the paper was either proved and
+refereed or checked against a machine record.
+
+### Ledger
+
+Drafted in dialogue and installed after refereeing:
+
+- Corollary 3.2 (Chain Lemma, Grundy form) and the bottom / top-rung terminology
+- Section 4 in its entirety — Definition 4.1 (the two residues, the hard set, s_min) through Proposition 4.9
+- Theorem 5.1, Corollary 5.2, Remark 5.3, and one clause of Remark 5.4
+- Section 6 in its entirety — Lemma 6.1, Theorem 6.2 (the Transfer Principle), Remarks 6.3 to 6.5
+- Section 8 in its entirety — Definition 8.1 through Corollary 8.6, including Table 2 and its caption
+- Section 9 in its entirety — Definition 9.1 through Remark 9.9
+- Section 10 in its entirety — Lemma 10.1 through Remark 10.7
+- Remark 7.4's closing sentence; Remark 11.3; the proof of Proposition 11.7; the body of Remark 11.8; the reverse-direction paragraph of Section 12; the closing paragraph of Section 13
+- The abstract and Section 1
+- Editorial: the Section 7 vocabulary and register revisions, the h* renaming, and the Section 11 cross-reference repairs
+
+The author's own, unchanged: Sections 2 and 3 (Lemma 3.1), Section 7, Sections
+11 through 13 apart from the items listed above, the search instrument, and
+every verification run in this repository.
+
+### What the firewall covered, and what it did not
+
+`proofs/` was read-only throughout the August work and no AI-drafted
+mathematics was written into it; the statement above that the `proofs/`
+directory contains human-authored mathematics only remains true. The firewall
+governed the repository. It did not govern the dialogue, and the paper's
+disclosure now says so — which is the substance of the correction this
+addendum records.
+
+### Corrections ran in both directions
+
+The record is not one-sided, and both directions are worth keeping. The
+dialogue caught errors the author's machine sweeps had missed — the base-point
+clause of Theorem 9.5 exists because a proof found what a base-blind sweep
+could not, and a converse gap in Proposition 11.7 that had stood since July
+was closed. The author's machine records caught errors in the drafting: a
+claim of "no mismatches" written for Section 12 was refuted by a recorded
+ledger of 77 disagreements, which on recomputation turned out to be exactly
+the excluded prefixes and now appears in the paper in that corrected form; an
+occurrence audit that reported eleven instances was found by relocation to
+have missed ten more; and a bibliographic attribution in the draft was wrong
+and was corrected against the source. Neither party's output was accepted
+without the other's check, and the paper's claims stand on the checks rather
+than on either party's authority.
