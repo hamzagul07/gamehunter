@@ -1,10 +1,16 @@
 # GameHunter: Machine-Guided Discovery in Mode-Switching Subtraction Games
 
-**Note (added August 2026).** This report describes the project through 30
-July 2026, and its statements about the division of labor were accurate on
-that date. The division changed during the August 2026 extension of the paper;
-see the August 2026 addendum at the end of this file. Nothing below has been
-rewritten — a record edited to match a later conclusion is not a record.
+**Note (added August 2026, revised).** This report describes the project
+through 30 July 2026. Its statements about the division of labor are
+incomplete, and some are inaccurate as written: parts of the mathematics
+attributed below to the author were derived in dialogue with an AI system
+before that date, including the results that appear in the paper as Theorem
+7.3 and Corollaries 7.5 to 7.7. Those claims — at the head of this report, in
+the proof-authorship scoreboard, and in the closing summary — should not be
+relied upon pending the audit described in the addendum at the end of this
+file. Nothing below has been rewritten. A record edited to match a later
+conclusion is not a record; a record that never posts its corrections is not
+one either, and this note is the correction.
 
 **Project report — July 29, 2026.**
 Compiled by the project's AI collaborator (Claude) at the student's request.
@@ -235,6 +241,16 @@ remark. The Foursquare result and proof were also posted publicly on the
 Art of Problem Solving forum for independent checking.
 
 ## August 2026 addendum: a change in the division of labor
+
+**Status: under audit (August 2026).** The ledger in this addendum is
+incomplete. It was written against commit 79de589 as a baseline, on the
+assumption that everything predating that commit was the author's own work;
+the chat record has since shown that assumption to be false, so the baseline
+marks a date and not a boundary of authorship. The ledger's entries for the
+material added after 79de589 have been checked against the git history and
+stand. Its claim that the earlier sections are the author's own does not
+stand, and is withdrawn pending a provenance audit of the full collaboration
+record. That audit, and not this ledger, will be the account of record.
 
 Everything above describes the project through 30 July 2026, when the division
 was as stated: the instrument proposed and verified, and the author wrote
