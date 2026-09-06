@@ -115,8 +115,8 @@ computation \cite{golomb}; see \cite{survey} for a recent survey. The
 live frontier is rulesets in which the set of legal moves varies with the
 position being moved from --- position-dependent, or non-invariant, move
 sets \cite{duchene-rigo}. This paper studies a structured family at that
-frontier and solves it completely --- outcomes and Grundy values under
-normal play, outcomes under mis\`ere --- and then shows that the
+frontier and solves it completely (outcomes and Grundy values under
+normal play, outcomes under mis\`ere) and then shows that the
 structure making the family solvable sits one construction away from
 universality: the same mode-switching format can host any subtraction
 game whatever.
@@ -193,9 +193,9 @@ class is the normal-play P-set translated by $\mp m$, the index set never
 moving.
 
 Section~\ref{sec:examples} puts the machinery to work three times:
-$D(5, 2)$ solved in full as the worked example; Foursquare --- the
+$D(5, 2)$ solved in full as the worked example; Foursquare (the
 machine's first find, moves $\{3, 8, 9\}$ with a square mode at
-$n \equiv 1 \pmod 4$ --- solved with its mechanism exposed and Kadam's
+$n \equiv 1 \pmod 4$) solved with its mechanism exposed and Kadam's
 Extension established; and a criterion determining exactly which
 enlargements of a mode's move set preserve a law.
 Section~\ref{sec:method} opens the instrument itself --- proposer,
@@ -374,8 +374,8 @@ splits modulo $2m$ into exactly the two residues $f$ and $h$, which we
 call the \emph{free} and \emph{hard} residues; when $r = 0$ these are $m$
 and $0$. Write
 \[ B = \{0, 1, \dots, m-1\} \setminus \{r\} \]
-for the set of \emph{foreign bottoms} --- the bottoms of the $m-1$ chains
-classified by Lemma~\ref{lem:chain} --- and define the \emph{hard set}
+for the set of \emph{foreign bottoms} (the bottoms of the $m-1$ chains
+classified by Lemma~\ref{lem:chain}) and define the \emph{hard set}
 \[ H(m,r) = ([f+1,\, f+m] \setminus m\mathbb{Z}) \bmod 2m. \]
 For $r \ge 1$ this is $\{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}$, and
 for $r = 0$ it is $\{m+1, \dots, 2m-1\}$. Finally, let
@@ -530,9 +530,9 @@ $m \in \{2, 4\}$, for every $r$.
 The proof turns on one equivalence: $s_{\min} \le f + m$ if and only if
 the window $(f, f+m]$ contains a square other than $m$ and $2m$. Indeed,
 a square $s \le f$ has residue $s$ (as $s < 2m$), and every residue in
-$H$ exceeds $r$ when read in $[0, 2m)$ --- its elements are
+$H$ exceeds $r$ when read in $[0, 2m)$ (its elements are
 $\{r+1, \dots, m-1\} \cup \{m+1, \dots, m+r\}$ for $r \ge 1$ and
-$\{m+1, \dots, 2m-1\}$ for $r = 0$ --- so $s \notin H$ and squares up to
+$\{m+1, \dots, 2m-1\}$ for $r = 0$) so $s \notin H$ and squares up to
 $f$ never certify. A square $s \in (f, f+m]$ with $s < 2m$ has residue
 $s$, which lies in $H$ exactly when $s$ is not a multiple of $m$; the
 window contains exactly one multiple of $m$ (any $m$ consecutive integers
@@ -941,8 +941,7 @@ $r$ or lands on an \NN-position of a foreign chain.
 % PORT: V.1, including the consequence paragraph (self-contained
 % internal recursion; 3 is P in D(2,1), 5 is P in D(4,1)) and the
 % calibration sentences (confinement proved; aperiodicity NOT proved).
-For $m \in \{2, 4\}$ and every $r$: $\Q(2m) \subseteq \{0, 1, m\}$ ---
-read directly off the mod-$4$ and mod-$8$ rows of Table~\ref{tab:Q} ---
+For $m \in \{2, 4\}$ and every $r$: $\Q(2m) \subseteq \{0, 1, m\}$ (read directly off the mod-$4$ and mod-$8$ rows of Table~\ref{tab:Q})
 while every hard set $H(m, r)$ excludes $0$, $1$, and $m$
 (Definition~\ref{def:smin}). Hence from any hard-residue position,
 every legal square move either stays inside class $r$ (a square $\equiv
@@ -1039,9 +1038,9 @@ $\lfloor t/2 \rfloor \in \mathcal{G}$.
 \end{proof}
 
 The anomaly ledger now reads as a codebook: $D(2,1)$'s recorded
-fingerprints $3, 11, 23$ are $4t + 3$ over $t = 0, 2, 5$ --- the opening
+fingerprints $3, 11, 23$ are $4t + 3$ over $t = 0, 2, 5$ (the opening
 P-positions of Golomb's game (OEIS
-\href{https://oeis.org/A030193}{A030193}) --- and $D(4,1)$'s
+\href{https://oeis.org/A030193}{A030193})) and $D(4,1)$'s
 $5, 13, 37$ are $8t + 5$ over $t = 0, 1, 4$, half-indices
 $u = 0, 0, 2$: the same openers arriving through the two interleaved
 copies. The instrument had been filing Golomb's sequence under two
@@ -1504,9 +1503,9 @@ $n = f + 2mt \ge 2m + 1 > m + 1$, so both witnesses are legal, and by
 Lemma~\ref{lem:host-geometry}(ii)--(iii) the amount $1$ lands on a bottom
 (value $0$) and $m+1$ on a top rung (value $1$): (H1). (H2) is
 Corollary~\ref{cor:chain-grundy}. Theorem~\ref{thm:transfer} gives
-$h = G - 2$ equal to the Grundy function of the internal game --- the
+$h = G - 2$ equal to the Grundy function of the internal game (the
 subtraction game $T$ on the index $t$, by
-Lemma~\ref{lem:host-geometry}(iv) --- with the index $0$ deleted; moves
+Lemma~\ref{lem:host-geometry}(iv)) with the index $0$ deleted; moves
 onto index $0$ are excluded from the mex as moves into $\mathrm{Bad}$.
 Deleting the initial segment $\{0\}$ and re-basing at $u = t - 1$ turns
 the legality $t - \tau \ge 1$ into $u - \tau \ge 0$, so
@@ -1515,7 +1514,7 @@ $h(f + 2mt) = G_T(t - 1)$.
 \emph{Hard residue, $r \ge 1$.} Take $C = \{m + r + 2mt : t \ge 0\}$ and
 $\mathrm{Bad} = \emptyset$. The least member $m + r \ge m + 1$ already
 affords both witnesses, so (H1) holds everywhere with the values
-exchanged --- $m+1$ lands on a bottom, $1$ on a top rung --- and (H2) is
+exchanged ($m+1$ lands on a bottom, $1$ on a top rung) and (H2) is
 as before. Theorem~\ref{thm:transfer} with no deletion gives
 $G(m + r + 2mt) = 2 + G_T(t)$.
 
@@ -2036,12 +2035,12 @@ the all-even candidate, while the $s \equiv 8$ moves land on
 $\{8, 10, 12, 14\} \pmod{16}$, also outside --- no move from the candidate
 returns to it. In the other direction, the extended move set contains the
 original one and square mode is untouched, so every escape witness of the
-original proof --- the standard moves and the squares $1$ and $9$ ---
+original proof (the standard moves and the squares $1$ and $9$)
 remains a legal move of $F'$ with the same landing, and a move set that
 only grows cannot lose an escape. Every position outside the candidate
 still has its move into it. The candidate therefore meets all three
-conditions of Lemma~\ref{lem:verify} in $F'$ --- terminals inside, closed
-against return, reachable from everywhere outside --- so it is the P-set
+conditions of Lemma~\ref{lem:verify} in $F'$ (terminals inside, closed
+against return, reachable from everywhere outside) so it is the P-set
 of $F'$, and it coincides with Foursquare's.
 \end{proof}
 
@@ -2066,7 +2065,7 @@ the smallest such position. We claim every position below $n_0$ keeps its
 original status in the enlarged game, by strong induction. A position
 $n < n_0$ with $n \in S$ has all of its old options outside $S$, hence
 N-positions by the induction hypothesis; its possible new option
-$n - a$ --- present only when $n$ is in the enlarged mode --- cannot lie
+$n - a$ (present only when $n$ is in the enlarged mode) cannot lie
 in $S$, since that would contradict the minimality of $n_0$; so every
 option of $n$ is an N-position and $n$ remains a P-position. A position
 $n < n_0$ outside $S$ keeps its old witness into $S$, still a P-position
@@ -2213,8 +2212,8 @@ the last, with exact laws read in $842$ of them. Every law survived six
 adversarial verification passes at depths $20{,}000$ and $10^6$ without a
 failure, and a deeper rescan of the $731$ resistant games converted only
 $6$. Before and after every session the engine re-derives five classical
-laws --- the subtraction game $\{1, 2, 3\}$ and Golomb's
-subtract-a-square among them --- so that drift anywhere in the stack
+laws (the subtraction game $\{1, 2, 3\}$ and Golomb's
+subtract-a-square among them) so that drift anywhere in the stack
 would announce itself in the classics first. The instrument stands in a
 short lineage of proposing machines --- Graffiti \cite{graffiti}, the
 Ramanujan Machine \cite{ramanujan-machine}, FunSearch \cite{funsearch}
@@ -2229,8 +2228,8 @@ claim above regenerates from the seeded scripts at
 protocol and its full session logs also live. How the proofs themselves
 were drafted is a separate question, and it is answered in the
 acknowledgments. The protocol earns its keep
-rather than asserting itself: one drafting error --- a subtly different
-game verified faithfully across three documents --- was caught only
+rather than asserting itself: one drafting error (a subtly different
+game verified faithfully across three documents) was caught only
 because the discipline requires sentences to follow printouts, never
 precede them.
 
@@ -2245,8 +2244,8 @@ consequences, which is the strongest form of confirmation a proposing
 machine can offer: the prediction was on the record before the mechanism
 that implies it existed.
 
-The traffic also ran the other way. Corollary~\ref{cor:r-beta} --- that
-$r$ enters the class-index Grundy sequence only through $\beta$ --- was
+The traffic also ran the other way. Corollary~\ref{cor:r-beta} (that
+$r$ enters the class-index Grundy sequence only through $\beta$) was
 derived before it was swept, and a sweep across eight moduli then
 returned the collapse: at each modulus, every healthy game with
 $r \ge 1$ produced one and the same class-index sequence, and the three
@@ -2328,11 +2327,11 @@ thanks Urban Larsson for the introduction and for the encouragement to
 continue. The search instrument described in Section~\ref{sec:method} was built
 with AI assistance; it proposes conjectures and verifies them
 mechanically, and it constructs no proofs. Separately, much of the
-theory in this paper --- the $s_{\min}$ apparatus of
+theory in this paper (the $s_{\min}$ apparatus of
 Sections~\ref{sec:clearing} and~\ref{sec:main}, and the transfer,
 Grundy, embedding and mis\`ere results of Sections~\ref{sec:transfer}
 and~\ref{sec:grundy} through~\ref{sec:misere}, together with
-the abstract and introduction --- was developed in extended dialogue
+the abstract and introduction) was developed in extended dialogue
 with Claude (Anthropic), which drafted statements and proofs. The author
 directed that work, refereed and corrected every draft, verified every
 claim against independent computation, and takes sole responsibility for
