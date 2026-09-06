@@ -82,7 +82,7 @@ zero within their class. The mechanism is isolated as a Transfer
 Principle for arbitrary impartial games, and it runs backward: a host
 construction embeds any subtraction game whatever as a mode class of a
 mode-switching game, at outcome level and, with one added move, at
-Grundy level --- so a classification theorem for mode-switching
+Grundy level. So a classification theorem for mode-switching
 subtraction games with arbitrary mode sets would classify all
 subtraction games. The same architecture solves Foursquare, an earlier
 machine-found game with moves $\{3, 8, 9\}$ and a square mode at
@@ -213,11 +213,11 @@ and in the writing.
 
 Section~\ref{sec:prelim} fixes notation and the verification lemma;
 Sections~\ref{sec:chain} through~\ref{sec:main} build chains, the
-$s_{\min}$ apparatus, and the Diagonal Law;
+$s_{\min}$ apparatus, and the Diagonal Law.
 Section~\ref{sec:transfer} isolates the Transfer Principle;
 Section~\ref{sec:disease} proves confinement at $m = 2$ and $4$;
 Sections~\ref{sec:grundy} and~\ref{sec:embed} carry the principle forward
-to the Grundy solution and backward to the universal embedding;
+to the Grundy solution and backward to the universal embedding.
 Section~\ref{sec:misere} settles mis\`ere play;
 Section~\ref{sec:examples} solves further games;
 Section~\ref{sec:method} opens the instrument; and
@@ -468,7 +468,7 @@ amount is a square. Finally, since $H$ and $H+m$ are disjoint and
 $1 \in H+m$ by (iv), the residue $1$ does not lie in $H$; the square
 $1$ therefore never certifies, and as no square lies strictly between
 $1$ and $4$, it follows that $s_{\min} \ge 4$ whenever
-$s_{\min}$ is finite --- and since the residues $0$ and $m$ are outside
+$s_{\min}$ is finite. And since the residues $0$ and $m$ are outside
 $H$, $s_{\min}$ is never a multiple of $m$.
 \end{remark}
 
@@ -604,7 +604,7 @@ divisible by $2m$ has size at least $\sigma(m) > s_{\min}$, hence exceeds
 every member of $\mathrm{Bad}$ and is illegal from all of them. An
 internal move --- a square $\equiv 0 \pmod m$ --- has residue $0$ or $m$
 modulo $2m$; the residue-$0$ case is exactly divisibility by $2m$, just
-excluded, so within $\mathrm{Bad}$ every internal move has residue $m$,
+excluded. So within $\mathrm{Bad}$ every internal move has residue $m$,
 and by Lemma~\ref{lem:hduality}(iii) it exchanges the two residues of the
 class while landing on a smaller class member, which lies in
 $\mathrm{Bad}$ since $\mathrm{Bad}$ is an initial segment of the class.
@@ -1149,7 +1149,7 @@ hypothesis --- the free residue contributes nothing, all of its members
 being N, and the confined class contributes density zero by
 Corollary~\ref{cor:sparse}. Written out at $m = 4$, where the accounting
 is least obvious: by Theorem~\ref{thm:golomb} the confined P-set is
-$(16\mathcal{G} + h^*) \cup (16\mathcal{G} + h^* + 8)$, the even and odd parities of $t$; an
+$(16\mathcal{G} + h^*) \cup (16\mathcal{G} + h^* + 8)$, the even and odd parities of $t$. An
 affine map $u \mapsto 16u + b$ scales a counting function by the
 constant $16$, so each image inherits density zero from $\mathcal{G}$, and a union
 of two density-zero sets is density zero --- two, not infinitely many,
@@ -1815,7 +1815,7 @@ $\PP^-$-positions are exactly $f^* + 2mu$ for $u \in I$. The index sets
 coincide because the two internal games are identical ---
 subtract-a-square at $m = 2$, subtract-$\{2i^2\}$ at $m = 4$ --- with
 index origin in each case at a position too small to afford any internal
-move, since $\max(f^*, h^*) < \sigma(m)$; and both are evaluated by the
+move, since $\max(f^*, h^*) < \sigma(m)$. And both are evaluated by the
 \emph{normal-play} recursion: the hard side because play there is normal,
 the free side by Lemma~\ref{lem:misere-transfer}, whose conclusion is
 precisely that the mis\`ere outcomes of the confined class are the
@@ -2002,9 +2002,9 @@ sequence of Foursquare is OEIS
 
 The question of which moves may be added to a subtraction game without
 changing it is an old one: Austin answered it in 1976 for purely
-periodic subtraction games --- for each move $s$ already present, the
+periodic subtraction games. For each move $s$ already present, the
 move $p - s$ may be adjoined, since the reply $s$ reverses it out and
-the period $p$ absorbs the pair --- and Ho, in 2015, gave the idea its
+the period $p$ absorbs the pair. And Ho, in 2015, gave the idea its
 modern name, expansion sets \cite{austin1976, ho2015}.
 Proposition~\ref{prop:kadam} and Remark~\ref{rem:mechanism} answer the
 same question for a mode-switching game, at the level of P-positions:
@@ -2027,10 +2027,10 @@ survive because the smallest member of the extended set is still $3 > 2$
 --- the terminal set is $\{0, 2\}$, inside the candidate
 $\{0, 2, 4, 6\} \pmod{16}$. From a candidate position --- even, hence
 standard mode --- every legal move of $F'$ subtracts some
-$s \equiv 3, 8,$ or $9 \pmod{16}$, and the closure argument of
+$s \equiv 3, 8,$ or $9 \pmod{16}$. And the closure argument of
 Theorem~\ref{thm:foursquare} consumed exactly two facts about $s$, its
 parity and its residue modulo $16$, never its actual size, so it transfers
-verbatim to every member of the extended family: the $s \equiv 3$ and
+verbatim to every member of the extended family. The $s \equiv 3$ and
 $s \equiv 9$ moves are odd and land on odd residues, none of which lie in
 the all-even candidate, while the $s \equiv 8$ moves land on
 $\{8, 10, 12, 14\} \pmod{16}$, also outside --- no move from the candidate
@@ -2038,7 +2038,7 @@ returns to it. In the other direction, the extended move set contains the
 original one and square mode is untouched, so every escape witness of the
 original proof --- the standard moves and the squares $1$ and $9$ ---
 remains a legal move of $F'$ with the same landing, and a move set that
-only grows cannot lose an escape: every position outside the candidate
+only grows cannot lose an escape. Every position outside the candidate
 still has its move into it. The candidate therefore meets all three
 conditions of Lemma~\ref{lem:verify} in $F'$ --- terminals inside, closed
 against return, reachable from everywhere outside --- so it is the P-set
@@ -2115,7 +2115,7 @@ never on the all-even P-set, so the single even move $8$ governs the even
 world alone. That world under one jump of $8$ is precisely the shape of
 the Chain Lemma (Lemma~\ref{lem:chain}) --- four chains by residue modulo
 $8$, with bottoms $0, 2, 4, 6$ too poor to afford the jump, and a jump of
-size $m$ minting a law of modulus $2m$ --- so $8$ mints $16$, with P at
+size $m$ minting a law of modulus $2m$. So $8$ mints $16$, with P at
 the even rungs: $n \equiv 0, 2, 4, 6 \pmod{16}$,
 Theorem~\ref{thm:foursquare}, its four residues revealed as chain bottoms;
 and running the law modulo $8$ instead kills closure on the spot,
@@ -2136,7 +2136,7 @@ $D(2,\cdot)$ and $D(4,\cdot)$, one refinement up and just barely wealth
 enough. So ``why $\{3, 8, 9\}$'' has its complete answer --- three moves,
 three jobs, zero waste: one governor $\equiv 8 \pmod{16}$ whose doubling
 is the modulus, plus a pair of odd rescuers whose residues cover all four
-standard-odd classes; and the number $9$'s double life upgrades rather
+standard-odd classes. And the number $9$'s double life upgrades rather
 than dissolves --- rescuer in both modes, carrying $\{11, 15\}$ as a move
 and $\{9, 13\}$ as a square, the entire upper odd world leaning on the
 value $9$.
@@ -2144,7 +2144,7 @@ value $9$.
 The mechanism classifies tampering as well: an enlargement of
 the standard set leaves the P-set fixed exactly when every added move is
 either odd, landing, from any candidate position, on the all-N odd world,
-or $\equiv 8 \pmod{16}$, a clone of the governor --- verified: $1$, $5$,
+or $\equiv 8 \pmod{16}$, a clone of the governor. Verified: $1$, $5$,
 and $24$ preserve the law, $2$, $4$, and $16$ break it at $n = 2, 4, 16$,
 and the maximal enlargement, every odd number plus the whole clone class,
 holds to $2{,}000$. The extension of Proposition~\ref{prop:kadam} adds
@@ -2235,7 +2235,7 @@ because the discipline requires sentences to follow printouts, never
 precede them.
 
 Twice the instrument recorded numbers that no theory then existed to
-explain, and both entries were later derived exactly: the unexplained
+explain, and both entries were later derived exactly. The unexplained
 P-positions $3, 11, 23$ in $D(2,1)$ and $5, 13, 37$ in $D(4,1)$ are the
 images of Golomb's opening losing positions under the reindexings of
 Theorem~\ref{thm:golomb}, and the recorded preperiod $14$ for $D(9,4)$ is
@@ -2290,7 +2290,7 @@ Golomb's game, where it has lived since 1966. The true growth rate of
 Golomb's P-set is wedged between two proven bounds --- the $\sqrt{n}$
 floor (Corollary~\ref{cor:sparse}, second half) and the $o(n)$ ceiling
 that Furstenberg--S\'ark\"ozy places on any square-difference-free set
-(Corollary~\ref{cor:sparse}, first half) --- and our instrument reads a
+(Corollary~\ref{cor:sparse}, first half). And our instrument reads a
 count near $n^{0.7}$ across its whole range: a reading, not a theorem,
 and one that must stay instrument-tier forever unless a genuinely new
 bound arrives, since no finite prefix can certify an exponent. The
