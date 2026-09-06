@@ -489,8 +489,8 @@ $1$.
 \end{proof}
 
 One square, two jobs: the witness that lands the hard residue on a bottom
---- the escape that Section~\ref{sec:main} converts into the
-classification --- is at the same time the Grundy-$0$ half of the
+(the escape that Section~\ref{sec:main} converts into the
+classification) is at the same time the Grundy-$0$ half of the
 palette, which Section~\ref{sec:grundy} converts into a transfer of
 Grundy values. The
 two developments consume the same hypothesis, the finiteness of
@@ -1323,9 +1323,9 @@ $D(m,r)$ is not eventually periodic.
 \begin{proof}
 Suppose it were, with period $q$ beyond some $N$. Restrict to the
 class-$r$ positions on a single copy $\rho$: adding
-$\operatorname{lcm}(q, dm)$ to $n$ preserves the class and the copy ---
-$dm$ is the period of the copy structure in $n$, so any multiple of it
-does --- and, beyond $N$, the Grundy value, so by
+$\operatorname{lcm}(q, dm)$ to $n$ preserves the class and the copy
+($dm$ is the period of the copy structure in $n$, so any multiple of it
+does) and, beyond $N$, the Grundy value, so by
 Theorem~\ref{thm:grundy-transfer} the sequence $\Gamma$ is eventually
 periodic with period $\operatorname{lcm}(q, dm)/(dm)$. Its zero set
 $\mathcal{G}$ would then be eventually periodic, contradicting
@@ -1538,7 +1538,7 @@ position audited for the diagonal family in Section~\ref{sec:main}. Both
 are absorbed as one-element $\mathrm{Bad}$ sets, and both disappear under
 cosmetic changes we do not make: the theorem's content is the progression
 based at $f + m$, where the embedding is exact with no prefix for every
-$m$ and $r$ --- the formal statement of the prefix-$0$ observation
+$m$ and $r$. This is the formal statement of the prefix-$0$ observation
 recorded by the search instrument, now with its base point made explicit.
 \end{remark}
 
@@ -1577,12 +1577,12 @@ residue class while the rest of the board obeys the chain law.
 \end{remark}
 
 \begin{remark}[Scope]\label{rem:host-scope}
-The construction uses only three properties of the host: that the foreign
+The construction uses only three properties of the host. The foreign
 classes are step-$m$ chains, so that the ceiling of
 Theorem~\ref{thm:transfer} is the alternation of
-Corollary~\ref{cor:chain-grundy}; that the mode set contains two amounts
+Corollary~\ref{cor:chain-grundy}; the mode set contains two amounts
 whose residues lie on opposite sides of the partition of
-Lemma~\ref{lem:hduality}(ii), so that the palette is available; and that
+Lemma~\ref{lem:hduality}(ii), so that the palette is available; and
 the remaining amounts are $\equiv 0 \pmod{2m}$, so that they are
 internal. A host whose fallback mode has a larger move set will fail the
 first of these and present a taller ceiling; by
@@ -1596,10 +1596,10 @@ embedding theorem is the natural next question. It is not pursued here.
 Under the mis\`ere convention the player unable to move wins. A terminal
 position is therefore an N-position, and every other position is P if and
 only if all of its options are N. We write $\PP^-$ and $\NN^-$ for
-mis\`ere outcomes. No Grundy theory is available here --- mis\`ere
+mis\`ere outcomes. No Grundy theory is available here. Mis\`ere
 outcomes of a disjunctive sum are not determined by the summands'
 outcomes \cite{lessons}, and the mis\`ere quotient of even a simple
-subtraction game may be large \cite{plambeck-siegel} --- so this section classifies outcomes only.
+subtraction game may be large \cite{plambeck-siegel}. So this section classifies outcomes only.
 That is enough: the classification is complete, and the comparison with
 Theorem~\ref{thm:main} is exact.
 
@@ -2077,10 +2077,10 @@ first at $n_0$.
 \begin{remark}[The scoping is not decorative]\label{rem:scoping}
 The criterion asks about P-positions of the enlarged mode, not about all
 P-positions. Enlarging $D(5, 2)$'s squares-mode set by the amount $2$
-leaves its law untouched --- and provably so, no longer by sweep: by
+leaves its law untouched, and provably so, no longer by sweep. By
 Corollary~\ref{cor:explicit} the class $2$ of $D(5, 2)$ contains no
 P-position at all, so the criterion's condition holds vacuously and
-Proposition~\ref{prop:enlarge} returns the law unchanged --- even though
+Proposition~\ref{prop:enlarge} returns the law unchanged. This holds even though
 $2$ is a difference of two P-positions of the game
 ($2 = 2 - 0$ modulo $10$). An unscoped criterion predicts a break here
 and is simply wrong.
@@ -2118,19 +2118,19 @@ size $m$ minting a law of modulus $2m$. So $8$ mints $16$, with P at
 the even rungs: $n \equiv 0, 2, 4, 6 \pmod{16}$,
 Theorem~\ref{thm:foursquare}, its four residues revealed as chain bottoms;
 and running the law modulo $8$ instead kills closure on the spot,
-$8 \to 0$ being a move from the candidate into itself. And $3$ and $9$ are not decoys --- delete them and the law breaks at
-once, first at $n = 3$ --- for on the standard-mode odds, where squares
+$8 \to 0$ being a move from the candidate into itself. And $3$ and $9$ are not decoys. Delete them and the law breaks at
+once, first at $n = 3$. For on the standard-mode odds, where squares
 are illegal, they are the sole rescuers: residue $3$'s only witness is $3$
 (to bottom $0$), residue $7$'s is $3$ (to $4$), residue $11$'s is $9$ (to
-$2$), residue $15$'s is $9$ (to $6$) --- while the squares police only
-their legal home, the value $1$ carrying residues $\{1, 5\}$ to bottoms
-$0$ and $4$ and the value $9$ carrying $\{9, 13\}$ to the same two
+$2$), residue $15$'s is $9$ (to $6$). While the squares police only
+their legal home, the value $1$ carries residues $\{1, 5\}$ to bottoms
+$0$ and $4$, and the value $9$ carries $\{9, 13\}$ to the same two
 bottoms. Here is the number-theoretic heart at its true address: odd
 squares modulo $16$ take exactly two values, $1$ and $9$
 (Remark~\ref{rem:odd-squares}), and the second is load-bearing precisely
 at residues $9$ and $13$ --- the square-mode residues, no others --- while
-modulo $8$ every odd square is $1$ and those residues would be stranded:
-the same poverty of squares modulo powers of two that confines
+modulo $8$ every odd square is $1$ and those residues would be stranded.
+This is the same poverty of squares modulo powers of two that confines
 $D(2,\cdot)$ and $D(4,\cdot)$, one refinement up and just barely wealth
 enough. So ``why $\{3, 8, 9\}$'' has its complete answer --- three moves,
 three jobs, zero waste: one governor $\equiv 8 \pmod{16}$ whose doubling
@@ -2149,7 +2149,7 @@ and the maximal enlargement, every odd number plus the whole clone class,
 holds to $2{,}000$. The extension of Proposition~\ref{prop:kadam} adds
 precisely the residue classes of $3$, $9$, and $8$ themselves, squarely
 inside the harmless family, so the conjecture is not merely true but
-forced --- and busy rather than idle: below $3{,}000$ the new moves serve
+forced. It is busy rather than idle: below $3{,}000$ the new moves serve
 as genuine witnesses at $1{,}490$ positions, $746$ of them odd, the
 smallest being $19 \to 0$, a new odd move rescuing its own residue. None
 of this replaces the verification proof, which remains the proof of
