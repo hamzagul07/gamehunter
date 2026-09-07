@@ -128,6 +128,44 @@ separates them is a single number determined by the ruleset before a
 counter is moved. This paper computes that number and shows what follows
 once it is in hand.
 
+Both examples belong to one family, and the difference between them has a
+short explanation.
+
+Take the squares away and what is left is trivial: from every pile remove
+exactly $m$. The game splits into $m$ independent chains, one per residue
+class, and each chain is a ladder resting on a bottom rung too small to
+remove anything from. The player to move loses at every second rung, so
+the losing positions are exactly the residues $0, 1, \ldots, m-1$ modulo
+$2m$ --- the bottom half of each period. That is the baseline, and it does
+not depend on $r$.
+
+Now switch the squares on at class $r$. They act on that one class and
+nothing else, and where they work they work completely. In the first
+example the entire effect is to delete residue $1 \pmod 6$ from the losing
+set: subtract-$3$'s law with one class removed and nothing else touched.
+That is the typical case. For most $m$ and $r$ the squares destroy class
+$r$'s contribution entirely, and when $r = 0$ all of it except the empty
+pile, which survives only because nothing can be removed from it.
+
+The interesting half is what happens when they cannot finish. A position
+of class $r$ escapes by removing a square that lands it on a chain bottom,
+and until the pile is large enough to afford the smallest square that does
+so, it has no escape and is a losing position. Those stranded positions do
+not sit where the baseline's losing positions sat. They sit on the class's
+other residue --- at $m + r$ when $r \ge 1$, a residue the fallback game
+leaves entirely empty, and at $0$ when $r = 0$. At $m = 9$ and $r = 4$ the
+smallest useful square is $25$, exactly one position falls short of it,
+and that position is $13 = m + r$, sitting alone in the upper half of the
+period where the baseline law says there should be nothing at all. At
+$m = 2$ and $m = 4$ no useful square exists at any size, nothing ever
+escapes, and the whole residue is stranded --- the infinite,
+never-periodic, density-zero sets that turn out to be Golomb's game.
+
+Which of the three happens --- the class deleted, a single position left
+behind, or infinitely many --- is decided by one number: the smallest
+square that carries class $r$ onto a chain bottom, computable from $m$ and
+$r$ before a single counter is moved.
+
 A subtraction game is played on a pile of counters: a ruleset names the
 amounts a player may remove, the players alternate, and under normal play
 whoever cannot move loses. For a fixed finite ruleset the classical
