@@ -106,6 +106,28 @@ subtract-a-square game; automated conjecture generation
 }
 
 \section{Introduction}\label{sec:intro}
+Take a pile of $n$ counters and two rules. If $n \equiv 1 \pmod 3$, the
+player to move may remove any positive square number of counters; from
+every other pile the only legal move is to remove exactly three. Players
+alternate, and whoever cannot move loses. That is the entire game, and it
+is completely solved: the player to move loses exactly when $n \equiv 0$
+or $2 \pmod 6$. The law holds from $n = 0$ upward, with no preperiod and
+no exceptions.
+
+Now change one number. Squares may be removed from any odd pile, and from
+an even pile a player removes exactly two. The even piles are tame: the
+player to move loses precisely when $n$ is a multiple of four. The odd
+piles one more than a multiple of four are all winning positions. The rest
+are the interesting ones. An odd pile of the form $n = 4t + 3$ is, read by
+the index $t$, exactly Golomb's game of 1966 --- the moves that can matter
+are subtract a positive square. Its losing positions never fall into any
+eventual period; they thin away to density zero; and how fast they thin
+has been open for years. Two rulesets, one line each. One is
+finished in a sentence, the other runs into an unsolved problem, and what
+separates them is a single number determined by the ruleset before a
+counter is moved. This paper computes that number and shows what follows
+once it is in hand.
+
 A subtraction game is played on a pile of counters: a ruleset names the
 amounts a player may remove, the players alternate, and under normal play
 whoever cannot move loses. For a fixed finite ruleset the classical
