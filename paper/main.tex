@@ -1425,6 +1425,34 @@ Corollary~\ref{cor:grundy-aperiodic} places the whole solved family, and
 not only the two degenerate moduli of Section~\ref{sec:disease}, outside
 the reach of the classical periodicity theory.
 
+\begin{corollary}[Unbounded values]\label{cor:unbounded}
+For every $m \ge 3$ with $m \ne 4$ and every $r$, the Grundy function of
+$D(m,r)$ is unbounded. Equivalently, $\Gamma$ is unbounded, and by
+Theorem~\ref{thm:grundy-transfer} the values on the square-mode class are
+$2 + \Gamma(\cdot)$ beyond a finite set.
+\end{corollary}
+\begin{proof}
+Fix $v \ge 0$ and let $L_v = \{\, t \ge 0 : \Gamma(t) = v \,\}$. If
+$t, t' \in L_v$ with $t - t' = k^2$ for some $k \ge 1$, then $t'$ is an
+option of $t$ in Golomb's game, so $\Gamma(t') \ne \Gamma(t)$ by the mex
+rule; hence $L_v$ contains no two elements differing by a positive square.
+By the Furstenberg--S\'ark\"ozy theorem every such set has asymptotic
+density zero. If $\Gamma$ were bounded by $B$, the non-negative integers
+would be the union of $L_0, \ldots, L_B$, a finite union of sets of
+density zero, which has density zero --- a contradiction. So $\Gamma$ is
+unbounded, and by Theorem~\ref{thm:grundy-transfer} the class-$r$ values
+$2 + \Gamma(\lfloor t/d \rfloor - a_\rho)$ are unbounded as
+$\lfloor t/d \rfloor$ runs over all sufficiently large integers on the
+copy $\rho = 0$.
+\end{proof}
+
+The case $v = 0$ is the argument of Corollary~\ref{cor:sparse}, where the
+square-difference-free property of the cold positions of Golomb's game and
+its consequence under Furstenberg--S\'ark\"ozy are recorded by Eppstein
+\cite{eppstein}; the extension is that argument applied to each level set
+in turn, the mex rule supplying the difference-free property for every
+value at once. We have not located the general form in the literature.
+
 \section{The Universal Embedding Theorem}\label{sec:embed}
 
 Section~\ref{sec:grundy} applied the Transfer Principle to a family
