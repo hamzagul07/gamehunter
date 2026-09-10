@@ -737,6 +737,24 @@ $G(p) = \operatorname{mex}\{1\} = 0$. If $p = 0$ --- occurring only at
 $r = 0$ --- then $p$ is terminal and $G(p) = 0$.
 \end{proof}
 
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l l c p{2.15in} l@{}}
+\hline
+regime & condition & $\beta$ & exception set & example \\
+\hline
+healthy, $r \ge 1$ & $s_{\min} \le f + m$ & $1$ & empty & $D(3,1)$ \\
+healthy, $r = 0$ & $s_{\min} \le f + m$ & $2$ & $\{0\}$ & $D(5,0)$ \\
+exceptional & $f + m < s_{\min} < \infty$ & $3$ & $\{m + r\}$ & $D(9,4)$ \\
+degenerate & $s_{\min} = \infty$ & $\infty$ & the Golomb P-set of the
+confined class (Theorem~\ref{thm:golomb}) & $D(2,1)$ \\
+\hline
+\end{tabular}
+\caption{The three regimes at a glance.}
+\label{tab:regimes-glance}
+\end{table}
+
 \section{The Diagonal Theorem}\label{sec:main}
 
 The pieces are now on the table, and they assemble into the
