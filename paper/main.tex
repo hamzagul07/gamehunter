@@ -57,41 +57,37 @@ Roots Ivy College, Islamabad, Pakistan}
 \maketitle
 
 \begin{abstract}
-Mode-switching subtraction games are non-invariant subtraction games
-whose legal moves depend on the pile size $n$ modulo a fixed $m$. In the
-diagonal family $D(m, r)$, a position $n \equiv r \pmod m$ permits the
-subtraction of any positive square at most $n$; every other position
-permits only $m$. We solve the family completely: outcomes and Grundy
-values under normal play, and outcomes under mis\`ere. For every
-$m \ge 3$ except $m = 4$ and every $r$, the P-positions are the $m - 1$
-residue classes modulo $2m$ of the fallback chains' bottoms, together
-with the hard half of a finite set $\mathrm{Bad}(m, r)$ read off a single
-parameter $s_{\min}$ --- the boundary position $n = 0$ when $r = 0$, and
-a single rebel $n = m + r \in \{13, 14, 15\}$ at
-$(m, r) \in \{(9,4), (9,5), (9,6)\}$. Under mis\`ere play the chains
-invert and the exceptional positions are exactly the free half of the
-same set: one exception set, two conventions. The Grundy function on the
-square-mode class is, beyond the finite prefix, an explicit shift of the
-nim-sequence of Golomb's subtract-a-square game; consequently no member
-of the family is eventually periodic at the level of Grundy values, and
-each has bounded Grundy values if and only if Golomb's game does --- a
-question that is open. At $m = 2$ and $m = 4$ the squares modulo $2m$ lie
-inside $\{0, 1, m\}$, the affected classes are confined, and they are
-Golomb's game in affine disguise, never eventually periodic, of density
-zero within their class. The mechanism is isolated as a Transfer
-Principle for arbitrary impartial games, and it runs backward: a host
-construction embeds any subtraction game whatever as a mode class of a
-mode-switching game, at outcome level and, with one added move, at
-Grundy level. So a classification theorem for mode-switching
-subtraction games with arbitrary mode sets would classify all
-subtraction games. The same architecture solves Foursquare, an earlier
-machine-found game with moves $\{3, 8, 9\}$ and a square mode at
-$n \equiv 1 \pmod 4$, and yields an exact criterion for which move-set
-enlargements preserve a law. Every conjecture was machine-proposed from a
-census of roughly 3,000 games; twice,
-theory constructed afterwards rederived numbers the instrument had
-recorded before the theory existed. The growth rate of Golomb's P-set ---
-his own open question since 1966 --- remains open.
+Mode-switching subtraction games are non-invariant subtraction games in
+which the legal moves depend on the pile size modulo a fixed $m$. In the
+diagonal family $D(m, r)$, a player facing a pile congruent to $r$ removes
+any positive square; from every other pile the only move removes exactly
+$m$. We solve the family completely for every $m \ne 4$ --- outcomes and
+Grundy values under normal play, outcomes under mis\`ere --- and give the
+outcomes at $m = 4$. The losing positions are $m - 1$ residue classes
+modulo $2m$, the bottoms of the game's fallback chains, together with a
+finite exception set fixed by one number: the smallest square carrying the
+square-mode class onto a chain bottom. Three regimes follow. For most
+parameters that square is affordable at once and there is no exception; at
+three parameter pairs it arrives late and strands a single position; at
+two moduli it never arrives, the exception set is infinite, and it is
+Golomb's subtract-a-square game under a change of index. Under mis\`ere
+play the same exception set governs, with the convention selecting which
+half of it is exceptional.
+
+The mechanism is isolated as a Transfer Principle for arbitrary impartial
+games, and it runs in both directions. Forward, it gives the Grundy
+function on the square-mode class as an explicit shift of Golomb's
+nim-sequence, from which no member of the family is eventually periodic in
+its Grundy values and every member has unbounded values. Backward, it
+embeds any subtraction game whatever as a mode class of a mode-switching
+host, at outcome level and, with one added move, at Grundy level --- so a
+classification theorem for mode-switching subtraction games with arbitrary
+mode sets would classify all subtraction games, and none exists to be
+proved. The same machinery solves Foursquare, an earlier machine-found
+game, and yields an exact criterion for which enlargements of a move set
+preserve a law. Every conjecture was machine-proposed from a census of
+roughly three thousand games; the proofs and the verification are
+documented separately.
 \end{abstract}
 
 {\small
