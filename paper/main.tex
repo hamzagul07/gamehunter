@@ -182,12 +182,27 @@ The protagonist is the two-parameter family $D(m, r)$: from a position
 $n \equiv r \pmod m$ a player may subtract any positive square not
 exceeding $n$; from every other position the only move is to subtract
 $m$. The family is called diagonal because its members first surfaced
-along a diagonal of a census's parameter grid, one game per modulus. The
-main outcome law can be tasted before any machinery arrives: for every
-$m \ge 3$ except $m = 4$ and every $r$, the P-positions of $D(m, r)$ are
-exactly $m - 1$ residue classes modulo $2m$ --- the bottoms of the game's
-fallback chains --- together with a finite exception set read off a
-single parameter, with no thresholds and no unverified zones.
+along a diagonal of a census's parameter grid, one game per modulus.
+
+The main theorem can be stated before any machinery arrives. For every
+$m \ge 3$ with $m \ne 4$ and every $r$, the losing positions of $D(m,r)$
+are
+\[
+\begin{aligned}
+  &\{\, n : n \equiv b \pmod{2m} \text{ for some } b \in \{0, \ldots, m-1\}
+  \setminus \{r\} \,\} \\
+  &\qquad \cup\;
+  \begin{cases}
+    \{0\} & \text{if } r = 0,\\
+    \{m + r\} & \text{if } (m,r) \in \{(9,4),(9,5),(9,6)\},\\
+    \emptyset & \text{otherwise,}
+  \end{cases}
+\end{aligned}
+\]
+and the law holds from $n = 0$ upward, with no preperiod. The first set is
+the chain bottoms of the baseline; the second is what the squares failed
+to remove. This is Theorem~\ref{thm:main}, proved in
+Section~\ref{sec:main}.
 
 The classification rests on two lemmas and one number. The Chain Lemma
 decomposes every fallback class into an independent chain whose
